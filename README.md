@@ -1,34 +1,30 @@
-[dice-engine](http://c0der78.github.com/dice-engine)
+[dice-engine](http://c0der78.github.com/libarg3/dice)
 ===========
 
-A c++11 library for working with dice.  Engines for different dice games (Yahtzee, Liar's Dice, Backgammon)
-
-See the [documentation](http://c0der78.github.com/dice-engine/docs)
+A c++11 library for working with dice.  Engines for different dice games (Yahtzee, etc.)
 
 requirements
 ============
 
-- c++11 for compiling
+- c++11 for compiling (I use clang++ on OSX)
 
 optional
 ========
 
 - [http://igloo-testing.org](Igloo) Unit Testing
-- requires [rake](http://rake.rubyforge.org) (ruby) for building
+- [premake](http://industriousone.com/premake) for building
 - [HeaderDoc](http://developer.apple.com/library/mac/#documentation/developertools/Conceptual/HeaderDoc/intro/intro.html) (Apple) for creating documentation
 - [astyle](http://astyle.sourceforge.net) for formatting source code
 
 compilation
 ===========
 
-Just run 'rake' to compile and run unit tests
 
-other options:
+Just run 'premake4 --help' to get a list of build types
 
-- *rake debug*: makes a debug build
-- *rake release*: makes a release build
-- *rake test*: runs the unit tests
-- *rake docs*: builds documents
-- *rake format*: formats source code
-- *rake clean*: cleans build files
-- *rake install*: installs library to system
+Typically I run 'premake4 gmake; make'
+
+licensing
+=========
+
+copyrighted under the Lesser GNU Public License
