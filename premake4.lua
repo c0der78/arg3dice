@@ -120,6 +120,8 @@ solution "arg3"
 
         links { "arg3dice" }
 
+	includedirs { "vendor" }
+
         configuration "Debug"
         postbuildcommands {
           "bin/debug/arg3test"
