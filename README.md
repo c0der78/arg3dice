@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [dice-engine](http://c0der78.github.com/libarg3/dice)
 ===========
 
@@ -28,3 +29,9 @@ licensing
 =========
 
 copyrighted under the Lesser GNU Public License
+=======
+arg3dice
+========
+
+dice rolling library
+>>>>>>> dba92add8acd2ba65412f38ba2fa24b1be73f5e4
