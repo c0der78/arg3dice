@@ -34,10 +34,17 @@ newaction {
         os.copyfile("bin/release/libarg3dice.a", bindir);
     end
 
-    headers = os.matchfiles("**.h")
+    headers = os.matchfiles("*.h")
 
     for i=1, #headers do
       os.copyfile(headers[i], headerdir);
+    end
+
+    headers = os.matchfiles("yacht/*.h")
+    yahtdir = headerdir.."yacht/"
+    os.mkdir(yahtdir)
+    for i=1, #headers do
+      os.copyfile(headers[i], yahtdir);
     end
   end
 }
