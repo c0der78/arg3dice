@@ -20,7 +20,7 @@ newaction {
       end
 
       bindir = _ARGS[1].."/lib"
-      headerdir = _ARGS[1].."/include/arg3/dice"
+      headerdir = _ARGS[1].."/include/arg3"
 
       if not os.isdir(bindir) then
         os.mkdir(bindir)
@@ -116,8 +116,7 @@ solution "arg3"
     project "arg3test"
         kind "ConsoleApp"
         files {
-            "**.test.cpp",
-            "arg3dice.test.cpp"
+            "**.test.cpp"
         }
 
         links { "arg3dice" }
