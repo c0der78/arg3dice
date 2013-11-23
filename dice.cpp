@@ -56,7 +56,7 @@ namespace arg3
         return *this;
     }
 
-    Die &Die::operator= (Die &&other)
+    Die &Die::operator= (Die && other)
     {
         if (this != &other)
         {
@@ -114,7 +114,7 @@ namespace arg3
     {
         assert(engine_ != 0);
 
-        value_ = engine_->generate(1, sides_ + 1);
+        value_ = engine_->generate(1, sides_);
 
         return value_;
     }
@@ -161,7 +161,7 @@ namespace arg3
         return *this;
     }
 
-    Dice &Dice::operator=(Dice &&other)
+    Dice &Dice::operator=(Dice && other)
     {
         if (this != &other)
         {

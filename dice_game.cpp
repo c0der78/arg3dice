@@ -30,7 +30,7 @@ namespace arg3
         return *this;
     }
 
-    DiceGame &DiceGame::operator=(DiceGame &&other)
+    DiceGame &DiceGame::operator=(DiceGame && other)
     {
 
         if (this != &other)
@@ -39,7 +39,7 @@ namespace arg3
         }
         return *this;
     }
-    
+
     void DiceGame::roll()
     {
         dice_.roll();
@@ -48,6 +48,11 @@ namespace arg3
     const vector<Die::value_type> &DiceGame::values() const
     {
         return dice_.values();
+    }
+
+    const Dice &DiceGame::dice() const
+    {
+        return dice_;
     }
 
     bool DiceGame::operator==(const DiceGame &other) const

@@ -20,15 +20,16 @@ namespace arg3
 
         DiceGame(unsigned int, unsigned int, Die::Engine * = Die::default_engine);
         DiceGame(const DiceGame &);
-        DiceGame(DiceGame &&);
+        DiceGame(DiceGame && );
         DiceGame &operator=(const DiceGame &);
-        DiceGame &operator=(DiceGame &&);
+        DiceGame &operator=(DiceGame && );
         virtual ~DiceGame();
     public:
         // rolls the dice for the game
         void roll();
         // returns the values of the dice for the game
         const vector<Die::value_type> &values() const;
+        const Dice &dice() const;
 
         // equality operator
         bool operator==(const DiceGame &) const;
