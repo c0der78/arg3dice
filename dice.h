@@ -86,7 +86,7 @@ namespace arg3
          */
         Die &operator=(const Die &rhs);
 
-        Die &operator=(Die &&rhs);
+        Die &operator=(Die && rhs);
 
         /*!
          * deconstructor
@@ -185,7 +185,7 @@ namespace arg3
          */
         Dice &operator= (const Dice &rhs);
 
-        Dice &operator= (Dice &&rhs);
+        Dice &operator= (Dice && rhs);
 
         /*!
          * equality operator

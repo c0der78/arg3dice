@@ -20,7 +20,7 @@ namespace arg3
 
         DiceGame(unsigned int, unsigned int, Die::Engine * = Die::default_engine);
         DiceGame(const DiceGame &);
-        DiceGame(DiceGame && );
+        DiceGame(DiceGame & & );
         DiceGame &operator=(const DiceGame &);
         DiceGame &operator=(DiceGame && );
         virtual ~DiceGame();
