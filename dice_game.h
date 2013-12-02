@@ -19,8 +19,8 @@ namespace arg3
         Dice dice_;
 
         DiceGame(unsigned int, unsigned int, Die::Engine * = Die::default_engine);
-        DiceGame(const DiceGame &);
-        DiceGame(DiceGame & & );
+        DiceGame(const DiceGame &other);
+        DiceGame(DiceGame  &&other);
         DiceGame &operator=(const DiceGame &);
         DiceGame &operator=(DiceGame && );
         virtual ~DiceGame();
