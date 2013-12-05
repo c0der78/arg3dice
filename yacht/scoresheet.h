@@ -1,6 +1,6 @@
 /*!
- * @header Yacht ScoreSheet
- * The Yacht ScoreSheet provides an interfaces to tracking scores in a game of Yacht
+ * @header Yacht scoresheet
+ * The Yacht scoresheet provides an interfaces to tracking scores in a game of Yacht
  */
 #ifndef ARG3_YACHT_SCORE_H
 #define ARG3_YACHT_SCORE_H
@@ -20,7 +20,7 @@ namespace arg3
         /*!
          * Class to track scores
          */
-        class ScoreSheet
+        class scoresheet
         {
         public:
 
@@ -48,45 +48,45 @@ namespace arg3
                 MAX_TYPE,
                 /*! first type for looping */
                 FIRST_TYPE = KIND_THREE
-            } Type;
+            } type;
 
             /*! default constructor */
-            ScoreSheet();
+            scoresheet();
 
             /*!
              * copy constructor
              * @param other the object to copy from
              */
-            ScoreSheet(const ScoreSheet &other);
+            scoresheet(const scoresheet &other);
 
-            ScoreSheet(ScoreSheet &&other);
+            scoresheet(scoresheet &&other);
 
             /*!
              * destructor
              */
-            virtual ~ScoreSheet();
+            virtual ~scoresheet();
 
             /*!
              * assignment operator
              * @param rhs the right hand side of the operator
              */
-            ScoreSheet &operator=(const ScoreSheet &rhs);
+            scoresheet &operator=(const scoresheet &rhs);
 
-            ScoreSheet &operator=(ScoreSheet &&rhs);
+            scoresheet &operator=(scoresheet && rhs);
 
             /*!
              * sets a score on the lower page
              * @param type the type of score
              * @param value the value to set
              */
-            void lowerScore(Type type, ScoreSheet::value_type value);
+            void lower_score(type type, scoresheet::value_type value);
 
             /*!
              * sets a score on the upper page
              * @param type the type of score
              * @param value the value to set
              */
-            void upperScore(Die::value_type type, ScoreSheet::value_type value);
+            void upper_score(die::value_type type, scoresheet::value_type value);
 
             /*!
              * resets/clears the score
@@ -97,13 +97,13 @@ namespace arg3
              * gets the upper score
              * @param type the type of score to get
              */
-            ScoreSheet::value_type lowerScore(Type type) const;
+            scoresheet::value_type lower_score(type type) const;
 
             /*!
              * gets the lower score
              * @param type the type of score to get
              */
-            ScoreSheet::value_type upperScore(Die::value_type type) const;
+            scoresheet::value_type upper_score(die::value_type type) const;
 
         private:
             array<value_type, MAX_TYPE> upperValues_;

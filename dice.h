@@ -1,5 +1,5 @@
 /*!
- * @header Dice
+ * @header dice
  * A representation of dice or a single die for use in games.
  */
 #ifndef ARG3_DICE_H
@@ -18,7 +18,7 @@ namespace arg3
     /*!
      * A die with a given number of sides
      */
-    class Die
+    class die
     {
     public:
         /*!
@@ -34,7 +34,7 @@ namespace arg3
         /*!
          * Abstract class for the underlying random engine
          */
-        class Engine
+        class engine
         {
         public:
             /*!
@@ -42,27 +42,13 @@ namespace arg3
              * @param from the start range
              * @param to the end range
              */
-            virtual Die::value_type generate(Die::value_type from, Die::value_type to) = 0;
-        };
-
-        /*!
-         * Default implementation of the underlying random engine
-         */
-        class DefaultEngine : public Engine
-        {
-        public:
-            /*!
-             * the random generator method
-             * @param from the starting range
-             * @param to the ending range
-             */
-            Die::value_type generate(Die::value_type from, Die::value_type to);
+            virtual die::value_type generate(die::value_type from, die::value_type to) = 0;
         };
 
         /*!
          * An instanceof the default random engine
          */
-        static Engine *const default_engine;
+        static engine *const default_engine;
 
         /*!
          * custom sides constructor
@@ -70,28 +56,28 @@ namespace arg3
          * @param sides the number of sides on this die
          * @param engine the die engine to use
          */
-        Die(const unsigned int sides = DEFAULT_SIDES, Engine *const engine = default_engine);
+        die(const unsigned int sides = DEFAULT_SIDES, engine *const engine = default_engine);
 
         /*!
          * copy constructor
          * @param other the object to copy from
          */
-        Die(const Die &other);
+        die(const die &other);
 
-        Die(Die &&other);
+        die(die &&other);
 
         /*!
          * assignment operator
          * @param rhs the right hand side of the operator
          */
-        Die &operator=(const Die &rhs);
+        die &operator=(const die &rhs);
 
-        Die &operator=(Die && rhs);
+        die &operator=(die && rhs);
 
         /*!
          * deconstructor
          */
-        virtual ~Die();
+        virtual ~die();
 
         /*!
          * returns the number of sides on the die
@@ -113,12 +99,12 @@ namespace arg3
          * equality operator
          * @param rhs the right hand side of the operator
          */
-        bool operator==(const Die &rhs) const;
+        bool operator==(const die &rhs) const;
         /*!
          * inequality operator
          * @param rhs the right hand side of the operator
          */
-        bool operator!=(const Die &rhs) const;
+        bool operator!=(const die &rhs) const;
 
         // cast operator
         operator value_type () const;
@@ -138,29 +124,47 @@ namespace arg3
         value_type roll();
 
     private:
-        Engine *engine_;     // engine to use for dice rolling
+        engine *engine_;     // engine to use for dice rolling
         unsigned sides_; // number of sides on die
         value_type value_;   // the current roll value
         bool keep_;        // flag for not rolling a die
     };
 
 
+    namespace detail
+    {
+
+        /*!
+         * Default implementation of the underlying random engine
+         */
+        class default_engine : public die::engine
+        {
+        public:
+            /*!
+             * the random generator method
+             * @param from the starting range
+             * @param to the ending range
+             */
+            die::value_type generate(die::value_type from, die::value_type to);
+        };
+
+    }
     /*!
      * simple class to encapsulate a collection of dice which can be rolled
      * a bonus value can be given
      */
-    class Dice
+    class dice
     {
 
     private:
         short bonus_;
-        vector<Die> dice_;
-        vector<Die::value_type> lastRoll_;
+        vector<die> dice_;
+        vector<die::value_type> lastRoll_;
     public:
         /*! iterator type for each die */
-        typedef typename vector<Die>::iterator iterator;
+        typedef typename vector<die>::iterator iterator;
         /*! const iterator type for each die */
-        typedef typename vector<Die>::const_iterator const_iterator;
+        typedef typename vector<die>::const_iterator const_iterator;
 
         /*!
          * create x dice with default number of sides
@@ -169,39 +173,39 @@ namespace arg3
          * @param sides the number of sides per die
          * @param engine the die engine to use
          */
-        Dice(const unsigned int num, const unsigned int sides = Die::DEFAULT_SIDES, Die::Engine *const engine = Die::default_engine);
+        dice(const unsigned int num, const unsigned int sides = die::DEFAULT_SIDES, die::engine *const engine = die::default_engine);
 
         /*!
          * copy constructor
          * @param other the other dice to copy
          */
-        Dice(const Dice &other);
+        dice(const dice &other);
 
-        Dice(Dice &&other);
+        dice(dice &&other);
 
         /*!
          * assignment operator
          * @param rhs the right hand side of the assignment
          */
-        Dice &operator= (const Dice &rhs);
+        dice &operator= (const dice &rhs);
 
-        Dice &operator= (Dice && rhs);
+        dice &operator= (dice && rhs);
 
         /*!
          * equality operator
          * @param rhs the right hand side of the operator
          */
-        bool operator==(const Dice &rhs) const;
+        bool operator==(const dice &rhs) const;
         /*!
          * inequality operator
          * @param rhs the right hand side of the operator
          */
-        bool operator!=(const Dice &rhs) const;
+        bool operator!=(const dice &rhs) const;
 
         /*!
          * deconstructor
          */
-        virtual ~Dice();
+        virtual ~dice();
 
         // iterator methods
         iterator begin();
@@ -220,13 +224,13 @@ namespace arg3
          * index operator
          * @param index the index
          */
-        Die &operator[] ( size_t index);
+        die &operator[] ( size_t index);
 
         /*!
          * const index operator
          * @param index the index
          */
-        const Die &operator[] ( size_t index) const;
+        const die &operator[] ( size_t index) const;
 
         /*!
          * returns the bonus value
@@ -243,13 +247,13 @@ namespace arg3
         const string to_string() const;
 
         // returns the values for each die in the last roll
-        const vector<Die::value_type> &values() const;
+        const vector<die::value_type> &values() const;
 
         // return the total of rolling all dice
-        const Die::value_type roll();
+        const die::value_type roll();
     };
 
-    ostream &operator<< (ostream &, const Dice &);
+    ostream &operator<< (ostream &, const dice &);
 
 }
 

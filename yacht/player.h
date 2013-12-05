@@ -1,6 +1,6 @@
 /*!
-     @header Yacht Player
-     The Yacht Player provides a functional interface to a player in a game of Yacht.
+     @header Yacht player
+     The Yacht player provides a functional interface to a player in a game of Yacht.
      Use the functions declared here to handle gameplay.
      @copyright ryan jennings (arg3.com) 2012 LGPL
      @updated 2012-09-09
@@ -18,23 +18,23 @@ namespace arg3
     {
 
         /*!
-         * @class Player
+         * @class player
          * A player in a game of yacht
          */
-        class Player : public DiceGame
+        class player : public dice_game
         {
-            friend std::ostream &operator<<(std::ostream &stm, const Player & );
+            friend std::ostream &operator<<(std::ostream &stm, const player & );
 
         public:
             /*!
              * number of sides in a die
              */
-            unsigned int dieSides() const;
+            unsigned int die_sides() const;
 
             /*!
              * number of die
              */
-            unsigned int dieCount() const;
+            unsigned int die_count() const;
 
             /*!
              * default constructor takes a name
@@ -43,57 +43,57 @@ namespace arg3
              * @param engine
              * the die engine to use
              */
-            Player(const string &name, Die::Engine *const = Die::default_engine);
+            player(const string &name, die::engine *const = die::default_engine);
 
             /*!
              * copy constructor
              */
-            Player(const Player &);
+            player(const player &);
 
-            Player(Player &&);
+            player(player &&);
 
             /*!
              * assignment operator
              */
-            Player &operator=(const Player &);
+            player &operator=(const player &);
 
-            Player &operator=(Player &&);
+            player &operator=(player && );
 
             /*!
              * destructor
              */
-            virtual ~Player();
+            virtual ~player();
 
             /*!
              * keeps a die
              */
-            void keepDie(size_t index);
+            void keep_die(size_t index);
 
             /*!
              * calculate a value on the lower part of scoresheet
              * @param type
              * the type of lower score
              */
-            ScoreSheet::value_type calculateLowerScore(ScoreSheet::Type) const;
+            scoresheet::value_type calculate_lower_score(scoresheet::type) const;
 
             /*!
              * calcualte a value on the upper part of scoresheet
              * @param type
              * the type of upper score
              */
-            ScoreSheet::value_type calculateUpperScore(Die::value_type) const;
+            scoresheet::value_type calculate_upper_score(die::value_type) const;
 
             /*!
              * calculates the best score available in hand
              */
-            ScoreSheet::value_type calculateBestScore() const;
+            scoresheet::value_type calculate_best_score() const;
 
-            pair<ScoreSheet::Type, ScoreSheet::value_type> calculateBestLowerScore() const;
+            pair<scoresheet::type, scoresheet::value_type> calculate_best_lower_score() const;
 
-            pair<Die::value_type, ScoreSheet::value_type> calculateBestUpperScore() const;
+            pair<die::value_type, scoresheet::value_type> calculate_best_upper_score() const;
 
 
-            ScoreSheet &score();
+            scoresheet &score();
 
             /*!
              * name of the player
@@ -103,22 +103,22 @@ namespace arg3
             /*!
              * equality operator
              */
-            bool operator==(const Player &) const;
+            bool operator==(const player &) const;
 
             /*!
              * equality operator
              */
-            bool operator!=(const Player &) const;
+            bool operator!=(const player &) const;
 
         private:
 
-            ScoreSheet::value_type calculateNumberOfAKind(int) const;
-            ScoreSheet::value_type calculateFullHouse() const;
-            ScoreSheet::value_type calculateStraight(int) const;
-            ScoreSheet::value_type calculateChance() const;
-            ScoreSheet::value_type calculateYacht() const;
+            scoresheet::value_type calculate_number_of_a_kind(int) const;
+            scoresheet::value_type calculate_full_house() const;
+            scoresheet::value_type calculate_straight(int) const;
+            scoresheet::value_type calculate_chance() const;
+            scoresheet::value_type calculate_yacht() const;
 
-            ScoreSheet score_;  // the score sheet
+            scoresheet score_;  // the score sheet
             unsigned short rollCount_; // number of die rolls
             string name_;   // player name
         };

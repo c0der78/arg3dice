@@ -7,78 +7,78 @@ using namespace igloo;
 
 using namespace arg3;
 
-DiceTestEngine::DiceTestEngine() : mValues(), mCurrentValue(0) {}
+dice_test_engine::dice_test_engine() : values_(), currentValue_(0) {}
 
-DiceTestEngine::DiceTestEngine(initializer_list<Die::value_type> value) : mValues(value), mCurrentValue(0) {}
+dice_test_engine::dice_test_engine(initializer_list<die::value_type> value) : values_(value), currentValue_(0) {}
 
-DiceTestEngine::DiceTestEngine(const DiceTestEngine &copy) : mValues(copy.mValues.size()), mCurrentValue(copy.mCurrentValue)
+dice_test_engine::dice_test_engine(const dice_test_engine &copy) : values_(copy.values_.size()), currentValue_(copy.currentValue_)
 {
-    for (auto & d : copy.mValues)
-        mValues.push_back(d);
+    for (auto & d : copy.values_)
+        values_.push_back(d);
 }
 
-DiceTestEngine &DiceTestEngine::operator=(const DiceTestEngine &rhs)
+dice_test_engine &dice_test_engine::operator=(const dice_test_engine &rhs)
 {
     if (this != &rhs)
     {
-        mValues = rhs.mValues;
-        mCurrentValue = rhs.mCurrentValue;
+        values_ = rhs.values_;
+        currentValue_ = rhs.currentValue_;
     }
 
     return *this;
 }
 
-DiceTestEngine::~DiceTestEngine() {}
+dice_test_engine::~dice_test_engine() {}
 
-Die::value_type DiceTestEngine::generate(Die::value_type from, Die::value_type to)
+die::value_type dice_test_engine::generate(die::value_type from, die::value_type to)
 {
-    if (mValues.size() == 0)
+    if (values_.size() == 0)
         return 0;
 
-    if ( mCurrentValue >= mValues.size() )
+    if ( currentValue_ >= values_.size() )
     {
-        mCurrentValue = 0;
+        currentValue_ = 0;
     }
 
-    return mValues[mCurrentValue++];
+    return values_[currentValue_++];
 }
 
-void DiceTestEngine::setNextRoll(initializer_list<Die::value_type> items)
+void dice_test_engine::set_next_roll(initializer_list<die::value_type> items)
 {
-    mValues = items;
-    mCurrentValue = 0;
+    values_ = items;
+    currentValue_ = 0;
 }
 
-Context(DieTest)
+Context(die_test)
 {
-    static DiceTestEngine randEngine;
+    static dice_test_engine randEngine;
 
-    Spec(Constructor_No_Arg)
+    Spec(constructor_no_arg)
     {
-        Die d;
+        die d;
 
-        Assert::That(d.sides(), Equals(Die::DEFAULT_SIDES));
+        Assert::That(d.sides(), Equals(die::DEFAULT_SIDES));
     }
 
-    Spec(Constructor_Sides)
+    Spec(constructor_sides)
     {
-        Die d(100);
+        die d(100);
 
         Assert::That(d.sides(), Equals(100));
     }
 
-    Spec(Constructor_Copy)
+    Spec(constructor_copy)
     {
-        Die d(10);
+        die d(10);
 
-        Die d2 = d;
+        die d2 = d;
 
         Assert::That(d2.sides(), Equals(10));
     }
 
-    Spec(Roll)
+    Spec(roll)
     {
-        Die d(10);
+        die d(10);
 
         for (int i = 0; i < 10; i++)
         {
@@ -89,7 +89,7 @@ Context(DieTest)
 
     Spec(sides)
     {
-        Die d(7);
+        die d(7);
 
         Assert::That(d.sides(), Equals(7));
 
@@ -99,25 +99,25 @@ Context(DieTest)
     }
 };
 
-DiceTestEngine DieTest::randEngine;
+dice_test_engine die_test::randEngine;
 
 
-Context(DiceTest)
+Context(dice_test)
 {
-    Spec(Constructor_With_Count)
+    Spec(constructor_with_count)
     {
-        Dice d(10);
+        dice d(10);
 
         Assert::That(d.size(), Equals(10));
     }
 
-    Spec(Constructor_With_Count_And_Sides)
+    Spec(constructor_with_count_and_sides)
     {
-        Dice dice(10, 10);
+        dice dice(10, 10);
 
         Assert::That(dice.size(), Equals(10));
 
-        for (Die & d : dice)
+        for (die & d : dice)
         {
             Assert::That(d.sides(), Equals(10));
         }
@@ -125,14 +125,14 @@ Context(DiceTest)
 
     Spec(size)
     {
-        Dice d(10);
+        dice d(10);
 
         Assert::That(d.size(), Equals(10));
     }
 
     Spec(bonus)
     {
-        Dice d(2);
+        dice d(2);
 
         d.bonus(23);
 
@@ -141,7 +141,7 @@ Context(DiceTest)
 
     Spec(to_string)
     {
-        Dice d(10, 20);
+        dice d(10, 20);
 
         Assert::That(d.to_string(), Equals("10d20"));
 

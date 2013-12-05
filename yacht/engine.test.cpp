@@ -10,54 +10,54 @@ using namespace arg3;
 
 using namespace arg3::yacht;
 
-Context(YachtTest)
+Context(yacht_test)
 {
-    static Engine *yacht;
+    static engine *yacht;
 
-    static DiceTestEngine randEngine;
+    static dice_test_engine randengine;
 
     static void SetUpContext()
     {
-        yacht = Engine::instance();
+        yacht = engine::instance();
 
-        yacht->setRandomEngine(&randEngine);
+        yacht->set_random_engine(&randengine);
 
-        yacht->addPlayer("testPlayer");
+        yacht->add_player("testPlayer");
     }
 
     void SetUp()
     {
-        int size = yacht->numberOfPlayers();
+        int size = yacht->number_of_players();
 
         while (size >= 1)
         {
-            yacht->removePlayer(size--);
+            yacht->remove_player(size--);
         }
     }
 
-    Spec(currentPlayer)
+    Spec(current_player)
     {
-        yacht->currentPlayer()->roll();
+        yacht->current_player()->roll();
 
-        yacht->addPlayer("newPlayerB");
+        yacht->add_player("newPlayerB");
 
-        yacht->nextPlayer();
+        yacht->next_player();
 
-        Assert::That(yacht->currentPlayer()->name(), Equals("newPlayerB"));
+        Assert::That(yacht->current_player()->name(), Equals("newPlayerB"));
 
-        yacht->removePlayer(1);
+        yacht->remove_player(1);
 
-        Assert::That(yacht->currentPlayer()->name(), !Equals("newPlayerB"));
+        Assert::That(yacht->current_player()->name(), !Equals("newPlayerB"));
     }
 
-    Spec(numberOfPlayers)
+    Spec(number_of_players)
     {
-        Assert::That(yacht->numberOfPlayers(), Equals(1));
+        Assert::That(yacht->number_of_players(), Equals(1));
     }
 
 };
 
 
-Engine *YachtTest::yacht;
-DiceTestEngine YachtTest::randEngine;
+engine *yacht_test::yacht;
+dice_test_engine yacht_test::randengine;
 

@@ -6,38 +6,38 @@ namespace arg3
     namespace yacht
     {
 
-        std::ostream &operator<<(std::ostream &stm, const Player &p)
+        std::ostream &operator<<(std::ostream &stm, const player &p)
         {
             stm << p.name();
             return stm;
         }
 
-        Player::Player(const string &name, Die::Engine *const engine) : DiceGame(dieCount(), dieSides(), engine),
+        player::player(const string &name, die::engine *const engine) : dice_game(die_count(), die_sides(), engine),
             score_(), rollCount_(0), name_(name)
         {
 
         }
-        Player::Player(const Player &other) : DiceGame(other), score_(other.score_), rollCount_(other.rollCount_),
+        player::player(const player &other) : dice_game(other), score_(other.score_), rollCount_(other.rollCount_),
             name_(other.name_)
         {
 
         }
 
-        Player::Player(Player &&other) : DiceGame(std::move(other)), score_(std::move(other.score_)), rollCount_(other.rollCount_),
+        player::player(player &&other) : dice_game(std::move(other)), score_(std::move(other.score_)), rollCount_(other.rollCount_),
             name_(std::move(other.name_))
         {
 
         }
 
-        Player::~Player()
+        player::~player()
         {
 
         }
 
-        Player &Player::operator=(const Player &other)
+        player &player::operator=(const player &other)
         {
 
-            DiceGame::operator=(other);
+            dice_game::operator=(other);
 
             if (this != &other)
             {
@@ -48,9 +48,9 @@ namespace arg3
             return *this;
         }
 
-        Player &Player::operator=(Player &&other)
+        player &player::operator=(player && other)
         {
-            DiceGame::operator=(std::move(other));
+            dice_game::operator=(std::move(other));
 
             if (this != &other)
             {
@@ -61,44 +61,44 @@ namespace arg3
             return *this;
         }
 
-        unsigned int Player::dieSides() const
+        unsigned int player::die_sides() const
         {
-            return Die::DEFAULT_SIDES;
+            return die::DEFAULT_SIDES;
         }
 
-        unsigned int Player::dieCount() const
+        unsigned int player::die_count() const
         {
             return Constants::NUM_DICE;
         }
 
-        void Player::keepDie(size_t index)
+        void player::keep_die(size_t index)
         {
             dice_[index].keep(true);
         }
 
-        const string &Player::name() const
+        const string &player::name() const
         {
             return name_;
         }
 
-        ScoreSheet &Player::score()
+        scoresheet &player::score()
         {
             return score_;
         }
 
-        bool Player::operator==(const Player &other) const
+        bool player::operator==(const player &other) const
         {
             return name_ == other.name_;
         }
 
-        bool Player::operator!=(const Player &other) const
+        bool player::operator!=(const player &other) const
         {
             return !operator==(other);
         }
 
-        ScoreSheet::value_type Player::calculateUpperScore(Die::value_type value) const
+        scoresheet::value_type player::calculate_upper_score(die::value_type value) const
         {
-            ScoreSheet::value_type score = 0;
+            scoresheet::value_type score = 0;
             for (auto & d : dice_)
             {
                 if (d.value() == value)
@@ -109,14 +109,14 @@ namespace arg3
 
 
 
-        ScoreSheet::value_type Player::calculateNumberOfAKind(int length) const
+        scoresheet::value_type player::calculate_number_of_a_kind(int length) const
         {
             auto values = dice_.values();
 
             sort(values.begin(), values.end());
 
             int count = 0;
-            Die::value_type lastValue = 0;
+            die::value_type lastValue = 0;
 
             for (auto & d : values)
             {
@@ -129,14 +129,14 @@ namespace arg3
                 {
                     if (++count == length - 1)
                     {
-                        return calculateChance();
+                        return calculate_chance();
                     }
                 }
             }
             return 0;
         }
 
-        ScoreSheet::value_type Player::calculateFullHouse() const
+        scoresheet::value_type player::calculate_full_house() const
         {
             auto values = dice_.values();
 
@@ -166,13 +166,13 @@ namespace arg3
             return 0;
         }
 
-        ScoreSheet::value_type Player::calculateStraight(int length) const
+        scoresheet::value_type player::calculate_straight(int length) const
         {
             auto values = dice_.values();
 
             sort(values.begin(), values.end());
 
-            Die::value_type test = 0;
+            die::value_type test = 0;
 
             int count = 0;
 
@@ -197,9 +197,9 @@ namespace arg3
             return 0;
         }
 
-        ScoreSheet::value_type Player::calculateChance() const
+        scoresheet::value_type player::calculate_chance() const
         {
-            ScoreSheet::value_type value = 0;
+            scoresheet::value_type value = 0;
             for (auto & d : dice_.values())
             {
                 value += d;
@@ -207,16 +207,16 @@ namespace arg3
             return value;
         }
 
-        pair<ScoreSheet::Type, ScoreSheet::value_type> Player::calculateBestLowerScore() const
+        pair<scoresheet::type, scoresheet::value_type> player::calculate_best_lower_score() const
         {
-            ScoreSheet::value_type value = 0;
-            ScoreSheet::Type type = ScoreSheet::MAX_TYPE;
+            scoresheet::value_type value = 0;
+            scoresheet::type type = scoresheet::MAX_TYPE;
 
-            for (auto t = ScoreSheet::FIRST_TYPE; t < ScoreSheet::MAX_TYPE; t++)
+            for (auto t = scoresheet::FIRST_TYPE; t < scoresheet::MAX_TYPE; t++)
             {
-                if (score_.lowerScore(t) != 0) continue;
+                if (score_.lower_score(t) != 0) continue;
 
-                auto score = calculateLowerScore(t);
+                auto score = calculate_lower_score(t);
                 if (score > value)
                 {
                     type = t;
@@ -226,17 +226,16 @@ namespace arg3
             return make_pair(type, value);
         }
 
-        pair<Die::value_type, ScoreSheet::value_type> Player::calculateBestUpperScore() const
+        pair<die::value_type, scoresheet::value_type> player::calculate_best_upper_score() const
         {
-            Die::value_type type = 0;
-            ScoreSheet::value_type value = 0;
+            die::value_type type = 0;
+            scoresheet::value_type value = 0;
 
-            for (Die::value_type d = 1; d <= Die::DEFAULT_SIDES; d++)
+            for (die::value_type d = 1; d <= die::DEFAULT_SIDES; d++)
             {
+                if (score_.upper_score(d) != 0) continue;
 
-                if (score_.upperScore(d) != 0) continue;
-
-                auto score = calculateUpperScore(d);
+                auto score = calculate_upper_score(d);
 
                 if (score > value)
                 {
@@ -248,16 +247,16 @@ namespace arg3
             return make_pair(type, value);
         }
 
-        ScoreSheet::value_type Player::calculateBestScore() const
+        scoresheet::value_type player::calculate_best_score() const
         {
-            auto lower = calculateBestLowerScore();
+            auto lower = calculate_best_lower_score();
 
-            auto higher = calculateBestUpperScore();
+            auto higher = calculate_best_upper_score();
 
             return max(lower.second, higher.second);
         }
 
-        ScoreSheet::value_type Player::calculateYacht() const
+        scoresheet::value_type player::calculate_yacht() const
         {
             auto values = dice_.values();
 
@@ -269,24 +268,24 @@ namespace arg3
             return 0;
         }
 
-        ScoreSheet::value_type Player::calculateLowerScore(ScoreSheet::Type type) const
+        scoresheet::value_type player::calculate_lower_score(scoresheet::type type) const
         {
             switch (type)
             {
-            case ScoreSheet::KIND_THREE:
-                return calculateNumberOfAKind(Constants::NUM_DICE - 2);
-            case ScoreSheet::KIND_FOUR:
-                return calculateNumberOfAKind(Constants::NUM_DICE - 1);
-            case ScoreSheet::FULL_HOUSE:
-                return calculateFullHouse();
-            case ScoreSheet::STRAIGHT_SMALL:
-                return calculateStraight(Constants::NUM_DICE - 2);
-            case ScoreSheet::STRAIGHT_BIG:
-                return calculateStraight(Constants::NUM_DICE - 1);
-            case ScoreSheet::YACHT:
-                return calculateYacht();
-            case ScoreSheet::CHANCE:
-                return calculateChance();
+            case scoresheet::KIND_THREE:
+                return calculate_number_of_a_kind(Constants::NUM_DICE - 2);
+            case scoresheet::KIND_FOUR:
+                return calculate_number_of_a_kind(Constants::NUM_DICE - 1);
+            case scoresheet::FULL_HOUSE:
+                return calculate_full_house();
+            case scoresheet::STRAIGHT_SMALL:
+                return calculate_straight(Constants::NUM_DICE - 2);
+            case scoresheet::STRAIGHT_BIG:
+                return calculate_straight(Constants::NUM_DICE - 1);
+            case scoresheet::YACHT:
+                return calculate_yacht();
+            case scoresheet::CHANCE:
+                return calculate_chance();
             default:
                 return 0;
             }

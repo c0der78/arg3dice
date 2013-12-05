@@ -7,44 +7,44 @@
 namespace arg3
 {
     // #######################################################################################################
-    // Die
+    // die
     // #######################################################################################################
 
     // randomness for dice rolls
-    static Die::DefaultEngine default_die_engine = Die::DefaultEngine();
+    static detail::default_engine default_die_engine = detail::default_engine();
 
-    const Die::value_type Die::DEFAULT_SIDES;
+    const die::value_type die::DEFAULT_SIDES;
 
-    Die::Engine *const Die::default_engine = &default_die_engine;
+    die::engine *const die::default_engine = &default_die_engine;
 
-    Die::value_type Die::DefaultEngine::generate(Die::value_type from, Die::value_type to)
+    die::value_type detail::default_engine::generate(die::value_type from, die::value_type to)
     {
 
         static std::default_random_engine random_engine(time(0));
 
-        uniform_int_distribution<Die::value_type> distribution(from, to);
+        uniform_int_distribution<die::value_type> distribution(from, to);
 
         return distribution(random_engine);
     }
 
-    Die::Die(const unsigned int sides, Die::Engine *const engine) : engine_(engine), value_(0), keep_(false)
+    die::die(const unsigned int sides, die::engine *const engine) : engine_(engine), value_(0), keep_(false)
     {
         if (sides == 0)
         {
-            throw new invalid_argument("Dice must have one or more sides.");
+            throw new invalid_argument("dice must have one or more sides.");
         }
 
         sides_ = sides;
     }
 
-    Die::Die(const Die &other) : engine_(other.engine_), sides_(other.sides_), value_(other.value_), keep_(other.keep_)
+    die::die(const die &other) : engine_(other.engine_), sides_(other.sides_), value_(other.value_), keep_(other.keep_)
     {
     }
 
-    Die::Die(Die &&other) : engine_(std::move(other.engine_)), sides_(other.sides_), value_(other.value_), keep_(other.keep_)
+    die::die(die &&other) : engine_(std::move(other.engine_)), sides_(other.sides_), value_(other.value_), keep_(other.keep_)
     {}
 
-    Die &Die::operator= (const Die &other)
+    die &die::operator= (const die &other)
     {
         if (this != &other)
         {
@@ -56,7 +56,7 @@ namespace arg3
         return *this;
     }
 
-    Die &Die::operator= (Die && other)
+    die &die::operator= (die && other)
     {
         if (this != &other)
         {
@@ -68,22 +68,22 @@ namespace arg3
         return *this;
     }
 
-    Die::~Die()
+    die::~die()
     {
         // nothing to do
     }
 
-    bool Die::operator== (const Die &rhs) const
+    bool die::operator== (const die &rhs) const
     {
         return value_ == rhs.value_;
     }
 
-    bool Die::operator!= (const Die &rhs) const
+    bool die::operator!= (const die &rhs) const
     {
         return !operator==(rhs);
     }
 
-    Die::operator value_type() const
+    die::operator value_type() const
     {
         return value_;
     }
@@ -91,7 +91,7 @@ namespace arg3
     /*
      * returns the number of sides on the die
      */
-    unsigned int Die::sides() const
+    unsigned int die::sides() const
     {
         return sides_;
     }
@@ -99,18 +99,18 @@ namespace arg3
     /*
      * sets the number of sides on the die
      */
-    void Die::sides(const unsigned int value)
+    void die::sides(const unsigned int value)
     {
         sides_ = value;
     }
 
-    Die::value_type Die::value() const
+    die::value_type die::value() const
     {
         return value_;
     }
 
     // returns one of the sides on the die (random)
-    Die::value_type Die::roll()
+    die::value_type die::roll()
     {
         assert(engine_ != 0);
 
@@ -119,38 +119,38 @@ namespace arg3
         return value_;
     }
 
-    void Die::keep(bool value)
+    void die::keep(bool value)
     {
         keep_ = value;
     }
 
-    bool Die::keep() const
+    bool die::keep() const
     {
         return keep_;
     }
 
     // #######################################################################################################
-    // Dice
+    // dice
     // #######################################################################################################
 
     // creates x dice with y sides
-    Dice::Dice(const unsigned int count, const unsigned int sides, Die::Engine *const engine) : bonus_(0), dice_(), lastRoll_()
+    dice::dice(const unsigned int count, const unsigned int sides, die::engine *const engine) : bonus_(0), dice_(), lastRoll_()
     {
         for (int i = 0; i < count; i++)
-            dice_.push_back(Die(sides, engine));
+            dice_.push_back(die(sides, engine));
     }
 
     // copy constructor
-    Dice::Dice(const Dice &other) : bonus_(other.bonus_), dice_(other.dice_), lastRoll_(other.lastRoll_)
+    dice::dice(const dice &other) : bonus_(other.bonus_), dice_(other.dice_), lastRoll_(other.lastRoll_)
     {
     }
 
     // move constructor
-    Dice::Dice(Dice &&other) : bonus_(other.bonus_), dice_(std::move(other.dice_)), lastRoll_(std::move(other.lastRoll_))
+    dice::dice(dice &&other) : bonus_(other.bonus_), dice_(std::move(other.dice_)), lastRoll_(std::move(other.lastRoll_))
     {
     }
 
-    Dice &Dice::operator=(const Dice &other)
+    dice &dice::operator=(const dice &other)
     {
         if (this != &other)
         {
@@ -161,7 +161,7 @@ namespace arg3
         return *this;
     }
 
-    Dice &Dice::operator=(Dice && other)
+    dice &dice::operator=(dice && other)
     {
         if (this != &other)
         {
@@ -172,55 +172,55 @@ namespace arg3
         return *this;
     }
 
-    bool Dice::operator==(const Dice &other) const
+    bool dice::operator==(const dice &other) const
     {
         return bonus_ == other.bonus_ && dice_ == other.dice_ && lastRoll_ == other.lastRoll_;
     }
 
-    bool Dice::operator!=(const Dice &other) const
+    bool dice::operator!=(const dice &other) const
     {
         return !operator==(other);
     }
 
     // deconstructor
-    Dice::~Dice()
+    dice::~dice()
     {
 
     }
 
     // iterator methods
-    Dice::iterator Dice::begin()
+    dice::iterator dice::begin()
     {
         return dice_.begin();
     }
 
-    Dice::const_iterator Dice::begin() const
+    dice::const_iterator dice::begin() const
     {
         return dice_.begin();
     }
 
     // const iterator methods
-    const Dice::const_iterator Dice::cbegin() const
+    const dice::const_iterator dice::cbegin() const
     {
         return dice_.cbegin();
     }
 
-    Dice::iterator Dice::end()
+    dice::iterator dice::end()
     {
         return dice_.end();
     }
 
-    Dice::const_iterator Dice::end() const
+    dice::const_iterator dice::end() const
     {
         return dice_.end();
     }
 
-    const Dice::const_iterator Dice::cend() const
+    const dice::const_iterator dice::cend() const
     {
         return dice_.cend();
     }
 
-    unsigned int Dice::size() const
+    unsigned int dice::size() const
     {
         return dice_.size();
     }
@@ -228,7 +228,7 @@ namespace arg3
     /*
      * returns the bonus value
      */
-    int Dice::bonus() const
+    int dice::bonus() const
     {
         return bonus_;
     }
@@ -236,13 +236,13 @@ namespace arg3
     /*
      * sets the bonus value
      */
-    void Dice::bonus(const int value)
+    void dice::bonus(const int value)
     {
         bonus_ = value;
     }
 
     // a string representation of the dice ex. 5d20
-    const string Dice::to_string() const
+    const string dice::to_string() const
     {
         stringstream buf;
 
@@ -263,19 +263,19 @@ namespace arg3
     }
 
     // returns the values for each die in the last roll
-    const vector<Die::value_type> &Dice::values() const
+    const vector<die::value_type> &dice::values() const
     {
         return lastRoll_;
     }
 
     // return the total of rolling all dice
-    const unsigned int Dice::roll()
+    const unsigned int dice::roll()
     {
-        Die::value_type value = 0;
+        die::value_type value = 0;
 
         lastRoll_.clear(); // reset the last roll values
 
-        for (Die & d : dice_)
+        for (die & d : dice_)
         {
             auto roll = d.keep() ? d.value() : d.roll(); // roll the die
             value += roll; // sum the total
@@ -285,17 +285,17 @@ namespace arg3
         return value + bonus(); // add the bonus
     }
 
-    Die &Dice::operator[] ( size_t n )
+    die &dice::operator[] ( size_t n )
     {
         return dice_[n];
     }
 
-    const Die &Dice::operator[] ( size_t n ) const
+    const die &dice::operator[] ( size_t n ) const
     {
         return dice_[n];
     }
 
-    ostream &operator<< (ostream &out, const Dice &dice)
+    ostream &operator<< (ostream &out, const dice &dice)
     {
         out << dice.to_string();
         return out;

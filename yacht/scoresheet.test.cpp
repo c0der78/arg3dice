@@ -7,13 +7,13 @@ using namespace igloo;
 using namespace arg3;
 using namespace arg3::yacht;
 
-Context(ScoreSheetTest)
+Context(scoresheet_test)
 {
-    ScoreSheet *score;
+    scoresheet *score;
 
     void SetUp()
     {
-        score = new ScoreSheet();
+        score = new scoresheet();
     }
 
     void TearDown()
@@ -21,46 +21,46 @@ Context(ScoreSheetTest)
         delete score;
     }
 
-    Spec(setOnes)
+    Spec(set_ones)
     {
-        score->upperScore(1, 1 * Constants::NUM_DICE);
+        score->upper_score(1, 1 * Constants::NUM_DICE);
 
-        Assert::That(score->upperScore(1), Equals(5));
+        Assert::That(score->upper_score(1), Equals(5));
     }
 
-    Spec(upperScore)
+    Spec(upper_score)
     {
 
-        for (int i = 1; i <= Die::DEFAULT_SIDES; i++)
+        for (int i = 1; i <= die::DEFAULT_SIDES; i++)
         {
             auto value = 2 * i;
 
-            score->upperScore(2, value);
+            score->upper_score(2, value);
 
-            Assert::That(score->upperScore(2), Equals(value));
+            Assert::That(score->upper_score(2), Equals(value));
         }
     }
 
-    Spec(lowerScore)
+    Spec(lower_score)
     {
-        for (int i = ScoreSheet::FIRST_TYPE; i < ScoreSheet::MAX_TYPE; i++)
+        for (int i = scoresheet::FIRST_TYPE; i < scoresheet::MAX_TYPE; i++)
         {
             auto value = 2 * i;
 
-            score->upperScore(2, value);
+            score->upper_score(2, value);
 
-            Assert::That(score->upperScore(2), Equals(value));
+            Assert::That(score->upper_score(2), Equals(value));
         }
     }
 
     Spec(reset)
     {
-        score->upperScore(2, 10);
+        score->upper_score(2, 10);
 
-        Assert::That(score->upperScore(2), Equals(10));
+        Assert::That(score->upper_score(2), Equals(10));
 
         score->reset();
 
-        Assert::That(score->upperScore(2), !Equals(10));
+        Assert::That(score->upper_score(2), !Equals(10));
     }
 };

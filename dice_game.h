@@ -13,28 +13,28 @@ namespace arg3
     /*!
      * class representing a game of dice
      */
-    class DiceGame
+    class dice_game
     {
     protected:
-        Dice dice_;
+        dice dice_;
 
-        DiceGame(unsigned int, unsigned int, Die::Engine * = Die::default_engine);
-        DiceGame(const DiceGame &other);
-        DiceGame(DiceGame  &&other);
-        DiceGame &operator=(const DiceGame &);
-        DiceGame &operator=(DiceGame && );
-        virtual ~DiceGame();
+        dice_game(unsigned int, unsigned int, die::engine * = die::default_engine);
+        dice_game(const dice_game &other);
+        dice_game(dice_game  &&other);
+        dice_game &operator=(const dice_game &);
+        dice_game &operator=(dice_game && );
+        virtual ~dice_game();
     public:
         // rolls the dice for the game
         void roll();
         // returns the values of the dice for the game
-        const vector<Die::value_type> &values() const;
-        const Dice &dice() const;
+        const vector<die::value_type> &values() const;
+        const dice &dice() const;
 
         // equality operator
-        bool operator==(const DiceGame &) const;
+        bool operator==(const dice_game &) const;
         // inequality operator
-        bool operator!=(const DiceGame &) const;
+        bool operator!=(const dice_game &) const;
     };
 
 }

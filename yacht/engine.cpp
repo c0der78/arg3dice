@@ -8,21 +8,21 @@ namespace arg3
     namespace yacht
     {
 
-        Engine::Engine(Die::Engine *engine) : players_(), engine_(engine), currentPlayer_(0)
+        engine::engine(die::engine *engine) : players_(), engine_(engine), currentPlayer_(0)
         {
         }
 
-        Engine::Engine(const Engine &other) : players_(other.players_), engine_(other.engine_), currentPlayer_(other.currentPlayer_)
-        {
-
-        }
-
-        Engine::Engine(Engine &&other) : players_(std::move(other.players_)), engine_(std::move(other.engine_)), currentPlayer_(other.currentPlayer_)
+        engine::engine(const engine &other) : players_(other.players_), engine_(other.engine_), currentPlayer_(other.currentPlayer_)
         {
 
         }
 
-        Engine &Engine::operator=(const Engine &other)
+        engine::engine(engine &&other) : players_(std::move(other.players_)), engine_(std::move(other.engine_)), currentPlayer_(other.currentPlayer_)
+        {
+
+        }
+
+        engine &engine::operator=(const engine &other)
         {
 
             if (this != &other)
@@ -35,7 +35,7 @@ namespace arg3
         }
 
 
-        Engine &Engine::operator=(Engine &&other)
+        engine &engine::operator=(engine && other)
         {
 
             if (this != &other)
@@ -47,12 +47,12 @@ namespace arg3
             return *this;
         }
 
-        void Engine::addPlayer(const string &name)
+        void engine::add_player(const string &name)
         {
-            players_.push_back(Player(name, engine_));
+            players_.push_back(player(name, engine_));
         }
 
-        void Engine::removePlayer(size_t index)
+        void engine::remove_player(size_t index)
         {
 
             iterator pos = players_.begin() + index;
@@ -68,14 +68,14 @@ namespace arg3
                 currentPlayer_--;
         }
 
-        Engine *Engine::instance()
+        engine *engine::instance()
         {
-            static Engine instance;
+            static engine instance;
             return &instance;
         }
 
 
-        Player *Engine::currentPlayer()
+        player *engine::current_player()
         {
             if (currentPlayer_ >= players_.size())
                 return 0;
@@ -83,12 +83,12 @@ namespace arg3
             return &(players_.at(currentPlayer_));
         }
 
-        size_t Engine::numberOfPlayers() const
+        size_t engine::number_of_players() const
         {
             return players_.size();
         }
 
-        Player *Engine::nextPlayer()
+        player *engine::next_player()
         {
             if (players_.size() == 0)
                 return 0;
@@ -104,48 +104,48 @@ namespace arg3
         }
 
         // iterator methods
-        Engine::iterator Engine::begin()
+        engine::iterator engine::begin()
         {
             return players_.begin();
         }
 
-        Engine::const_iterator Engine::begin() const
+        engine::const_iterator engine::begin() const
         {
             return players_.begin();
         }
 
         // const iterator methods
-        const Engine::const_iterator Engine::cbegin() const
+        const engine::const_iterator engine::cbegin() const
         {
             return players_.cbegin();
         }
 
-        Engine::iterator Engine::end()
+        engine::iterator engine::end()
         {
             return players_.end();
         }
 
-        Engine::const_iterator Engine::end() const
+        engine::const_iterator engine::end() const
         {
             return players_.end();
         }
 
-        const Engine::const_iterator Engine::cend() const
+        const engine::const_iterator engine::cend() const
         {
             return players_.cend();
         }
 
-        Player *Engine::operator[] ( size_t index )
+        player *engine::operator[] ( size_t index )
         {
             return &(players_.at(index));
         }
 
-        const Player *Engine::operator[] ( size_t index ) const
+        const player *engine::operator[] ( size_t index ) const
         {
             return &(players_[index]);
         }
 
-        void Engine::setRandomEngine(Die::Engine *value)
+        void engine::set_random_engine(die::engine *value)
         {
             engine_ = value;
         }

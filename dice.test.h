@@ -5,27 +5,27 @@
 
 using namespace arg3;
 
-class DiceTestEngine : public Die::Engine
+class dice_test_engine : public die::engine
 {
 
 public:
 
-    DiceTestEngine();
+    dice_test_engine();
 
-    DiceTestEngine(initializer_list<Die::value_type> items);
+    dice_test_engine(initializer_list<die::value_type> items);
 
-    DiceTestEngine(const DiceTestEngine &copy);
+    dice_test_engine(const dice_test_engine &copy);
 
-    virtual ~DiceTestEngine();
+    virtual ~dice_test_engine();
 
-    DiceTestEngine &operator=(const DiceTestEngine &rhs);
+    dice_test_engine &operator=(const dice_test_engine &rhs);
 
-    Die::value_type generate(Die::value_type from, Die::value_type to);
+    die::value_type generate(die::value_type from, die::value_type to);
 
-    void setNextRoll(initializer_list<Die::value_type> items);
+    void set_next_roll(initializer_list<die::value_type> items);
 private:
-    vector<Die::value_type> mValues;
-    size_t mCurrentValue;
+    vector<die::value_type> values_;
+    size_t currentValue_;
 
 };
 

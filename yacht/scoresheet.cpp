@@ -7,28 +7,28 @@ namespace arg3
     {
 
 
-        ScoreSheet::ScoreSheet()
+        scoresheet::scoresheet()
         {
             lowerValues_.fill(0);
             upperValues_.fill(0);
         }
 
-        ScoreSheet::ScoreSheet(const ScoreSheet &other) : upperValues_(other.upperValues_), lowerValues_(other.lowerValues_)
+        scoresheet::scoresheet(const scoresheet &other) : upperValues_(other.upperValues_), lowerValues_(other.lowerValues_)
         {
 
         }
 
-        ScoreSheet::ScoreSheet(ScoreSheet &&other) : upperValues_(std::move(other.upperValues_)), lowerValues_(std::move(other.lowerValues_))
+        scoresheet::scoresheet(scoresheet &&other) : upperValues_(std::move(other.upperValues_)), lowerValues_(std::move(other.lowerValues_))
         {
 
         }
 
-        ScoreSheet::~ScoreSheet()
+        scoresheet::~scoresheet()
         {
 
         }
 
-        ScoreSheet &ScoreSheet::operator=(const ScoreSheet &other)
+        scoresheet &scoresheet::operator=(const scoresheet &other)
         {
             if (this != &other)
             {
@@ -38,7 +38,7 @@ namespace arg3
             return *this;
         }
 
-        ScoreSheet &ScoreSheet::operator=(ScoreSheet &&other)
+        scoresheet &scoresheet::operator=(scoresheet && other)
         {
             if (this != &other)
             {
@@ -48,28 +48,28 @@ namespace arg3
             return *this;
         }
 
-        void ScoreSheet::reset()
+        void scoresheet::reset()
         {
             lowerValues_.fill(0);
             upperValues_.fill(0);
         }
 
-        void ScoreSheet::lowerScore(Type index, ScoreSheet::value_type value)
+        void scoresheet::lower_score(type index, scoresheet::value_type value)
         {
             lowerValues_[index] = value;
         }
 
-        void ScoreSheet::upperScore(Die::value_type index, ScoreSheet::value_type value)
+        void scoresheet::upper_score(die::value_type index, scoresheet::value_type value)
         {
             upperValues_[index] = value;
         }
 
-        ScoreSheet::value_type ScoreSheet::lowerScore(Type index) const
+        scoresheet::value_type scoresheet::lower_score(type index) const
         {
             return lowerValues_[index];
         }
 
-        ScoreSheet::value_type ScoreSheet::upperScore(Die::value_type index) const
+        scoresheet::value_type scoresheet::upper_score(die::value_type index) const
         {
             return upperValues_[index];
         }
