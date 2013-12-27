@@ -71,6 +71,26 @@ namespace arg3
             return Constants::NUM_DICE;
         }
 
+        void player::on_roll()
+        {
+            rollCount_++;
+        }
+
+        unsigned short player::roll_count() const
+        {
+            return rollCount_;
+        }
+
+        void player::reset()
+        {
+            rollCount_ = 0;
+
+            for (auto & die : dice_)
+            {
+                die.keep(false);
+            }
+        }
+
         void player::keep_die(size_t index)
         {
             dice_[index].keep(true);

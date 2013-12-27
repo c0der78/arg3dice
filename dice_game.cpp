@@ -43,6 +43,8 @@ namespace arg3
     void dice_game::roll()
     {
         dice_.roll();
+
+        on_roll();
     }
 
     const vector<die::value_type> &dice_game::values() const

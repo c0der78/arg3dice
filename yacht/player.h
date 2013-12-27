@@ -110,7 +110,13 @@ namespace arg3
              */
             bool operator!=(const player &) const;
 
+            unsigned short roll_count() const;
+
+            void reset();
+
         private:
+
+            void on_roll();
 
             scoresheet::value_type calculate_number_of_a_kind(int) const;
             scoresheet::value_type calculate_full_house() const;

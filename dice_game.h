@@ -24,6 +24,7 @@ namespace arg3
         dice_game &operator=(const dice_game &);
         dice_game &operator=(dice_game && );
         virtual ~dice_game();
+        virtual void on_roll() {};
     public:
         // rolls the dice for the game
         void roll();

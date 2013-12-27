@@ -243,6 +243,8 @@ namespace arg3
          */
         void bonus(const int value);
 
+        void reset();
+
         // a string representation of the dice ex. 5d20
         const string to_string() const;
 
