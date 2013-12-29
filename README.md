@@ -1,37 +1,70 @@
-<<<<<<< HEAD
-[dice-engine](http://c0der78.github.com/libarg3/dice)
+libarg3dice
 ===========
 
-A c++11 library for working with dice.  Engines for different dice games (Yahtzee, etc.)
+A c++11 library for working with dice.  Implementations for different dice games (Yahtzee, etc.)
 
-requirements
+Building
+========
+
+*OSX:*
+
+[Download](http://brew.sh) and install homebrew.
+
+```bash
+brew install premake
+
+premake4 gmake
+
+make
+```
+
+*Windows:*
+
+- [Download](http://industriousone.com/premake/download) premake.
+- run <code>premake4 vs2010</code>.
+- Open the generated project file in Visual Studio.
+
+
+Coding Style
 ============
 
-- c++11 for compiling (I use clang++ on OSX)
+- class/struct/method names are all lower case with underscores separating words
+- non public members are camel case with and underscore at end of the name
+- macros, enums and constants are all upper case with underscores seperating words
+- braces on a new line
 
-optional
+Examples
 ========
 
-- [http://igloo-testing.org](Igloo) Unit Testing
-- [premake](http://industriousone.com/premake) for building
-- [HeaderDoc](http://developer.apple.com/library/mac/#documentation/developertools/Conceptual/HeaderDoc/intro/intro.html) (Apple) for creating documentation
-- [astyle](http://astyle.sourceforge.net) for formatting source code
+*Simple Example*
 
-compilation
-===========
+```c++
+dice d10(10, 10); // 10 dice with 10 sides each
 
+d10.roll(); // random value
+```
 
-Just run 'premake4 --help' to get a list of build types
+*Complex Example*
 
-Typically I run 'premake4 gmake; make'
+```c++
+class logger_die_engine : public die::engine
+{
+public:
+    die::value_type generate(die::value_type from, die::value_type to)
+    {
+    	// pseudo code
+    	auto value = generate_random_number(from, to);
 
-licensing
-=========
+    	cout << "Generated random number: " << value << endl;
 
-copyrighted under the Lesser GNU Public License
-=======
-arg3dice
-========
+    	return value;
+	}
+};
 
-dice rolling library
->>>>>>> dba92add8acd2ba65412f38ba2fa24b1be73f5e4
+logger_die_engine my_engine;
+
+dice d10(10, 10, &my_engine);
+
+d10.roll(); // logs the random number
+```
+
