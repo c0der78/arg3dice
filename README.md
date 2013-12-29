@@ -63,7 +63,7 @@ public:
 
 logger_die_engine my_engine;
 
-dice d10(10, 10, &my_engine);
+arg3::dice d10(10, 10, &my_engine);
 
 d10.roll(); // logs the random number
 ```
