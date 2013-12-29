@@ -39,7 +39,7 @@ Examples
 *Simple Example*
 
 ```c++
-dice d10(10, 10); // 10 dice with 10 sides each
+arg3::dice d10(10, 10); // 10 dice with 10 sides each
 
 d10.roll(); // random value
 ```
@@ -47,7 +47,7 @@ d10.roll(); // random value
 *Complex Example*
 
 ```c++
-class logger_die_engine : public die::engine
+class logger_die_engine : public arg3::die::engine
 {
 public:
     die::value_type generate(die::value_type from, die::value_type to)
