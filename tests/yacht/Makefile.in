@@ -92,9 +92,11 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
 am_arg3yacht_test_OBJECTS = arg3.test.$(OBJEXT) engine.test.$(OBJEXT) \
-	player.test.$(OBJEXT) scoresheet.test.$(OBJEXT)
+	player.test.$(OBJEXT) scoresheet.test.$(OBJEXT) \
+	dice.test.$(OBJEXT)
 arg3yacht_test_OBJECTS = $(am_arg3yacht_test_OBJECTS)
-arg3yacht_test_DEPENDENCIES = ../src/libarg3dice-0.2.la
+arg3yacht_test_DEPENDENCIES = ../../src/libarg3dice-0.2.la \
+	../../src/yacht/libarg3yacht-0.2.la
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -279,9 +281,9 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-arg3yacht_test_SOURCES = arg3.test.cpp engine.test.cpp player.test.cpp scoresheet.test.cpp
-AM_CPPFLAGS = -std=c++11 -stdlib=libc++ -Ivendor -Wall -Werror
-arg3yacht_test_LDADD = ../src/libarg3dice-0.2.la
+arg3yacht_test_SOURCES = arg3.test.cpp engine.test.cpp player.test.cpp scoresheet.test.cpp ../dice.test.cpp
+AM_CPPFLAGS = -std=c++11 -stdlib=libc++ -I../vendor -Wall -Werror -I../../src/yacht
+arg3yacht_test_LDADD = ../../src/libarg3dice-0.2.la ../../src/yacht/libarg3yacht-0.2.la
 all: all-am
 
 .SUFFIXES:
@@ -337,6 +339,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/arg3.test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dice.test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/engine.test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/player.test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/scoresheet.test.Po@am__quote@
@@ -361,6 +364,20 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='$<' object='$@' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LTCXXCOMPILE) -c -o $@ $<
+
+dice.test.o: ../dice.test.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT dice.test.o -MD -MP -MF $(DEPDIR)/dice.test.Tpo -c -o dice.test.o `test -f '../dice.test.cpp' || echo '$(srcdir)/'`../dice.test.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/dice.test.Tpo $(DEPDIR)/dice.test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='../dice.test.cpp' object='dice.test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o dice.test.o `test -f '../dice.test.cpp' || echo '$(srcdir)/'`../dice.test.cpp
+
+dice.test.obj: ../dice.test.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT dice.test.obj -MD -MP -MF $(DEPDIR)/dice.test.Tpo -c -o dice.test.obj `if test -f '../dice.test.cpp'; then $(CYGPATH_W) '../dice.test.cpp'; else $(CYGPATH_W) '$(srcdir)/../dice.test.cpp'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/dice.test.Tpo $(DEPDIR)/dice.test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='../dice.test.cpp' object='dice.test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o dice.test.obj `if test -f '../dice.test.cpp'; then $(CYGPATH_W) '../dice.test.cpp'; else $(CYGPATH_W) '$(srcdir)/../dice.test.cpp'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
