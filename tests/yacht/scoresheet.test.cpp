@@ -1,7 +1,7 @@
 #include <igloo/igloo.h>
-#include "scoresheet.h"
-#include "constants.h"
-#include "../dice.h"
+#include "../../src/yacht/scoresheet.h"
+#include "../../src/yacht/constants.h"
+#include "../../src/dice.h"
 
 using namespace igloo;
 using namespace arg3;

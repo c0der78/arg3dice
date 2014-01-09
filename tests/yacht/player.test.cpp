@@ -1,6 +1,6 @@
 #include <igloo/igloo.h>
-#include "player.h"
-#include "engine.h"
+#include "../../src/yacht/player.h"
+#include "../../src/yacht/engine.h"
 #include "../dice.test.h"
 
 using namespace igloo;

@@ -19,3 +19,7 @@ obj/
 *.tar.gz
 *.log
 .deps
+*.cache
+libtool
+stamp-h1
+.libs

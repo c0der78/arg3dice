@@ -1,6 +1,6 @@
 #include <igloo/igloo.h>
 
-#include "engine.h"
+#include "../../src/yacht/engine.h"
 
 #include "../dice.test.h"
 
