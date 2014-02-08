@@ -23,3 +23,7 @@ obj/
 libtool
 stamp-h1
 .libs
+.dirstamp
+*.status
+config.h
+arg3dice_test

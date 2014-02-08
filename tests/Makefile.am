@@ -9,3 +9,6 @@ AM_CPPFLAGS = -std=c++11 -stdlib=libc++ -Ivendor -Wall -Werror
 pkginclude_HEADERS = dice.test.h
 
 arg3dice_test_LDADD = ../src/libarg3dice-0.2.la
+
+all-local: arg3dice_test$(EXEEXT)
+	./arg3dice_test
