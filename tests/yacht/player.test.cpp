@@ -73,7 +73,7 @@ Context(yacht_player_test)
     {
         for (die::value_type i = 1; i <= Constants::NUM_DICE; i++)
         {
-            rand_engine.set_next_roll( {{i}});
+            rand_engine.set_next_roll( { i });
 
             player.roll();
 
@@ -87,7 +87,7 @@ Context(yacht_player_test)
     {
         for (die::value_type i = 1; i <= Constants::NUM_DICE; i++)
         {
-            rand_engine.set_next_roll( {{i > 1 ? 1 : i + 1}});
+            rand_engine.set_next_roll( {i > 1 ? 1 : i + 1});
 
             player.roll();
 
@@ -269,5 +269,3 @@ Context(yacht_player_test)
 dice_test_engine yacht_player_test::rand_engine;
 
 player yacht_player_test::player("testA", &yacht_player_test::rand_engine);
-
-

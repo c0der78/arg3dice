@@ -232,8 +232,10 @@ namespace arg3
             scoresheet::value_type value = 0;
             scoresheet::type type = scoresheet::MAX_TYPE;
 
-            for (auto t = scoresheet::FIRST_TYPE; t < scoresheet::MAX_TYPE; t++)
+            for (int i = scoresheet::FIRST_TYPE; i < scoresheet::MAX_TYPE; i++)
             {
+                scoresheet::type t = (scoresheet::type) i;
+
                 if (score_.lower_score(t) != 0) continue;
 
                 auto score = calculate_lower_score(t);
