@@ -27,3 +27,5 @@ stamp-h1
 *.status
 config.h
 arg3dice_test
+*.gcno
+coverage.info
