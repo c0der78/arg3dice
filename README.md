@@ -8,7 +8,7 @@ A c++11 library for working with dice.  Implementations for different dice games
 Building
 ========
 
-Requires [autotools](http://en.wikipedia.org/wiki/GNU_build_system).
+I use [autotools](http://en.wikipedia.org/wiki/GNU_build_system).
 
 ```bash
 ./configure --prefix=/usr/local
