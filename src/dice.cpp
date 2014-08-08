@@ -46,25 +46,21 @@ namespace arg3
 
     die &die::operator= (const die &other)
     {
-        if (this != &other)
-        {
-            engine_ = other.engine_;
-            sides_ = other.sides_;
-            value_ = other.value_;
-            keep_ = other.keep_;
-        }
+        engine_ = other.engine_;
+        sides_ = other.sides_;
+        value_ = other.value_;
+        keep_ = other.keep_;
+
         return *this;
     }
 
     die &die::operator= (die && other)
     {
-        if (this != &other)
-        {
-            engine_ = std::move(other.engine_);
-            sides_ = other.sides_;
-            value_ = other.value_;
-            keep_ = other.keep_;
-        }
+        engine_ = std::move(other.engine_);
+        sides_ = other.sides_;
+        value_ = other.value_;
+        keep_ = other.keep_;
+
         return *this;
     }
 
@@ -152,23 +148,19 @@ namespace arg3
 
     dice &dice::operator=(const dice &other)
     {
-        if (this != &other)
-        {
-            bonus_ = other.bonus_;
-            dice_ = other.dice_;
-            lastRoll_ = other.lastRoll_;
-        }
+        bonus_ = other.bonus_;
+        dice_ = other.dice_;
+        lastRoll_ = other.lastRoll_;
+
         return *this;
     }
 
     dice &dice::operator=(dice && other)
     {
-        if (this != &other)
-        {
-            bonus_ = other.bonus_;
-            dice_ = std::move(other.dice_);
-            lastRoll_ = std::move(other.lastRoll_);
-        }
+        bonus_ = other.bonus_;
+        dice_ = std::move(other.dice_);
+        lastRoll_ = std::move(other.lastRoll_);
+
         return *this;
     }
 

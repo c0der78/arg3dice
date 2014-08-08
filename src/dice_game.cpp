@@ -22,21 +22,16 @@ namespace arg3
 
     dice_game &dice_game::operator=(const dice_game &other)
     {
+        dice_ = other.dice_;
 
-        if (this != &other)
-        {
-            dice_ = other.dice_;
-        }
         return *this;
     }
 
     dice_game &dice_game::operator=(dice_game && other)
     {
 
-        if (this != &other)
-        {
-            dice_ = std::move(other.dice_);
-        }
+        dice_ = std::move(other.dice_);
+
         return *this;
     }
 
