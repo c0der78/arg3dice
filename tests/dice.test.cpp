@@ -1,9 +1,9 @@
 
-#include <igloo/igloo.h>
+#include <bandit/bandit.h>
 #include "dice.h"
 #include "dice.test.h"
 
-using namespace igloo;
+using namespace bandit;
 
 using namespace arg3;
 
@@ -49,104 +49,106 @@ void dice_test_engine::set_next_roll(initializer_list<die::value_type> items)
     currentValue_ = 0;
 }
 
-Context(die_test)
+go_bandit([]()
 {
-    static dice_test_engine randEngine;
 
-    Spec(constructor_no_arg)
+    describe("a die", []()
     {
-        die d;
-
-        Assert::That(d.sides(), Equals(die::DEFAULT_SIDES));
-    }
-
-    Spec(constructor_sides)
-    {
-        die d(100);
-
-        Assert::That(d.sides(), Equals(100));
-    }
-
-    Spec(constructor_copy)
-    {
-        die d(10);
-
-        die d2 = d;
-
-        Assert::That(d2.sides(), Equals(10));
-    }
-
-    Spec(roll)
-    {
-        die d(10);
-
-        for (int i = 0; i < 10; i++)
+        it("has a default constructor", []()
         {
-            Assert::That(d.sides(), IsGreaterThan(0));
-            Assert::That(d.sides(), IsLessThan(11));
-        }
-    }
+            die d;
 
-    Spec(sides)
-    {
-        die d(7);
+            Assert::That(d.sides(), Equals(die::DEFAULT_SIDES));
+        });
 
-        Assert::That(d.sides(), Equals(7));
-
-        d.sides(25);
-
-        Assert::That(d.sides(), Equals(25));
-    }
-};
-
-dice_test_engine die_test::randEngine;
-
-
-Context(dice_test)
-{
-    Spec(constructor_with_count)
-    {
-        dice d(10);
-
-        Assert::That(d.size(), Equals(10));
-    }
-
-    Spec(constructor_with_count_and_sides)
-    {
-        dice dice(10, 10);
-
-        Assert::That(dice.size(), Equals(10));
-
-        for (die & d : dice)
+        it("can be constructed with sides", []()
         {
-            Assert::That(d.sides(), Equals(10));
-        }
-    }
+            die d(100);
 
-    Spec(size)
+            Assert::That(d.sides(), Equals(100));
+        });
+
+        it("can be copied", []()
+        {
+            die d(10);
+
+            die d2 = d;
+
+            Assert::That(d2.sides(), Equals(10));
+        });
+
+        it("can be rolled", []()
+        {
+            die d(10);
+
+            for (int i = 0; i < 10; i++)
+            {
+                Assert::That(d.sides(), IsGreaterThan(0));
+                Assert::That(d.sides(), IsLessThan(11));
+            }
+        });
+
+        it("has sides", []()
+        {
+            die d(7);
+
+            Assert::That(d.sides(), Equals(7));
+
+            d.sides(25);
+
+            Assert::That(d.sides(), Equals(25));
+        });
+    });
+
+    describe("some dice", []()
     {
-        dice d(10);
+        it("can be constructed with the number of die", []()
+        {
+            dice d(10);
 
-        Assert::That(d.size(), Equals(10));
-    }
+            Assert::That(d.size(), Equals(10));
+        });
 
-    Spec(bonus)
-    {
-        dice d(2);
+        it("can be constructed with the number of die and sides per die", []()
+        {
+            dice dice(10, 10);
 
-        d.bonus(23);
+            Assert::That(dice.size(), Equals(10));
 
-        Assert::That(d.bonus(), Equals(23));
-    }
+            for (die & d : dice)
+            {
+                Assert::That(d.sides(), Equals(10));
+            }
+        });
 
-    Spec(to_string)
-    {
-        dice d(10, 20);
+        it("has a size", []()
+        {
+            dice d(10);
 
-        Assert::That(d.to_string(), Equals("10d20"));
+            Assert::That(d.size(), Equals(10));
+        });
 
-        d.bonus(5);
+        it("has a bonus value", []()
+        {
+            dice d(2);
 
-        Assert::That(d.to_string(), Equals("10d20+5"));
-    }
-};
+            d.bonus(23);
+
+            Assert::That(d.bonus(), Equals(23));
+        });
+
+        it("can be converted to a string", []()
+        {
+            dice d(10, 20);
+
+            Assert::That(d.to_string(), Equals("10d20"));
+
+            d.bonus(5);
+
+            Assert::That(d.to_string(), Equals("10d20+5"));
+        });
+    });
+
+
+});
+

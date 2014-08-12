@@ -1,66 +1,73 @@
-#include <igloo/igloo.h>
+#include <bandit/bandit.h>
 #include "../../src/yacht/scoresheet.h"
 #include "../../src/yacht/constants.h"
 #include "../../src/dice.h"
 
-using namespace igloo;
+using namespace bandit;
 using namespace arg3;
 using namespace arg3::yacht;
 
-Context(scoresheet_test)
+go_bandit([]()
 {
-    scoresheet *score;
 
-    void SetUp()
+    describe("a yaht(zee) scoresheet", []()
     {
-        score = new scoresheet();
-    }
+        scoresheet *score;
 
-    void TearDown()
-    {
-        delete score;
-    }
-
-    Spec(set_ones)
-    {
-        score->upper_score(1, 1 * Constants::NUM_DICE);
-
-        Assert::That(score->upper_score(1), Equals(5));
-    }
-
-    Spec(upper_score)
-    {
-
-        for (int i = 1; i <= die::DEFAULT_SIDES; i++)
+        before_each([&]()
         {
-            auto value = 2 * i;
+            score = new scoresheet();
+        });
 
-            score->upper_score(2, value);
-
-            Assert::That(score->upper_score(2), Equals(value));
-        }
-    }
-
-    Spec(lower_score)
-    {
-        for (int i = scoresheet::FIRST_TYPE; i < scoresheet::MAX_TYPE; i++)
+        after_each([&]()
         {
-            auto value = 2 * i;
+            delete score;
+        });
 
-            score->upper_score(2, value);
+        it("can score ones", [&]()
+        {
+            score->upper_score(1, 1 * Constants::NUM_DICE);
 
-            Assert::That(score->upper_score(2), Equals(value));
-        }
-    }
+            Assert::That(score->upper_score(1), Equals(5));
+        });
 
-    Spec(reset)
-    {
-        score->upper_score(2, 10);
+        it("has an upper score", [&]()
+        {
 
-        Assert::That(score->upper_score(2), Equals(10));
+            for (int i = 1; i <= die::DEFAULT_SIDES; i++)
+            {
+                auto value = 2 * i;
 
-        score->reset();
+                score->upper_score(2, value);
 
-        Assert::That(score->upper_score(2), !Equals(10));
-    }
-};
+                Assert::That(score->upper_score(2), Equals(value));
+            }
+        });
+
+        it("has a lower score", [&]()
+        {
+            for (int i = scoresheet::FIRST_TYPE; i < scoresheet::MAX_TYPE; i++)
+            {
+                auto value = 2 * i;
+
+                score->lower_score(scoresheet::CHANCE, (scoresheet::value_type) value);
+
+                Assert::That(score->lower_score(scoresheet::CHANCE), Equals(value));
+            }
+        });
+
+        it("can reset", [&]()
+        {
+            score->upper_score(2, 10);
+
+            Assert::That(score->upper_score(2), Equals(10));
+
+            score->reset();
+
+            Assert::That(score->upper_score(2), !Equals(10));
+        });
+    });
+
+
+});
+

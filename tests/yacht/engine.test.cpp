@@ -1,63 +1,60 @@
-#include <igloo/igloo.h>
+#include <bandit/bandit.h>
 
 #include "../../src/yacht/engine.h"
 
 #include "../dice.test.h"
 
-using namespace igloo;
+using namespace bandit;
 
 using namespace arg3;
 
 using namespace arg3::yacht;
 
-Context(yacht_test)
+go_bandit([]()
 {
-    static engine *yacht;
 
-    static dice_test_engine randengine;
-
-    static void SetUpContext()
+    describe("a game of yaht(zee)", []()
     {
-        yacht = engine::instance();
+        engine *yacht = engine::instance();
 
-        yacht->set_random_engine(&randengine);
+        dice_test_engine randengine;
 
-        yacht->add_player("testPlayer");
-    }
-
-    void SetUp()
-    {
-        int size = yacht->number_of_players();
-
-        while (size >= 1)
+        before_each([&]()
         {
-            yacht->remove_player(size--);
-        }
-    }
+            yacht->set_random_engine(&randengine);
 
-    Spec(current_player)
-    {
-        yacht->current_player()->roll();
+            yacht->add_player("testPlayer");
 
-        yacht->add_player("newPlayerB");
+            int size = yacht->number_of_players();
 
-        yacht->next_player();
+            while (size >= 1)
+            {
+                yacht->remove_player(size--);
+            }
+        });
 
-        Assert::That(yacht->current_player()->name(), Equals("newPlayerB"));
+        it("has a current player", [&]()
+        {
+            yacht->current_player()->roll();
 
-        yacht->remove_player(1);
+            yacht->add_player("newPlayerB");
 
-        Assert::That(yacht->current_player()->name(), !Equals("newPlayerB"));
-    }
+            yacht->next_player();
 
-    Spec(number_of_players)
-    {
-        Assert::That(yacht->number_of_players(), Equals(1));
-    }
+            Assert::That(yacht->current_player()->name(), Equals("newPlayerB"));
 
-};
+            yacht->remove_player(1);
 
+            Assert::That(yacht->current_player()->name(), !Equals("newPlayerB"));
+        });
 
-engine *yacht_test::yacht;
-dice_test_engine yacht_test::randengine;
+        it("has a number of players", [&]()
+        {
+            Assert::That(yacht->number_of_players(), Equals(1));
+        });
+
+    });
+
+});
+
 
