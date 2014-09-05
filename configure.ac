@@ -22,14 +22,18 @@ else
 	AC_SUBST([AM_CPPFLAGS], ["-std=c++0x -Wall -Werror"])
 fi
 
-
 m4_include([m4/gcov.m4])
 AC_TDD_GCOV
 AC_SUBST(COVERAGE_CFLAGS)
 AC_SUBST(COVERAGE_CXXFLAGS)
 AC_SUBST(COVERAGE_LDFLAGS)
 
-# Checks for libraries.
+AC_CHECK_PROG(GIT_CHECK,git,yes)
+if test x"$GIT_CHECK" != x"yes" ; then
+    AC_MSG_ERROR([Required program 'git' not found.])
+else
+    git submodule update --init --recursive
+fi
 
 # Checks for header files.
 
