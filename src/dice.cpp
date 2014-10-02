@@ -132,7 +132,7 @@ namespace arg3
     // creates x dice with y sides
     dice::dice(const unsigned int count, const unsigned int sides, die::engine *const engine) : bonus_(0), dice_(), lastRoll_()
     {
-        for (int i = 0; i < count; i++)
+        for (size_t i = 0; i < count; i++)
             dice_.push_back(die(sides, engine));
     }
 
