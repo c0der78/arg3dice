@@ -34,7 +34,7 @@ go_bandit([]()
         it("has an upper score", [&]()
         {
 
-            for (int i = 1; i <= die::DEFAULT_SIDES; i++)
+            for (unsigned int i = 1; i <= die::DEFAULT_SIDES; i++)
             {
                 auto value = 2 * i;
 

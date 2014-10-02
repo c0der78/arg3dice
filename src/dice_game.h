@@ -30,7 +30,7 @@ namespace arg3
         void roll();
         // returns the values of the dice for the game
         const vector<die::value_type> &values() const;
-        const dice &dice() const;
+        const dice &d1ce() const;
 
         // equality operator
         bool operator==(const dice_game &) const;

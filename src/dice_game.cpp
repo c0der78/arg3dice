@@ -47,7 +47,7 @@ namespace arg3
         return dice_.values();
     }
 
-    const dice &dice_game::dice() const
+    const dice &dice_game::d1ce() const
     {
         return dice_;
     }

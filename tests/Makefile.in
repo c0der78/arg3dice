@@ -197,7 +197,7 @@ CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
-AM_CPPFLAGS = -std=c++11 -stdlib=libc++ -Ivendor/bandit -Wall -Werror
+AM_CPPFLAGS = @AM_CPPFLAGS@ -Ivendor/bandit -Wall -Werror
 AM_DEFAULT_VERBOSITY = @AM_DEFAULT_VERBOSITY@
 AR = @AR@
 AUTOCONF = @AUTOCONF@
@@ -534,7 +534,7 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(PROGRAMS) $(HEADERS) all-local
+all-am: Makefile $(PROGRAMS) $(HEADERS)
 installdirs:
 	for dir in "$(DESTDIR)$(pkgincludedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
@@ -644,9 +644,9 @@ uninstall-am: uninstall-pkgincludeHEADERS
 
 .MAKE: install-am install-strip
 
-.PHONY: CTAGS GTAGS TAGS all all-am all-local check check-am clean \
-	clean-generic clean-libtool clean-noinstPROGRAMS cscopelist-am \
-	ctags ctags-am distclean distclean-compile distclean-generic \
+.PHONY: CTAGS GTAGS TAGS all all-am check check-am clean clean-generic \
+	clean-libtool clean-noinstPROGRAMS cscopelist-am ctags \
+	ctags-am distclean distclean-compile distclean-generic \
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
 	html-am info info-am install install-am install-data \
 	install-data-am install-dvi install-dvi-am install-exec \
@@ -660,7 +660,7 @@ uninstall-am: uninstall-pkgincludeHEADERS
 	uninstall-pkgincludeHEADERS
 
 
-all-local: arg3dice_test$(EXEEXT)
+check: arg3dice_test$(EXEEXT)
 	./arg3dice_test
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
