@@ -1,6 +1,8 @@
 libarg3dice
 ===========
 
+[![Build Status](https://travis-ci.org/c0der78/arg3dice.svg?branch=master)](https://travis-ci.org/c0der78/arg3dice)
+
 A c++11 library for working with dice.  Implementations for different dice games (Yahtzee, etc.)
 
 [View Testing Code Coverage](http://htmlpreview.github.com/?https://github.com/c0der78/arg3dice/blob/master/coverage/index.html)
