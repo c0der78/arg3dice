@@ -14,7 +14,6 @@
 
 @SET_MAKE@
 
-
 VPATH = @srcdir@
 am__is_gnu_make = test -n '$(MAKEFILE_LIST)' && test -n '$(MAKELEVEL)'
 am__make_running_with_option = \
@@ -82,7 +81,7 @@ host_triplet = @host@
 noinst_PROGRAMS = arg3dice_test$(EXEEXT)
 subdir = tests
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
-	$(top_srcdir)/depcomp $(pkginclude_HEADERS)
+	$(top_srcdir)/depcomp
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
@@ -97,8 +96,8 @@ CONFIG_CLEAN_VPATH_FILES =
 PROGRAMS = $(noinst_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am_arg3dice_test_OBJECTS = arg3.test.$(OBJEXT) dice.test.$(OBJEXT) \
-	yacht/engine.test.$(OBJEXT) yacht/player.test.$(OBJEXT) \
-	yacht/scoresheet.test.$(OBJEXT)
+	yaht/engine.test.$(OBJEXT) yaht/player.test.$(OBJEXT) \
+	yaht/scoresheet.test.$(OBJEXT)
 arg3dice_test_OBJECTS = $(am_arg3dice_test_OBJECTS)
 arg3dice_test_DEPENDENCIES = ../src/libarg3dice-0.2.la
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -146,35 +145,6 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
-am__vpath_adj = case $$p in \
-    $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
-    *) f=$$p;; \
-  esac;
-am__strip_dir = f=`echo $$p | sed -e 's|^.*/||'`;
-am__install_max = 40
-am__nobase_strip_setup = \
-  srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*|]/\\\\&/g'`
-am__nobase_strip = \
-  for p in $$list; do echo "$$p"; done | sed -e "s|$$srcdirstrip/||"
-am__nobase_list = $(am__nobase_strip_setup); \
-  for p in $$list; do echo "$$p $$p"; done | \
-  sed "s| $$srcdirstrip/| |;"' / .*\//!s/ .*/ ./; s,\( .*\)/[^/]*$$,\1,' | \
-  $(AWK) 'BEGIN { files["."] = "" } { files[$$2] = files[$$2] " " $$1; \
-    if (++n[$$2] == $(am__install_max)) \
-      { print $$2, files[$$2]; n[$$2] = 0; files[$$2] = "" } } \
-    END { for (dir in files) print dir, files[dir] }'
-am__base_list = \
-  sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
-  sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
-am__uninstall_files_from_dir = { \
-  test -z "$$files" \
-    || { test ! -d "$$dir" && test ! -f "$$dir" && test ! -r "$$dir"; } \
-    || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
-         $(am__cd) "$$dir" && rm -f $$files; }; \
-  }
-am__installdirs = "$(DESTDIR)$(pkgincludedir)"
-HEADERS = $(pkginclude_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
 # and print each of them once, without duplicates.  Input order is
@@ -323,8 +293,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
-arg3dice_test_SOURCES = arg3.test.cpp dice.test.cpp yacht/engine.test.cpp yacht/player.test.cpp yacht/scoresheet.test.cpp
-pkginclude_HEADERS = dice.test.h
+arg3dice_test_SOURCES = arg3.test.cpp dice.test.cpp yaht/engine.test.cpp yaht/player.test.cpp yaht/scoresheet.test.cpp
 arg3dice_test_LDADD = ../src/libarg3dice-0.2.la
 all: all-am
 
@@ -369,18 +338,18 @@ clean-noinstPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
-yacht/$(am__dirstamp):
-	@$(MKDIR_P) yacht
-	@: > yacht/$(am__dirstamp)
-yacht/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) yacht/$(DEPDIR)
-	@: > yacht/$(DEPDIR)/$(am__dirstamp)
-yacht/engine.test.$(OBJEXT): yacht/$(am__dirstamp) \
-	yacht/$(DEPDIR)/$(am__dirstamp)
-yacht/player.test.$(OBJEXT): yacht/$(am__dirstamp) \
-	yacht/$(DEPDIR)/$(am__dirstamp)
-yacht/scoresheet.test.$(OBJEXT): yacht/$(am__dirstamp) \
-	yacht/$(DEPDIR)/$(am__dirstamp)
+yaht/$(am__dirstamp):
+	@$(MKDIR_P) yaht
+	@: > yaht/$(am__dirstamp)
+yaht/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) yaht/$(DEPDIR)
+	@: > yaht/$(DEPDIR)/$(am__dirstamp)
+yaht/engine.test.$(OBJEXT): yaht/$(am__dirstamp) \
+	yaht/$(DEPDIR)/$(am__dirstamp)
+yaht/player.test.$(OBJEXT): yaht/$(am__dirstamp) \
+	yaht/$(DEPDIR)/$(am__dirstamp)
+yaht/scoresheet.test.$(OBJEXT): yaht/$(am__dirstamp) \
+	yaht/$(DEPDIR)/$(am__dirstamp)
 
 arg3dice_test$(EXEEXT): $(arg3dice_test_OBJECTS) $(arg3dice_test_DEPENDENCIES) $(EXTRA_arg3dice_test_DEPENDENCIES) 
 	@rm -f arg3dice_test$(EXEEXT)
@@ -388,16 +357,16 @@ arg3dice_test$(EXEEXT): $(arg3dice_test_OBJECTS) $(arg3dice_test_DEPENDENCIES) $
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
-	-rm -f yacht/*.$(OBJEXT)
+	-rm -f yaht/*.$(OBJEXT)
 
 distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/arg3.test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dice.test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@yacht/$(DEPDIR)/engine.test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@yacht/$(DEPDIR)/player.test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@yacht/$(DEPDIR)/scoresheet.test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@yaht/$(DEPDIR)/engine.test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@yaht/$(DEPDIR)/player.test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@yaht/$(DEPDIR)/scoresheet.test.Po@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -428,27 +397,6 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
-install-pkgincludeHEADERS: $(pkginclude_HEADERS)
-	@$(NORMAL_INSTALL)
-	@list='$(pkginclude_HEADERS)'; test -n "$(pkgincludedir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(pkgincludedir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(pkgincludedir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(pkgincludedir)'"; \
-	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(pkgincludedir)" || exit $$?; \
-	done
-
-uninstall-pkgincludeHEADERS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(pkginclude_HEADERS)'; test -n "$(pkgincludedir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(pkgincludedir)'; $(am__uninstall_files_from_dir)
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -534,11 +482,8 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(PROGRAMS) $(HEADERS)
+all-am: Makefile $(PROGRAMS)
 installdirs:
-	for dir in "$(DESTDIR)$(pkgincludedir)"; do \
-	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
-	done
 install: install-am
 install-exec: install-exec-am
 install-data: install-data-am
@@ -565,8 +510,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
-	-rm -f yacht/$(DEPDIR)/$(am__dirstamp)
-	-rm -f yacht/$(am__dirstamp)
+	-rm -f yaht/$(DEPDIR)/$(am__dirstamp)
+	-rm -f yaht/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -577,7 +522,7 @@ clean-am: clean-generic clean-libtool clean-noinstPROGRAMS \
 	mostlyclean-am
 
 distclean: distclean-am
-	-rm -rf ./$(DEPDIR) yacht/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) yaht/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -594,7 +539,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-pkgincludeHEADERS
+install-data-am:
 
 install-dvi: install-dvi-am
 
@@ -623,7 +568,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-	-rm -rf ./$(DEPDIR) yacht/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) yaht/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -640,7 +585,7 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-pkgincludeHEADERS
+uninstall-am:
 
 .MAKE: install-am install-strip
 
@@ -652,12 +597,11 @@ uninstall-am: uninstall-pkgincludeHEADERS
 	install-data-am install-dvi install-dvi-am install-exec \
 	install-exec-am install-html install-html-am install-info \
 	install-info-am install-man install-pdf install-pdf-am \
-	install-pkgincludeHEADERS install-ps install-ps-am \
-	install-strip installcheck installcheck-am installdirs \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
-	pdf pdf-am ps ps-am tags tags-am uninstall uninstall-am \
-	uninstall-pkgincludeHEADERS
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags tags-am uninstall uninstall-am
 
 
 check: arg3dice_test$(EXEEXT)

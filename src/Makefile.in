@@ -82,7 +82,7 @@ host_triplet = @host@
 subdir = src
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(srcdir)/config.h.in $(top_srcdir)/depcomp \
-	$(pkginclude_HEADERS)
+	$(pkginclude_HEADERS) $(subdirheaders_HEADERS)
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
@@ -121,15 +121,16 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgincludedir)"
+am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgincludedir)" \
+	"$(DESTDIR)$(subdirheadersdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libarg3dice_0_2_la_LIBADD =
 am__dirstamp = $(am__leading_dot)dirstamp
 am_libarg3dice_0_2_la_OBJECTS = libarg3dice_0_2_la-dice.lo \
 	libarg3dice_0_2_la-dice_game.lo \
-	yacht/libarg3dice_0_2_la-engine.lo \
-	yacht/libarg3dice_0_2_la-player.lo \
-	yacht/libarg3dice_0_2_la-scoresheet.lo
+	yaht/libarg3dice_0_2_la-engine.lo \
+	yaht/libarg3dice_0_2_la-player.lo \
+	yaht/libarg3dice_0_2_la-scoresheet.lo
 libarg3dice_0_2_la_OBJECTS = $(am_libarg3dice_0_2_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -180,7 +181,7 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-HEADERS = $(pkginclude_HEADERS)
+HEADERS = $(pkginclude_HEADERS) $(subdirheaders_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) \
 	$(LISP)config.h.in
 # Read a list of newline-separated strings from the standard input,
@@ -331,9 +332,11 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
 lib_LTLIBRARIES = libarg3dice-0.2.la
-libarg3dice_0_2_la_SOURCES = dice.cpp dice_game.cpp yacht/engine.cpp yacht/player.cpp yacht/scoresheet.cpp
+libarg3dice_0_2_la_SOURCES = dice.cpp dice_game.cpp yaht/engine.cpp yaht/player.cpp yaht/scoresheet.cpp
 libarg3dice_0_2_la_CXXFLAGS = $(LIBARG3DICE_0_2_LA_CXXFLAGS) $(COVERAGE_CFLAGS)
-pkginclude_HEADERS = dice.h dice_game.h yacht/constants.h yacht/engine.h yacht/player.h yacht/scoresheet.h
+pkginclude_HEADERS = dice.h dice_game.h
+subdirheadersdir = $(pkgincludedir)/yaht
+subdirheaders_HEADERS = yaht/constants.h yaht/engine.h yaht/player.h yaht/scoresheet.h
 all: config.h
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -419,35 +422,35 @@ clean-libLTLIBRARIES:
 	  echo rm -f $${locs}; \
 	  rm -f $${locs}; \
 	}
-yacht/$(am__dirstamp):
-	@$(MKDIR_P) yacht
-	@: > yacht/$(am__dirstamp)
-yacht/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) yacht/$(DEPDIR)
-	@: > yacht/$(DEPDIR)/$(am__dirstamp)
-yacht/libarg3dice_0_2_la-engine.lo: yacht/$(am__dirstamp) \
-	yacht/$(DEPDIR)/$(am__dirstamp)
-yacht/libarg3dice_0_2_la-player.lo: yacht/$(am__dirstamp) \
-	yacht/$(DEPDIR)/$(am__dirstamp)
-yacht/libarg3dice_0_2_la-scoresheet.lo: yacht/$(am__dirstamp) \
-	yacht/$(DEPDIR)/$(am__dirstamp)
+yaht/$(am__dirstamp):
+	@$(MKDIR_P) yaht
+	@: > yaht/$(am__dirstamp)
+yaht/$(DEPDIR)/$(am__dirstamp):
+	@$(MKDIR_P) yaht/$(DEPDIR)
+	@: > yaht/$(DEPDIR)/$(am__dirstamp)
+yaht/libarg3dice_0_2_la-engine.lo: yaht/$(am__dirstamp) \
+	yaht/$(DEPDIR)/$(am__dirstamp)
+yaht/libarg3dice_0_2_la-player.lo: yaht/$(am__dirstamp) \
+	yaht/$(DEPDIR)/$(am__dirstamp)
+yaht/libarg3dice_0_2_la-scoresheet.lo: yaht/$(am__dirstamp) \
+	yaht/$(DEPDIR)/$(am__dirstamp)
 
 libarg3dice-0.2.la: $(libarg3dice_0_2_la_OBJECTS) $(libarg3dice_0_2_la_DEPENDENCIES) $(EXTRA_libarg3dice_0_2_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(libarg3dice_0_2_la_LINK) -rpath $(libdir) $(libarg3dice_0_2_la_OBJECTS) $(libarg3dice_0_2_la_LIBADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
-	-rm -f yacht/*.$(OBJEXT)
-	-rm -f yacht/*.lo
+	-rm -f yaht/*.$(OBJEXT)
+	-rm -f yaht/*.lo
 
 distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libarg3dice_0_2_la-dice.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libarg3dice_0_2_la-dice_game.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@yacht/$(DEPDIR)/libarg3dice_0_2_la-engine.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@yacht/$(DEPDIR)/libarg3dice_0_2_la-player.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@yacht/$(DEPDIR)/libarg3dice_0_2_la-scoresheet.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@yaht/$(DEPDIR)/libarg3dice_0_2_la-engine.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@yaht/$(DEPDIR)/libarg3dice_0_2_la-player.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@yaht/$(DEPDIR)/libarg3dice_0_2_la-scoresheet.Plo@am__quote@
 
 .cpp.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -487,33 +490,33 @@ libarg3dice_0_2_la-dice_game.lo: dice_game.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -c -o libarg3dice_0_2_la-dice_game.lo `test -f 'dice_game.cpp' || echo '$(srcdir)/'`dice_game.cpp
 
-yacht/libarg3dice_0_2_la-engine.lo: yacht/engine.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -MT yacht/libarg3dice_0_2_la-engine.lo -MD -MP -MF yacht/$(DEPDIR)/libarg3dice_0_2_la-engine.Tpo -c -o yacht/libarg3dice_0_2_la-engine.lo `test -f 'yacht/engine.cpp' || echo '$(srcdir)/'`yacht/engine.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) yacht/$(DEPDIR)/libarg3dice_0_2_la-engine.Tpo yacht/$(DEPDIR)/libarg3dice_0_2_la-engine.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='yacht/engine.cpp' object='yacht/libarg3dice_0_2_la-engine.lo' libtool=yes @AMDEPBACKSLASH@
+yaht/libarg3dice_0_2_la-engine.lo: yaht/engine.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -MT yaht/libarg3dice_0_2_la-engine.lo -MD -MP -MF yaht/$(DEPDIR)/libarg3dice_0_2_la-engine.Tpo -c -o yaht/libarg3dice_0_2_la-engine.lo `test -f 'yaht/engine.cpp' || echo '$(srcdir)/'`yaht/engine.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) yaht/$(DEPDIR)/libarg3dice_0_2_la-engine.Tpo yaht/$(DEPDIR)/libarg3dice_0_2_la-engine.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='yaht/engine.cpp' object='yaht/libarg3dice_0_2_la-engine.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -c -o yacht/libarg3dice_0_2_la-engine.lo `test -f 'yacht/engine.cpp' || echo '$(srcdir)/'`yacht/engine.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -c -o yaht/libarg3dice_0_2_la-engine.lo `test -f 'yaht/engine.cpp' || echo '$(srcdir)/'`yaht/engine.cpp
 
-yacht/libarg3dice_0_2_la-player.lo: yacht/player.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -MT yacht/libarg3dice_0_2_la-player.lo -MD -MP -MF yacht/$(DEPDIR)/libarg3dice_0_2_la-player.Tpo -c -o yacht/libarg3dice_0_2_la-player.lo `test -f 'yacht/player.cpp' || echo '$(srcdir)/'`yacht/player.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) yacht/$(DEPDIR)/libarg3dice_0_2_la-player.Tpo yacht/$(DEPDIR)/libarg3dice_0_2_la-player.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='yacht/player.cpp' object='yacht/libarg3dice_0_2_la-player.lo' libtool=yes @AMDEPBACKSLASH@
+yaht/libarg3dice_0_2_la-player.lo: yaht/player.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -MT yaht/libarg3dice_0_2_la-player.lo -MD -MP -MF yaht/$(DEPDIR)/libarg3dice_0_2_la-player.Tpo -c -o yaht/libarg3dice_0_2_la-player.lo `test -f 'yaht/player.cpp' || echo '$(srcdir)/'`yaht/player.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) yaht/$(DEPDIR)/libarg3dice_0_2_la-player.Tpo yaht/$(DEPDIR)/libarg3dice_0_2_la-player.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='yaht/player.cpp' object='yaht/libarg3dice_0_2_la-player.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -c -o yacht/libarg3dice_0_2_la-player.lo `test -f 'yacht/player.cpp' || echo '$(srcdir)/'`yacht/player.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -c -o yaht/libarg3dice_0_2_la-player.lo `test -f 'yaht/player.cpp' || echo '$(srcdir)/'`yaht/player.cpp
 
-yacht/libarg3dice_0_2_la-scoresheet.lo: yacht/scoresheet.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -MT yacht/libarg3dice_0_2_la-scoresheet.lo -MD -MP -MF yacht/$(DEPDIR)/libarg3dice_0_2_la-scoresheet.Tpo -c -o yacht/libarg3dice_0_2_la-scoresheet.lo `test -f 'yacht/scoresheet.cpp' || echo '$(srcdir)/'`yacht/scoresheet.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) yacht/$(DEPDIR)/libarg3dice_0_2_la-scoresheet.Tpo yacht/$(DEPDIR)/libarg3dice_0_2_la-scoresheet.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='yacht/scoresheet.cpp' object='yacht/libarg3dice_0_2_la-scoresheet.lo' libtool=yes @AMDEPBACKSLASH@
+yaht/libarg3dice_0_2_la-scoresheet.lo: yaht/scoresheet.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -MT yaht/libarg3dice_0_2_la-scoresheet.lo -MD -MP -MF yaht/$(DEPDIR)/libarg3dice_0_2_la-scoresheet.Tpo -c -o yaht/libarg3dice_0_2_la-scoresheet.lo `test -f 'yaht/scoresheet.cpp' || echo '$(srcdir)/'`yaht/scoresheet.cpp
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) yaht/$(DEPDIR)/libarg3dice_0_2_la-scoresheet.Tpo yaht/$(DEPDIR)/libarg3dice_0_2_la-scoresheet.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='yaht/scoresheet.cpp' object='yaht/libarg3dice_0_2_la-scoresheet.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -c -o yacht/libarg3dice_0_2_la-scoresheet.lo `test -f 'yacht/scoresheet.cpp' || echo '$(srcdir)/'`yacht/scoresheet.cpp
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -c -o yaht/libarg3dice_0_2_la-scoresheet.lo `test -f 'yaht/scoresheet.cpp' || echo '$(srcdir)/'`yaht/scoresheet.cpp
 
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
-	-rm -rf yacht/.libs yacht/_libs
+	-rm -rf yaht/.libs yaht/_libs
 install-pkgincludeHEADERS: $(pkginclude_HEADERS)
 	@$(NORMAL_INSTALL)
 	@list='$(pkginclude_HEADERS)'; test -n "$(pkgincludedir)" || list=; \
@@ -535,6 +538,27 @@ uninstall-pkgincludeHEADERS:
 	@list='$(pkginclude_HEADERS)'; test -n "$(pkgincludedir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(pkgincludedir)'; $(am__uninstall_files_from_dir)
+install-subdirheadersHEADERS: $(subdirheaders_HEADERS)
+	@$(NORMAL_INSTALL)
+	@list='$(subdirheaders_HEADERS)'; test -n "$(subdirheadersdir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(subdirheadersdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(subdirheadersdir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(subdirheadersdir)'"; \
+	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(subdirheadersdir)" || exit $$?; \
+	done
+
+uninstall-subdirheadersHEADERS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(subdirheaders_HEADERS)'; test -n "$(subdirheadersdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(subdirheadersdir)'; $(am__uninstall_files_from_dir)
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -622,7 +646,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(LTLIBRARIES) $(HEADERS) config.h
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgincludedir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgincludedir)" "$(DESTDIR)$(subdirheadersdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -651,8 +675,8 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
-	-rm -f yacht/$(DEPDIR)/$(am__dirstamp)
-	-rm -f yacht/$(am__dirstamp)
+	-rm -f yaht/$(DEPDIR)/$(am__dirstamp)
+	-rm -f yaht/$(am__dirstamp)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
@@ -663,7 +687,7 @@ clean-am: clean-generic clean-libLTLIBRARIES clean-libtool \
 	mostlyclean-am
 
 distclean: distclean-am
-	-rm -rf ./$(DEPDIR) yacht/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) yaht/$(DEPDIR)
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-tags
@@ -680,7 +704,8 @@ info: info-am
 
 info-am:
 
-install-data-am: install-pkgincludeHEADERS
+install-data-am: install-pkgincludeHEADERS \
+	install-subdirheadersHEADERS
 
 install-dvi: install-dvi-am
 
@@ -709,7 +734,7 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-	-rm -rf ./$(DEPDIR) yacht/$(DEPDIR)
+	-rm -rf ./$(DEPDIR) yaht/$(DEPDIR)
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
@@ -726,7 +751,8 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-libLTLIBRARIES uninstall-pkgincludeHEADERS
+uninstall-am: uninstall-libLTLIBRARIES uninstall-pkgincludeHEADERS \
+	uninstall-subdirheadersHEADERS
 
 .MAKE: all install-am install-strip
 
@@ -740,11 +766,12 @@ uninstall-am: uninstall-libLTLIBRARIES uninstall-pkgincludeHEADERS
 	install-info install-info-am install-libLTLIBRARIES \
 	install-man install-pdf install-pdf-am \
 	install-pkgincludeHEADERS install-ps install-ps-am \
-	install-strip installcheck installcheck-am installdirs \
-	maintainer-clean maintainer-clean-generic mostlyclean \
-	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
-	pdf pdf-am ps ps-am tags tags-am uninstall uninstall-am \
-	uninstall-libLTLIBRARIES uninstall-pkgincludeHEADERS
+	install-strip install-subdirheadersHEADERS installcheck \
+	installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
+	tags tags-am uninstall uninstall-am uninstall-libLTLIBRARIES \
+	uninstall-pkgincludeHEADERS uninstall-subdirheadersHEADERS
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
