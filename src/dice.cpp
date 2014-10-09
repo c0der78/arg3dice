@@ -259,7 +259,7 @@ namespace arg3
         if (b < 0)
         {
             // avoid unsigned overflow
-            if (abs(b) >= value)
+            if (static_cast<die::value_type>(abs(b)) >= value)
                 return value + b;
             else
                 return 0;
