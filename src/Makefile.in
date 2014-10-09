@@ -127,7 +127,6 @@ LTLIBRARIES = $(lib_LTLIBRARIES)
 libarg3dice_0_2_la_LIBADD =
 am__dirstamp = $(am__leading_dot)dirstamp
 am_libarg3dice_0_2_la_OBJECTS = libarg3dice_0_2_la-dice.lo \
-	libarg3dice_0_2_la-dice_game.lo \
 	yaht/libarg3dice_0_2_la-engine.lo \
 	yaht/libarg3dice_0_2_la-player.lo \
 	yaht/libarg3dice_0_2_la-scoresheet.lo
@@ -332,9 +331,9 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
 lib_LTLIBRARIES = libarg3dice-0.2.la
-libarg3dice_0_2_la_SOURCES = dice.cpp dice_game.cpp yaht/engine.cpp yaht/player.cpp yaht/scoresheet.cpp
+libarg3dice_0_2_la_SOURCES = dice.cpp yaht/engine.cpp yaht/player.cpp yaht/scoresheet.cpp
 libarg3dice_0_2_la_CXXFLAGS = $(LIBARG3DICE_0_2_LA_CXXFLAGS) $(COVERAGE_CFLAGS)
-pkginclude_HEADERS = dice.h dice_game.h
+pkginclude_HEADERS = dice.h
 subdirheadersdir = $(pkgincludedir)/yaht
 subdirheaders_HEADERS = yaht/constants.h yaht/engine.h yaht/player.h yaht/scoresheet.h
 all: config.h
@@ -447,7 +446,6 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libarg3dice_0_2_la-dice.Plo@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libarg3dice_0_2_la-dice_game.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@yaht/$(DEPDIR)/libarg3dice_0_2_la-engine.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@yaht/$(DEPDIR)/libarg3dice_0_2_la-player.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@yaht/$(DEPDIR)/libarg3dice_0_2_la-scoresheet.Plo@am__quote@
@@ -482,13 +480,6 @@ libarg3dice_0_2_la-dice.lo: dice.cpp
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='dice.cpp' object='libarg3dice_0_2_la-dice.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -c -o libarg3dice_0_2_la-dice.lo `test -f 'dice.cpp' || echo '$(srcdir)/'`dice.cpp
-
-libarg3dice_0_2_la-dice_game.lo: dice_game.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -MT libarg3dice_0_2_la-dice_game.lo -MD -MP -MF $(DEPDIR)/libarg3dice_0_2_la-dice_game.Tpo -c -o libarg3dice_0_2_la-dice_game.lo `test -f 'dice_game.cpp' || echo '$(srcdir)/'`dice_game.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libarg3dice_0_2_la-dice_game.Tpo $(DEPDIR)/libarg3dice_0_2_la-dice_game.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='dice_game.cpp' object='libarg3dice_0_2_la-dice_game.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -c -o libarg3dice_0_2_la-dice_game.lo `test -f 'dice_game.cpp' || echo '$(srcdir)/'`dice_game.cpp
 
 yaht/libarg3dice_0_2_la-engine.lo: yaht/engine.cpp
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libarg3dice_0_2_la_CXXFLAGS) $(CXXFLAGS) -MT yaht/libarg3dice_0_2_la-engine.lo -MD -MP -MF yaht/$(DEPDIR)/libarg3dice_0_2_la-engine.Tpo -c -o yaht/libarg3dice_0_2_la-engine.lo `test -f 'yaht/engine.cpp' || echo '$(srcdir)/'`yaht/engine.cpp

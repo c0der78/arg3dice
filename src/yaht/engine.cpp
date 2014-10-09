@@ -5,7 +5,7 @@
 namespace arg3
 {
 
-    namespace yacht
+    namespace yaht
     {
 
         engine::engine(die::engine *engine) : players_(), engine_(engine), currentPlayer_(0)

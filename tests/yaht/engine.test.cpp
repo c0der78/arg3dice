@@ -8,49 +8,49 @@ using namespace bandit;
 
 using namespace arg3;
 
-using namespace arg3::yacht;
+using namespace arg3::yaht;
 
 go_bandit([]()
 {
 
     describe("a game of yaht(zee)", []()
     {
-        engine *yacht = engine::instance();
+        engine *yaht = engine::instance();
 
         dice_test_engine randengine;
 
         before_each([&]()
         {
-            yacht->set_random_engine(&randengine);
+            yaht->set_random_engine(&randengine);
 
-            yacht->add_player("testPlayer");
+            yaht->add_player("testPlayer");
 
-            int size = yacht->number_of_players();
+            int size = yaht->number_of_players();
 
             while (size >= 1)
             {
-                yacht->remove_player(size--);
+                yaht->remove_player(size--);
             }
         });
 
         it("has a current player", [&]()
         {
-            yacht->current_player()->roll();
+            yaht->current_player()->roll();
 
-            yacht->add_player("newPlayerB");
+            yaht->add_player("newPlayerB");
 
-            yacht->next_player();
+            yaht->next_player();
 
-            Assert::That(yacht->current_player()->name(), Equals("newPlayerB"));
+            Assert::That(yaht->current_player()->name(), Equals("newPlayerB"));
 
-            yacht->remove_player(1);
+            yaht->remove_player(1);
 
-            Assert::That(yacht->current_player()->name(), !Equals("newPlayerB"));
+            Assert::That(yaht->current_player()->name(), !Equals("newPlayerB"));
         });
 
         it("has a number of players", [&]()
         {
-            Assert::That(yacht->number_of_players(), Equals(1));
+            Assert::That(yaht->number_of_players(), Equals(1));
         });
 
     });

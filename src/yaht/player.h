@@ -8,20 +8,21 @@
 #ifndef ARG3_YACHT_PLAYER_H
 #define ARG3_YACHT_PLAYER_H
 
-#include "../dice_game.h"
+#include "../dice.h"
 #include "scoresheet.h"
+#include <map>
 
 namespace arg3
 {
 
-    namespace yacht
+    namespace yaht
     {
 
         /*!
          * @class player
-         * A player in a game of yacht
+         * A player in a game of yaht(zee)
          */
-        class player : public dice_game
+        class player
         {
             friend std::ostream &operator<<(std::ostream &stm, const player & );
 
@@ -67,7 +68,9 @@ namespace arg3
             /*!
              * keeps a die
              */
-            void keep_die(size_t index);
+            void keep_die(size_t index, bool value);
+
+            bool is_kept(size_t index);
 
             /*!
              * calculate a value on the lower part of scoresheet
@@ -92,13 +95,16 @@ namespace arg3
 
             pair<die::value_type, scoresheet::value_type> calculate_best_upper_score() const;
 
-
             scoresheet &score();
 
             /*!
              * name of the player
              */
             const string &name() const;
+
+            const dice &d1ce() const;
+
+            const die &d1e(size_t index) const;
 
             /*!
              * equality operator
@@ -114,19 +120,21 @@ namespace arg3
 
             void reset();
 
-        private:
+            void roll();
 
-            void on_roll();
+        private:
+            dice dice_;
 
             scoresheet::value_type calculate_number_of_a_kind(int) const;
             scoresheet::value_type calculate_full_house() const;
             scoresheet::value_type calculate_straight(int) const;
             scoresheet::value_type calculate_chance() const;
-            scoresheet::value_type calculate_yacht() const;
+            scoresheet::value_type calculate_yaht() const;
 
             scoresheet score_;  // the score sheet
             unsigned short rollCount_; // number of die rolls
             string name_;   // player name
+            map<size_t, int> kept_;  // kept die values
         };
 
     }

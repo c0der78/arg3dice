@@ -27,7 +27,7 @@ namespace arg3
         return distribution(random_engine);
     }
 
-    die::die(const unsigned int sides, die::engine *const engine) : engine_(engine), value_(0), keep_(false)
+    die::die(const unsigned int sides, die::engine *const engine) : engine_(engine), value_(0)
     {
         if (sides == 0)
         {
@@ -37,11 +37,11 @@ namespace arg3
         sides_ = sides;
     }
 
-    die::die(const die &other) : engine_(other.engine_), sides_(other.sides_), value_(other.value_), keep_(other.keep_)
+    die::die(const die &other) : engine_(other.engine_), sides_(other.sides_), value_(other.value_)
     {
     }
 
-    die::die(die &&other) : engine_(std::move(other.engine_)), sides_(other.sides_), value_(other.value_), keep_(other.keep_)
+    die::die(die &&other) : engine_(std::move(other.engine_)), sides_(other.sides_), value_(other.value_)
     {}
 
     die &die::operator= (const die &other)
@@ -49,7 +49,6 @@ namespace arg3
         engine_ = other.engine_;
         sides_ = other.sides_;
         value_ = other.value_;
-        keep_ = other.keep_;
 
         return *this;
     }
@@ -59,7 +58,6 @@ namespace arg3
         engine_ = std::move(other.engine_);
         sides_ = other.sides_;
         value_ = other.value_;
-        keep_ = other.keep_;
 
         return *this;
     }
@@ -115,34 +113,24 @@ namespace arg3
         return value_;
     }
 
-    void die::keep(bool value)
-    {
-        keep_ = value;
-    }
-
-    bool die::keep() const
-    {
-        return keep_;
-    }
-
     // #######################################################################################################
     // dice
     // #######################################################################################################
 
     // creates x dice with y sides
-    dice::dice(const unsigned int count, const unsigned int sides, die::engine *const engine) : bonus_(0), dice_(), lastRoll_()
+    dice::dice(const unsigned int count, const unsigned int sides, die::engine *const engine) : bonus_(0), dice_()
     {
         for (size_t i = 0; i < count; i++)
             dice_.push_back(die(sides, engine));
     }
 
     // copy constructor
-    dice::dice(const dice &other) : bonus_(other.bonus_), dice_(other.dice_), lastRoll_(other.lastRoll_)
+    dice::dice(const dice &other) : bonus_(other.bonus_), dice_(other.dice_)
     {
     }
 
     // move constructor
-    dice::dice(dice &&other) : bonus_(other.bonus_), dice_(std::move(other.dice_)), lastRoll_(std::move(other.lastRoll_))
+    dice::dice(dice &&other) : bonus_(other.bonus_), dice_(std::move(other.dice_))
     {
     }
 
@@ -150,7 +138,6 @@ namespace arg3
     {
         bonus_ = other.bonus_;
         dice_ = other.dice_;
-        lastRoll_ = other.lastRoll_;
 
         return *this;
     }
@@ -159,19 +146,8 @@ namespace arg3
     {
         bonus_ = other.bonus_;
         dice_ = std::move(other.dice_);
-        lastRoll_ = std::move(other.lastRoll_);
 
         return *this;
-    }
-
-    bool dice::operator==(const dice &other) const
-    {
-        return bonus_ == other.bonus_ && dice_ == other.dice_ && lastRoll_ == other.lastRoll_;
-    }
-
-    bool dice::operator!=(const dice &other) const
-    {
-        return !operator==(other);
     }
 
     // deconstructor
@@ -254,27 +230,44 @@ namespace arg3
         return buf.str();
     }
 
-    // returns the values for each die in the last roll
-    const vector<die::value_type> &dice::values() const
-    {
-        return lastRoll_;
-    }
-
     // return the total of rolling all dice
-    const unsigned int dice::roll()
+    die::value_type dice::roll(std::function<bool(size_t index, const die &d)> selector)
     {
         die::value_type value = 0;
 
-        lastRoll_.clear(); // reset the last roll values
-
-        for (die & d : dice_)
+        for (size_t i = 0; i < dice_.size(); i++)
         {
-            auto roll = d.keep() ? d.value() : d.roll(); // roll the die
+            auto &d = dice_[i];
+
+            die::value_type roll;
+
+            if (selector == nullptr || selector(i, d))
+            {
+                roll = d.roll();
+            }
+            else
+            {
+                roll = d.value();
+            }
+
             value += roll; // sum the total
-            // save each value for use later
-            lastRoll_.push_back(roll);
         }
-        return value + bonus(); // add the bonus
+
+        /* return value has the bonus */
+        auto b = bonus();
+
+        if (b < 0)
+        {
+            // avoid unsigned overflow
+            if (abs(b) >= value)
+                return value + b;
+            else
+                return 0;
+        }
+        else
+        {
+            return value + b; // add the bonus
+        }
     }
 
     die &dice::operator[] ( size_t n )

@@ -85,17 +85,6 @@ namespace arg3
         unsigned int sides() const;
 
         /*!
-         * sets a flag to indicate this die is frozen
-         * @param value the value to set
-         */
-        void keep(bool value);
-
-        /*!
-         * flag to indicate this die is frozen
-         */
-        bool keep() const;
-
-        /*!
          * equality operator
          * @param rhs the right hand side of the operator
          */
@@ -127,7 +116,6 @@ namespace arg3
         engine *engine_;     // engine to use for dice rolling
         unsigned sides_; // number of sides on die
         value_type value_;   // the current roll value
-        bool keep_;        // flag for not rolling a die
     };
 
 
@@ -155,11 +143,9 @@ namespace arg3
      */
     class dice
     {
-
     private:
         short bonus_;
         vector<die> dice_;
-        vector<die::value_type> lastRoll_;
     public:
         /*! iterator type for each die */
         typedef typename vector<die>::iterator iterator;
@@ -190,17 +176,6 @@ namespace arg3
         dice &operator= (const dice &rhs);
 
         dice &operator= (dice && rhs);
-
-        /*!
-         * equality operator
-         * @param rhs the right hand side of the operator
-         */
-        bool operator==(const dice &rhs) const;
-        /*!
-         * inequality operator
-         * @param rhs the right hand side of the operator
-         */
-        bool operator!=(const dice &rhs) const;
 
         /*!
          * deconstructor
@@ -246,11 +221,8 @@ namespace arg3
         // a string representation of the dice ex. 5d20
         const string to_string() const;
 
-        // returns the values for each die in the last roll
-        const vector<die::value_type> &values() const;
-
         // return the total of rolling all dice
-        const die::value_type roll();
+        die::value_type roll(std::function<bool(size_t index, const die &d)> selector = nullptr);
     };
 
     ostream &operator<< (ostream &, const dice &);

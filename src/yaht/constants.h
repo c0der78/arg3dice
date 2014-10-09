@@ -8,7 +8,7 @@
 namespace arg3
 {
 
-    namespace yacht
+    namespace yaht
     {
 
 

@@ -5,7 +5,7 @@
 
 using namespace bandit;
 
-using namespace arg3::yacht;
+using namespace arg3::yaht;
 
 go_bandit([]()
 {
@@ -18,7 +18,7 @@ go_bandit([]()
 
         before_each([&]()
         {
-            player = new yacht::player("testA", &rand_engine);
+            player = new yaht::player("testA", &rand_engine);
         });
 
         after_each([&]()
@@ -193,29 +193,25 @@ go_bandit([]()
 
             player->roll();
 
-            player->keep_die(1);
+            player->keep_die(1, true);
 
             rand_engine.set_next_roll( {1, 2, 4, 3});
 
             player->roll();
 
-            auto values = player->values();
+            Assert::That(player->d1e(0).value(), !Equals(4));
 
-            Assert::That(values[0], !Equals(4));
+            Assert::That(player->d1e(1).value(), Equals(3));
 
-            Assert::That(values[1], Equals(3));
-
-            player->keep_die(4);
+            player->keep_die(4, true);
 
             rand_engine.set_next_roll( {6, 6, 4});
 
             player->roll();
 
-            values = player->values();
+            Assert::That(player->d1e(0).value(), !Equals(1));
 
-            Assert::That(values[0], !Equals(1));
-
-            Assert::That(values[4], Equals(3));
+            Assert::That(player->d1e(4).value(), Equals(3));
         });
 
         it("can determine best lower score", [&]()

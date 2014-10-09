@@ -4,28 +4,32 @@
 namespace arg3
 {
 
-    namespace yacht
+    namespace yaht
     {
 
+        bool sortDice(const die &d1, const die &d2)
+        {
+            return d1.value() < d2.value();
+        }
         std::ostream &operator<<(std::ostream &stm, const player &p)
         {
             stm << p.name();
             return stm;
         }
 
-        player::player(const string &name, die::engine *const engine) : dice_game(die_count(), die_sides(), engine),
+        player::player(const string &name, die::engine *const engine) : dice_(die_count(), die_sides(), engine),
             score_(), rollCount_(0), name_(name)
         {
 
         }
-        player::player(const player &other) : dice_game(other), score_(other.score_), rollCount_(other.rollCount_),
-            name_(other.name_)
+        player::player(const player &other) : dice_(other.dice_), score_(other.score_), rollCount_(other.rollCount_),
+            name_(other.name_), kept_(other.kept_)
         {
 
         }
 
-        player::player(player &&other) : dice_game(std::move(other)), score_(std::move(other.score_)), rollCount_(other.rollCount_),
-            name_(std::move(other.name_))
+        player::player(player &&other) : dice_(std::move(other.dice_)), score_(std::move(other.score_)), rollCount_(other.rollCount_),
+            name_(std::move(other.name_)), kept_(std::move(other.kept_))
         {
 
         }
@@ -37,28 +41,23 @@ namespace arg3
 
         player &player::operator=(const player &other)
         {
+            dice_ = other.dice_;
+            score_ = other.score_;
+            rollCount_ = other.rollCount_;
+            name_ = other.name_;
+            kept_ = other.kept_;
 
-            dice_game::operator=(other);
-
-            if (this != &other)
-            {
-                score_ = other.score_;
-                rollCount_ = other.rollCount_;
-                name_ = other.name_;
-            }
             return *this;
         }
 
         player &player::operator=(player && other)
         {
-            dice_game::operator=(std::move(other));
+            dice_ = std::move(other.dice_);
+            score_ = std::move(other.score_);
+            rollCount_ = other.rollCount_;
+            name_ = std::move(other.name_);
+            kept_ = std::move(other.kept_);
 
-            if (this != &other)
-            {
-                score_ = std::move(other.score_);
-                rollCount_ = other.rollCount_;
-                name_ = std::move(other.name_);
-            }
             return *this;
         }
 
@@ -72,29 +71,48 @@ namespace arg3
             return Constants::NUM_DICE;
         }
 
-        void player::on_roll()
-        {
-            rollCount_++;
-        }
-
         unsigned short player::roll_count() const
         {
             return rollCount_;
         }
 
+        void player::roll()
+        {
+            dice_.roll([&](size_t index, const die & d)
+            {
+                return !is_kept(index);
+            });
+
+            rollCount_++;
+        }
+
         void player::reset()
         {
             rollCount_ = 0;
-
-            for (auto & die : dice_)
-            {
-                die.keep(false);
-            }
+            kept_.clear();
         }
 
-        void player::keep_die(size_t index)
+        const dice &player::d1ce() const
         {
-            dice_[index].keep(true);
+            return dice_;
+        }
+
+        void player::keep_die(size_t index, bool value)
+        {
+            if (value)
+                kept_[index] = dice_[index].value();
+            else
+                kept_.erase(index);
+        }
+
+        bool player::is_kept(size_t index)
+        {
+            return kept_.find(index) != kept_.end();
+        }
+
+        const die &player::d1e(size_t index) const
+        {
+            return dice_[index];
         }
 
         const string &player::name() const
@@ -128,15 +146,14 @@ namespace arg3
             return score;
         }
 
-
-
         scoresheet::value_type player::calculate_number_of_a_kind(int length) const
         {
-            auto values = dice_.values();
+            auto values = dice_;
 
-            sort(values.begin(), values.end());
+            sort(values.begin(), values.end(), sortDice);
 
             int count = 0;
+
             die::value_type lastValue = 0;
 
             for (auto & d : values)
@@ -159,12 +176,12 @@ namespace arg3
 
         scoresheet::value_type player::calculate_full_house() const
         {
-            auto values = dice_.values();
+            auto values = dice_;
 
             if (values.size() < 5)
                 return 0;
 
-            sort(values.begin(), values.end());
+            sort(values.begin(), values.end(), sortDice);
 
             if (
                 (
@@ -189,9 +206,9 @@ namespace arg3
 
         scoresheet::value_type player::calculate_straight(int length) const
         {
-            auto values = dice_.values();
+            auto values = dice_;
 
-            sort(values.begin(), values.end());
+            sort(values.begin(), values.end(), sortDice);
 
             die::value_type test = 0;
 
@@ -221,9 +238,9 @@ namespace arg3
         scoresheet::value_type player::calculate_chance() const
         {
             scoresheet::value_type value = 0;
-            for (auto & d : dice_.values())
+            for (auto & d : dice_)
             {
-                value += d;
+                value += d.value();
             }
             return value;
         }
@@ -279,13 +296,13 @@ namespace arg3
             return max(lower.second, higher.second);
         }
 
-        scoresheet::value_type player::calculate_yacht() const
+        scoresheet::value_type player::calculate_yaht() const
         {
-            auto values = dice_.values();
+            auto values = dice_;
 
-            sort(values.begin(), values.end());
+            sort(values.begin(), values.end(), sortDice);
 
-            if (values.front() == values.back())
+            if (values[0] == values[values.size() - 1])
                 return 50;
 
             return 0;
@@ -306,7 +323,7 @@ namespace arg3
             case scoresheet::STRAIGHT_BIG:
                 return calculate_straight(Constants::NUM_DICE - 1);
             case scoresheet::YACHT:
-                return calculate_yacht();
+                return calculate_yaht();
             case scoresheet::CHANCE:
                 return calculate_chance();
             default:

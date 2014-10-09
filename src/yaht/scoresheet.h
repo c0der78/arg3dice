@@ -14,7 +14,7 @@ using namespace std;
 namespace arg3
 {
 
-    namespace yacht
+    namespace yaht
     {
 
         /*!

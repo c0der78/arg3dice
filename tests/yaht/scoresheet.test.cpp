@@ -5,7 +5,7 @@
 
 using namespace bandit;
 using namespace arg3;
-using namespace arg3::yacht;
+using namespace arg3::yaht;
 
 go_bandit([]()
 {
@@ -26,7 +26,7 @@ go_bandit([]()
 
         it("can score ones", [&]()
         {
-            score->upper_score(1, 1 * Constants::NUM_DICE);
+            score->upper_score(1, Constants::NUM_DICE);
 
             Assert::That(score->upper_score(1), Equals(5));
         });
@@ -42,6 +42,15 @@ go_bandit([]()
 
                 Assert::That(score->upper_score(2), Equals(value));
             }
+        });
+
+        it("gracefully handles range errors", [&]()
+        {
+            score->upper_score(1, 11111);
+
+            score->upper_score(1234, 1234);
+
+            Assert::That(score->upper_score(1234), Equals(0));
         });
 
         it("has a lower score", [&]()
