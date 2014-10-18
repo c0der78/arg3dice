@@ -511,7 +511,7 @@ uninstall-am:
 	tags uninstall uninstall-am
 
 
-check: arg3dice_test$(EXEEXT)
+check: arg3dice_test
 	./arg3dice_test
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
