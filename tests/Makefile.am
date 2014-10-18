@@ -1,6 +1,6 @@
 AUTOMAKE_OPTIONS = subdir-objects
 
-noinst_PROGRAMS = arg3dice_test
+check_PROGRAMS = arg3dice_test
 
 arg3dice_test_SOURCES = arg3.test.cpp dice.test.cpp yaht/engine.test.cpp yaht/player.test.cpp yaht/scoresheet.test.cpp
 
