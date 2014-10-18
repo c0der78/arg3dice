@@ -8,5 +8,5 @@ AM_CPPFLAGS = @AM_CPPFLAGS@ -Ivendor/bandit -Wall -Werror
 
 arg3dice_test_LDADD = ../src/libarg3dice-0.2.la
 
-check: arg3dice_test$(EXEEXT)
+test: arg3dice_test$(EXEEXT)
 	./arg3dice_test
