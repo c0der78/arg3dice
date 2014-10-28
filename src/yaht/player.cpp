@@ -138,7 +138,7 @@ namespace arg3
         scoresheet::value_type player::calculate_upper_score(die::value_type value) const
         {
             scoresheet::value_type score = 0;
-            for (auto & d : dice_)
+            for (auto &d : dice_)
             {
                 if (d.value() == value)
                     score += value;
@@ -156,7 +156,7 @@ namespace arg3
 
             die::value_type lastValue = 0;
 
-            for (auto & d : values)
+            for (auto &d : values)
             {
                 if (lastValue != d)
                 {
@@ -178,7 +178,7 @@ namespace arg3
         {
             auto values = dice_;
 
-            if (values.size() < 5)
+            if (values.size() < Constants::NUM_DICE)
                 return 0;
 
             sort(values.begin(), values.end(), sortDice);
@@ -198,7 +198,7 @@ namespace arg3
                 )
             )
             {
-                return 25;
+                return Constants::FULL_HOUSE_VALUE;
             }
 
             return 0;
@@ -214,7 +214,7 @@ namespace arg3
 
             int count = 0;
 
-            for (auto & d : values)
+            for (auto &d : values)
             {
                 if (test == 0)
                 {
@@ -238,7 +238,7 @@ namespace arg3
         scoresheet::value_type player::calculate_chance() const
         {
             scoresheet::value_type value = 0;
-            for (auto & d : dice_)
+            for (auto &d : dice_)
             {
                 value += d.value();
             }
@@ -303,10 +303,31 @@ namespace arg3
             sort(values.begin(), values.end(), sortDice);
 
             if (values[0] == values[values.size() - 1])
-                return 50;
+                return Constants::YAHT_SCORE_VALUE;
 
             return 0;
         }
+
+
+        scoresheet::value_type player::calculate_total_upper_score() const
+        {
+            scoresheet::value_type total_score = 0;
+
+            for (int i = 0; i <= Constants::NUM_DICE; i++)
+            {
+                auto value = score_.upper_score(i + 1);
+
+                total_score += value;
+            }
+
+            auto lower_score_total = total_score;
+
+            if (total_score > Constants::UPPER_BONUS_LEVEL)
+                lower_score_total += Constants::UPPER_BONUS;
+
+            return lower_score_total;
+        }
+
 
         scoresheet::value_type player::calculate_lower_score(scoresheet::type type) const
         {

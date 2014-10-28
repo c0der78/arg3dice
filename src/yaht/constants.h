@@ -21,6 +21,13 @@ namespace arg3
             /*! @var NUM_DICE the number of dice in a cup */
             static const unsigned short NUM_DICE = 5;
 
+            static const unsigned short YAHT_SCORE_VALUE = 50;
+            static const unsigned short FULL_HOUSE_VALUE = 25;
+
+            static const unsigned short UPPER_BONUS_LEVEL = 63;
+
+            static const unsigned short UPPER_BONUS = 35;
+
         } Constants;
 
     }

@@ -24,7 +24,7 @@ namespace arg3
          */
         class player
         {
-            friend std::ostream &operator<<(std::ostream &stm, const player & );
+            friend std::ostream &operator<<(std::ostream &stm, const player &);
 
         public:
             /*!
@@ -85,6 +85,8 @@ namespace arg3
              * the type of upper score
              */
             scoresheet::value_type calculate_upper_score(die::value_type) const;
+
+            scoresheet::value_type calculate_total_upper_score() const;
 
             /*!
              * calculates the best score available in hand
