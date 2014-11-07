@@ -52,6 +52,18 @@ namespace arg3
             players_.push_back(player(name, engine_));
         }
 
+        void engine::remove_player(const string &name)
+        {
+            for (iterator p = begin(); p != end(); p++)
+            {
+                if (p->name() == name)
+                {
+                    players_.erase(p);
+                    return;
+                }
+            }
+        }
+
         void engine::remove_player(size_t index)
         {
 
@@ -143,6 +155,26 @@ namespace arg3
         const player *engine::operator[] ( size_t index ) const
         {
             return &(players_[index]);
+        }
+
+        player *engine::operator[] (const string &name )
+        {
+            for (iterator p = begin(); p != end(); p++)
+            {
+                if (p->name() == name)
+                    return &(*p);
+            }
+            return NULL;
+        }
+
+        const player *engine::operator[] (const string &name) const
+        {
+            for (const_iterator p = begin(); p != end(); p++)
+            {
+                if (p->name() == name)
+                    return &(*p);
+            }
+            return NULL;
         }
 
         void engine::set_random_engine(die::engine *value)

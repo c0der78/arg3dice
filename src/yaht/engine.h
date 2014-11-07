@@ -49,6 +49,8 @@ namespace arg3
              */
             void remove_player(size_t index);
 
+            void remove_player(const string &name);
+
             /*!
              * @result the player whose turn it is
              */
@@ -78,6 +80,8 @@ namespace arg3
             // index operators
             player *operator[] ( size_t );
             const player *operator[] ( size_t ) const;
+            player *operator[] (const string &);
+            const player *operator[] ( const string &) const;
 
             /*!
              * Sets the random engine to use when adding players
