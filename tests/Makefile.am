@@ -6,7 +6,7 @@ arg3dice_test_SOURCES = arg3.test.cpp dice.test.cpp yaht/engine.test.cpp yaht/pl
 
 AM_CPPFLAGS = @AM_CPPFLAGS@ -Ivendor/bandit -Wall -Werror
 
-arg3dice_test_LDADD = ../src/libarg3dice-0.2.la
+arg3dice_test_LDADD = ../src/libarg3dice.la
 
 check: arg3dice_test
 	./arg3dice_test

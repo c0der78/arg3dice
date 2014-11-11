@@ -97,7 +97,7 @@ am_arg3dice_test_OBJECTS = arg3.test.$(OBJEXT) dice.test.$(OBJEXT) \
 	yaht/engine.test.$(OBJEXT) yaht/player.test.$(OBJEXT) \
 	yaht/scoresheet.test.$(OBJEXT)
 arg3dice_test_OBJECTS = $(am_arg3dice_test_OBJECTS)
-arg3dice_test_DEPENDENCIES = ../src/libarg3dice-0.2.la
+arg3dice_test_DEPENDENCIES = ../src/libarg3dice.la
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -292,7 +292,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
 arg3dice_test_SOURCES = arg3.test.cpp dice.test.cpp yaht/engine.test.cpp yaht/player.test.cpp yaht/scoresheet.test.cpp
-arg3dice_test_LDADD = ../src/libarg3dice-0.2.la
+arg3dice_test_LDADD = ../src/libarg3dice.la
 all: all-am
 
 .SUFFIXES:
