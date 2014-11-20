@@ -54,7 +54,7 @@ namespace arg3
 
         void game::remove_player(const string &name)
         {
-            for (iterator p = begin(); p != end(); p++)
+            for (auto p = players_.begin(); p != players_.end(); ++p)
             {
                 if (p->name() == name)
                 {
@@ -66,7 +66,7 @@ namespace arg3
 
         void game::remove_player(size_t index)
         {
-            iterator pos = players_.begin() + index;
+            auto pos = players_.begin() + index;
 
             if (pos >= players_.end())
             {
@@ -75,7 +75,7 @@ namespace arg3
 
             players_.erase(pos);
 
-            if (index <= currentPlayer_)
+            if (static_cast<int>(index) <= currentPlayer_)
                 currentPlayer_--;
         }
 
@@ -100,7 +100,7 @@ namespace arg3
 
             currentPlayer_++;
 
-            if (currentPlayer_ >= players_.size())
+            if (currentPlayer_ >= static_cast<int>(players_.size()))
             {
                 currentPlayer_ = 0;
             }
@@ -114,69 +114,9 @@ namespace arg3
             currentPlayer_ = 0;
         }
 
-        // iterator methods
-        game::iterator game::begin()
+        const vector<player> game::players() const
         {
-            return players_.begin();
-        }
-
-        game::const_iterator game::begin() const
-        {
-            return players_.begin();
-        }
-
-        // const iterator methods
-        const game::const_iterator game::cbegin() const
-        {
-            return players_.cbegin();
-        }
-
-        game::iterator game::end()
-        {
-            return players_.end();
-        }
-
-        game::const_iterator game::end() const
-        {
-            return players_.end();
-        }
-
-        const game::const_iterator game::cend() const
-        {
-            return players_.cend();
-        }
-
-        player *game::operator[] ( size_t index )
-        {
-            if (index >= players_.size())
-                return NULL;
-
-            return &(players_.at(index));
-        }
-
-        const player *game::operator[] ( size_t index ) const
-        {
-            return &(players_[index]);
-        }
-
-        player *game::operator[] (const string &name )
-        {
-            for (iterator p = begin(); p != end(); p++)
-            {
-                if (p->name() == name)
-                    return &(*p);
-            }
-            return NULL;
-        }
-
-        const player *game::operator[] (const string &name) const
-        {
-            for (const_iterator p = begin(); p != end(); p++)
-            {
-                if (p->name() == name)
-                    return &(*p);
-            }
-            return NULL;
+            return players_;
         }
 
         void game::set_random_engine(die::engine *value)

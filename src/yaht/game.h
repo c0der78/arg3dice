@@ -24,11 +24,6 @@ namespace arg3
         class game
         {
         public:
-            /*! iterator type for players */
-            typedef typename vector<player>::iterator iterator;
-            /*! const iterator type for players */
-            typedef typename vector<player>::const_iterator const_iterator;
-
             /*!
              * Adds a player with given name to the game
              * @param name
@@ -63,21 +58,7 @@ namespace arg3
 
             void reset();
 
-            // iterator methods
-            iterator begin();
-            const_iterator begin() const;
-            iterator end();
-            const_iterator end() const;
-
-            // const iterator methods
-            const const_iterator cbegin() const;
-            const const_iterator cend() const;
-
-            // index operators
-            player *operator[] ( size_t );
-            const player *operator[] ( size_t ) const;
-            player *operator[] (const string &);
-            const player *operator[] ( const string &) const;
+            const vector<player> players() const;
 
             /*!
              * Sets the random engine to use when adding players
