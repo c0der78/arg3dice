@@ -58,7 +58,7 @@ namespace arg3
 
             void reset();
 
-            const vector<player> players() const;
+            const vector<player> &players() const;
 
             /*!
              * Sets the random engine to use when adding players

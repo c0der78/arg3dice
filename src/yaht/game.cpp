@@ -114,7 +114,7 @@ namespace arg3
             currentPlayer_ = 0;
         }
 
-        const vector<player> game::players() const
+        const vector<player> &game::players() const
         {
             return players_;
         }
