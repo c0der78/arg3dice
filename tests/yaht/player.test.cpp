@@ -1,6 +1,6 @@
 #include <bandit/bandit.h>
 #include "../../src/yaht/player.h"
-#include "../../src/yaht/engine.h"
+#include "../../src/yaht/game.h"
 #include "../dice.test.h"
 
 using namespace bandit;

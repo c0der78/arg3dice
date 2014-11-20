@@ -21,15 +21,9 @@ namespace arg3
          * @class engine
          * A class that represents a game of Yacht
          */
-        class engine
+        class game
         {
         public:
-
-            /*!
-             * Gets the instance of the yacht engine
-             */
-            static engine *instance();
-
             /*! iterator type for players */
             typedef typename vector<player>::iterator iterator;
             /*! const iterator type for players */
@@ -67,6 +61,8 @@ namespace arg3
              */
             size_t number_of_players() const;
 
+            void reset();
+
             // iterator methods
             iterator begin();
             const_iterator begin() const;
@@ -90,21 +86,20 @@ namespace arg3
              */
             void set_random_engine(die::engine *engine);
 
-            engine(const engine &other);
-            engine(engine  &&other);
-            engine &operator=(const engine &);
-            engine &operator=(engine && );
+            game(const game &other);
+            game(game  &&other);
+            game &operator=(const game &);
+            game &operator=(game && );
+
+            // private singleton constructors
+            game(die::engine * = die::default_engine);
 
         private:
             vector<player> players_;
 
             die::engine *engine_;
 
-            // private singleton constructors
-            engine(die::engine * = die::default_engine);
-
-
-            size_t currentPlayer_;
+            int currentPlayer_;
         };
 
     }
