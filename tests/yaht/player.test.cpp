@@ -14,16 +14,16 @@ go_bandit([]()
     {
         dice_test_engine rand_engine;
 
-        player *player;
+        shared_ptr<player> player;
 
         before_each([&]()
         {
-            player = new yaht::player("testA", &rand_engine);
+            player = make_shared<yaht::player>("testA", &rand_engine);
         });
 
         after_each([&]()
         {
-            delete player;
+            player = nullptr;
         });
 
         it("can positively determine four of a kind", [&]()

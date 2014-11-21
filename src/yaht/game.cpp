@@ -17,7 +17,7 @@ namespace arg3
 
         }
 
-        game::game(game &&other) : players_(std::move(other.players_)), engine_(std::move(other.engine_)), currentPlayer_(other.currentPlayer_)
+        game::game(game &&other) : players_(std::move(other.players_)), engine_(std::move(other.engine_)), currentPlayer_(std::move(other.currentPlayer_))
         {
 
         }
@@ -25,42 +25,44 @@ namespace arg3
         game &game::operator=(const game &other)
         {
 
-            if (this != &other)
-            {
-                players_ = other.players_;
-                engine_ = other.engine_;
-                currentPlayer_ = other.currentPlayer_;
-            }
+            players_ = other.players_;
+            engine_ = other.engine_;
+            currentPlayer_ = other.currentPlayer_;
+
             return *this;
         }
 
 
         game &game::operator=(game && other)
         {
+            players_ = std::move(other.players_);
+            engine_ = std::move(other.engine_);
+            currentPlayer_ = std::move(other.currentPlayer_);
 
-            if (this != &other)
-            {
-                players_ = std::move(other.players_);
-                engine_ = std::move(other.engine_);
-                currentPlayer_ = other.currentPlayer_;
-            }
             return *this;
         }
 
-        void game::add_player(const string &name)
+        void game::add_player(shared_ptr<player> &&player)
         {
-            players_.emplace_back(name, engine_);
+            auto it = find(players_.begin(), players_.end(), player);
+
+            if (it == players_.end())
+                players_.push_back(player);
         }
 
-        void game::remove_player(const string &name)
+        void game::remove_player(const shared_ptr<player> &player)
         {
-            for (auto p = players_.begin(); p != players_.end(); ++p)
+            auto it = find(players_.begin(), players_.end(), player);
+
+            if (it != players_.end())
             {
-                if (p->name() == name)
-                {
-                    players_.erase(p);
-                    return;
-                }
+
+                size_t index = distance(players_.begin(), it);
+
+                if (index < currentPlayer_ )
+                    currentPlayer_--;
+
+                players_.erase(it);
             }
         }
 
@@ -73,19 +75,29 @@ namespace arg3
                 return;
             }
 
+            size_t iPos = distance(players_.begin(), pos);
+
+            if (iPos < currentPlayer_)
+                currentPlayer_--;
+
             players_.erase(pos);
 
-            if (static_cast<int>(index) <= currentPlayer_)
-                currentPlayer_--;
         }
 
 
-        player *game::current_player()
+        shared_ptr<player> game::current_player()
         {
-            if (currentPlayer_ < 0 || currentPlayer_ >= static_cast<int>(players_.size()))
-                return 0;
+            size_t pSize = players_.size();
 
-            return &(players_.at(currentPlayer_));
+            if (players_.size() == 0)
+                return nullptr;
+
+            if (currentPlayer_ >= pSize)
+            {
+                currentPlayer_ = 0;
+            }
+
+            return players_[currentPlayer_];
         }
 
         size_t game::number_of_players() const
@@ -93,19 +105,19 @@ namespace arg3
             return players_.size();
         }
 
-        player *game::next_player()
+        shared_ptr<player> game::next_player()
         {
-            if (players_.size() == 0)
+            size_t pSize = players_.size();
+
+            if (pSize == 0)
                 return 0;
 
-            currentPlayer_++;
-
-            if (currentPlayer_ >= static_cast<int>(players_.size()))
+            if (currentPlayer_ == pSize || ++currentPlayer_ == pSize)
             {
                 currentPlayer_ = 0;
             }
 
-            return &(players_.at(currentPlayer_));
+            return players_[currentPlayer_];
         }
 
         void game::reset()
@@ -114,9 +126,12 @@ namespace arg3
             currentPlayer_ = 0;
         }
 
-        const vector<player> &game::players() const
+        void game::for_players(std::function<void(const shared_ptr<player> &player)> funk)
         {
-            return players_;
+            for (const auto & p : players_)
+            {
+                funk(p);
+            }
         }
 
         void game::set_random_engine(die::engine *value)

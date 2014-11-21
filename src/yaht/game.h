@@ -29,7 +29,7 @@ namespace arg3
              * @param name
              * the name to give the added player
              */
-            void add_player(const string &name);
+            void add_player(shared_ptr<player> &&player);
 
             /*!
              * Removes a player from the game
@@ -38,18 +38,18 @@ namespace arg3
              */
             void remove_player(size_t index);
 
-            void remove_player(const string &name);
+            void remove_player(const shared_ptr<player> &player);
 
             /*!
              * @result the player whose turn it is
              */
-            player *current_player();
+            shared_ptr<player> current_player();
 
             /*!
              * Advances to the next player in the game
              * @result the next player in the game
              */
-            player *next_player();
+            shared_ptr<player> next_player();
 
             /*!
              * @result the number of players in the game
@@ -58,7 +58,7 @@ namespace arg3
 
             void reset();
 
-            const vector<player> &players() const;
+            void for_players(std::function<void(const shared_ptr<player> &)> funk);
 
             /*!
              * Sets the random engine to use when adding players
@@ -75,12 +75,14 @@ namespace arg3
             // private singleton constructors
             game(die::engine * = die::default_engine);
 
+            virtual ~game() {}
+
         private:
-            vector<player> players_;
+            vector<shared_ptr<player>> players_;
 
             die::engine *engine_;
 
-            int currentPlayer_;
+            size_t currentPlayer_;
         };
 
     }

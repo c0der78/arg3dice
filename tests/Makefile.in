@@ -94,7 +94,7 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__dirstamp = $(am__leading_dot)dirstamp
 am_arg3dice_test_OBJECTS = arg3.test.$(OBJEXT) dice.test.$(OBJEXT) \
-	yaht/engine.test.$(OBJEXT) yaht/player.test.$(OBJEXT) \
+	yaht/game.test.$(OBJEXT) yaht/player.test.$(OBJEXT) \
 	yaht/scoresheet.test.$(OBJEXT)
 arg3dice_test_OBJECTS = $(am_arg3dice_test_OBJECTS)
 arg3dice_test_DEPENDENCIES = ../src/libarg3dice.la
@@ -291,7 +291,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = subdir-objects
-arg3dice_test_SOURCES = arg3.test.cpp dice.test.cpp yaht/engine.test.cpp yaht/player.test.cpp yaht/scoresheet.test.cpp
+arg3dice_test_SOURCES = arg3.test.cpp dice.test.cpp yaht/game.test.cpp yaht/player.test.cpp yaht/scoresheet.test.cpp
 arg3dice_test_LDADD = ../src/libarg3dice.la
 all: all-am
 
@@ -342,7 +342,7 @@ yaht/$(am__dirstamp):
 yaht/$(DEPDIR)/$(am__dirstamp):
 	@$(MKDIR_P) yaht/$(DEPDIR)
 	@: > yaht/$(DEPDIR)/$(am__dirstamp)
-yaht/engine.test.$(OBJEXT): yaht/$(am__dirstamp) \
+yaht/game.test.$(OBJEXT): yaht/$(am__dirstamp) \
 	yaht/$(DEPDIR)/$(am__dirstamp)
 yaht/player.test.$(OBJEXT): yaht/$(am__dirstamp) \
 	yaht/$(DEPDIR)/$(am__dirstamp)
@@ -362,7 +362,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/arg3.test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dice.test.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@yaht/$(DEPDIR)/engine.test.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@yaht/$(DEPDIR)/game.test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@yaht/$(DEPDIR)/player.test.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@yaht/$(DEPDIR)/scoresheet.test.Po@am__quote@
 
