@@ -1,6 +1,5 @@
 #include "game.h"
 #include <algorithm>
-#include <cassert>
 
 namespace arg3
 {
@@ -42,7 +41,14 @@ namespace arg3
             return *this;
         }
 
-        void game::add_player(shared_ptr<player> &&player)
+        shared_ptr<player> game::operator[](size_t index)
+        {
+            if (index >= players_.size()) return nullptr;
+
+            return players_[index];
+        }
+
+        void game::add_player(shared_ptr<player> player)
         {
             auto it = find(players_.begin(), players_.end(), player);
 

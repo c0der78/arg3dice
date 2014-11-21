@@ -9,6 +9,8 @@
 #define ARG3_YACHT_H
 
 #include "player.h"
+#include <memory>
+#include <vector>
 
 namespace arg3
 {
@@ -29,7 +31,7 @@ namespace arg3
              * @param name
              * the name to give the added player
              */
-            void add_player(shared_ptr<player> &&player);
+            void add_player(std::shared_ptr<player> player);
 
             /*!
              * Removes a player from the game
@@ -38,18 +40,20 @@ namespace arg3
              */
             void remove_player(size_t index);
 
-            void remove_player(const shared_ptr<player> &player);
+            void remove_player(const std::shared_ptr<player> &player);
 
             /*!
              * @result the player whose turn it is
              */
-            shared_ptr<player> current_player();
+            std::shared_ptr<player> current_player();
 
             /*!
              * Advances to the next player in the game
              * @result the next player in the game
              */
-            shared_ptr<player> next_player();
+            std::shared_ptr<player> next_player();
+
+            std::shared_ptr<player> operator[](size_t index);
 
             /*!
              * @result the number of players in the game
@@ -58,7 +62,7 @@ namespace arg3
 
             void reset();
 
-            void for_players(std::function<void(const shared_ptr<player> &)> funk);
+            void for_players(std::function<void(const std::shared_ptr<player> &)> funk);
 
             /*!
              * Sets the random engine to use when adding players
@@ -78,7 +82,7 @@ namespace arg3
             virtual ~game() {}
 
         private:
-            vector<shared_ptr<player>> players_;
+            std::vector<std::shared_ptr<player>> players_;
 
             die::engine *engine_;
 
