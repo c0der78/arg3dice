@@ -53,7 +53,8 @@ namespace arg3
              */
             std::shared_ptr<player> next_player();
 
-            std::shared_ptr<player> operator[](size_t index);
+            std::shared_ptr<player> get_player(size_t index);
+            const std::shared_ptr<player> get_player(size_t index) const;
 
             /*!
              * @result the number of players in the game

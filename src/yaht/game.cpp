@@ -41,11 +41,16 @@ namespace arg3
             return *this;
         }
 
-        shared_ptr<player> game::operator[](size_t index)
+        shared_ptr<player> game::get_player(size_t index)
         {
             if (index >= players_.size()) return nullptr;
 
             return players_[index];
+        }
+
+        const shared_ptr<player> game::get_player(size_t index) const
+        {
+            return get_player(index);
         }
 
         void game::add_player(shared_ptr<player> player)
