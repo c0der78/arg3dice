@@ -23,6 +23,7 @@ namespace arg3
          * @class engine
          * A class that represents a game of Yacht
          */
+
         class game
         {
         public:
@@ -54,6 +55,9 @@ namespace arg3
             std::shared_ptr<player> next_player();
 
             std::shared_ptr<player> get_player(size_t index);
+
+            void set_current_player(const std::shared_ptr<player> &player);
+
             const std::shared_ptr<player> get_player(size_t index) const;
 
             /*!

@@ -50,7 +50,9 @@ namespace arg3
 
         const shared_ptr<player> game::get_player(size_t index) const
         {
-            return get_player(index);
+            if (index >= players_.size()) return nullptr;
+
+            return players_[index];
         }
 
         void game::add_player(shared_ptr<player> player)
@@ -111,6 +113,16 @@ namespace arg3
             return players_[currentPlayer_];
         }
 
+        void game::set_current_player(const std::shared_ptr<player> &player)
+        {
+            auto it = find(players_.begin(), players_.end(), player);
+
+            if (it != players_.end())
+            {
+                currentPlayer_ = distance(players_.begin(), it);
+            }
+        }
+
         size_t game::number_of_players() const
         {
             return players_.size();
@@ -139,7 +151,7 @@ namespace arg3
 
         void game::for_players(std::function<void(const shared_ptr<player> &player)> funk)
         {
-            for (const auto & p : players_)
+            for (const auto &p : players_)
             {
                 funk(p);
             }

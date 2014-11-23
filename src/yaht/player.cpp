@@ -17,6 +17,9 @@ namespace arg3
             return stm;
         }
 
+        player::player(die::engine *const engine) : dice_(die_count(), die_sides(), engine), score_(), rollCount_(0)
+        {}
+
         player::player(const string &name, die::engine *const engine) : dice_(die_count(), die_sides(), engine),
             score_(), rollCount_(0), name_(name)
         {
@@ -118,6 +121,12 @@ namespace arg3
         const string &player::name() const
         {
             return name_;
+        }
+
+        player &player::set_name(const string &value)
+        {
+            name_ = value;
+            return *this;
         }
 
         scoresheet &player::score()

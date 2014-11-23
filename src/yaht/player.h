@@ -38,7 +38,11 @@ namespace arg3
             unsigned int die_count() const;
 
             /*!
-             * default constructor takes a name
+             * default constructor
+             */
+            player(die::engine *const = die::default_engine);
+
+            /*!
              * @param name
              * the name given to a player
              * @param engine
@@ -103,6 +107,8 @@ namespace arg3
              * name of the player
              */
             const string &name() const;
+
+            player &set_name(const string &value);
 
             const dice &d1ce() const;
 
