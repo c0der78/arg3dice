@@ -1,4 +1,4 @@
-#include "game.h"
+#include "scoresheet.h"
 #include <algorithm>
 
 namespace arg3

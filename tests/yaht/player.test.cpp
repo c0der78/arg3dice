@@ -1,11 +1,13 @@
 #include <bandit/bandit.h>
 #include "../../src/yaht/player.h"
-#include "../../src/yaht/game.h"
 #include "../dice.test.h"
+#include "yaht.test.h"
 
 using namespace bandit;
 
 using namespace arg3::yaht;
+
+int ::player::next_id = 0;
 
 go_bandit([]()
 {
@@ -14,11 +16,11 @@ go_bandit([]()
     {
         dice_test_engine rand_engine;
 
-        shared_ptr<player> player;
+        shared_ptr<::player> player;
 
         before_each([&]()
         {
-            player = make_shared<yaht::player>("testA", &rand_engine);
+            player = make_shared<::player>("testA", &rand_engine);
         });
 
         after_each([&]()

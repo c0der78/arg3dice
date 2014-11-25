@@ -2,7 +2,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 check_PROGRAMS = arg3dice_test
 
-arg3dice_test_SOURCES = arg3.test.cpp dice.test.cpp yaht/game.test.cpp yaht/player.test.cpp yaht/scoresheet.test.cpp
+arg3dice_test_SOURCES = arg3.test.cpp dice.test.cpp yaht/player.test.cpp yaht/scoresheet.test.cpp
 
 AM_CPPFLAGS = @AM_CPPFLAGS@ -Ivendor/bandit -Wall -Werror
 

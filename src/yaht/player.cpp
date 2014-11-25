@@ -1,5 +1,5 @@
 #include <algorithm>
-#include "game.h"
+#include "player.h"
 
 namespace arg3
 {
@@ -11,28 +11,18 @@ namespace arg3
         {
             return d1.value() < d2.value();
         }
-        std::ostream &operator<<(std::ostream &stm, const player &p)
-        {
-            stm << p.name();
-            return stm;
-        }
 
         player::player(die::engine *const engine) : dice_(die_count(), die_sides(), engine), score_(), rollCount_(0)
         {}
 
-        player::player(const string &name, die::engine *const engine) : dice_(die_count(), die_sides(), engine),
-            score_(), rollCount_(0), name_(name)
-        {
-
-        }
         player::player(const player &other) : dice_(other.dice_), score_(other.score_), rollCount_(other.rollCount_),
-            name_(other.name_), kept_(other.kept_)
+            kept_(other.kept_)
         {
 
         }
 
         player::player(player &&other) : dice_(std::move(other.dice_)), score_(std::move(other.score_)), rollCount_(other.rollCount_),
-            name_(std::move(other.name_)), kept_(std::move(other.kept_))
+            kept_(std::move(other.kept_))
         {
 
         }
@@ -47,7 +37,6 @@ namespace arg3
             dice_ = other.dice_;
             score_ = other.score_;
             rollCount_ = other.rollCount_;
-            name_ = other.name_;
             kept_ = other.kept_;
 
             return *this;
@@ -58,7 +47,6 @@ namespace arg3
             dice_ = std::move(other.dice_);
             score_ = std::move(other.score_);
             rollCount_ = other.rollCount_;
-            name_ = std::move(other.name_);
             kept_ = std::move(other.kept_);
 
             return *this;
@@ -118,30 +106,9 @@ namespace arg3
             return dice_[index];
         }
 
-        const string &player::name() const
-        {
-            return name_;
-        }
-
-        player &player::set_name(const string &value)
-        {
-            name_ = value;
-            return *this;
-        }
-
         scoresheet &player::score()
         {
             return score_;
-        }
-
-        bool player::operator==(const player &other) const
-        {
-            return name_ == other.name_;
-        }
-
-        bool player::operator!=(const player &other) const
-        {
-            return !operator==(other);
         }
 
         scoresheet::value_type player::calculate_upper_score(die::value_type value) const

@@ -17,7 +17,6 @@ namespace arg3
 
     namespace yaht
     {
-
         /*!
          * @class player
          * A player in a game of yaht(zee)
@@ -41,14 +40,6 @@ namespace arg3
              * default constructor
              */
             player(die::engine *const = die::default_engine);
-
-            /*!
-             * @param name
-             * the name given to a player
-             * @param engine
-             * the die engine to use
-             */
-            player(const string &name, die::engine *const = die::default_engine);
 
             /*!
              * copy constructor
@@ -103,26 +94,9 @@ namespace arg3
 
             scoresheet &score();
 
-            /*!
-             * name of the player
-             */
-            const string &name() const;
-
-            player &set_name(const string &value);
-
             const dice &d1ce() const;
 
             const die &d1e(size_t index) const;
-
-            /*!
-             * equality operator
-             */
-            bool operator==(const player &) const;
-
-            /*!
-             * equality operator
-             */
-            bool operator!=(const player &) const;
 
             unsigned short roll_count() const;
 
@@ -141,10 +115,8 @@ namespace arg3
 
             scoresheet score_;  // the score sheet
             unsigned short rollCount_; // number of die rolls
-            string name_;   // player name
             map<size_t, int> kept_;  // kept die values
         };
-
     }
 
 }
