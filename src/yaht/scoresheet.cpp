@@ -54,6 +54,8 @@ namespace arg3
         void scoresheet::lower_score(type index, scoresheet::value_type value)
         {
             lowerValues_[index] = value;
+
+            lowerPlayed_ |= (1 << (index));
         }
 
         void scoresheet::upper_score(die::value_type index, scoresheet::value_type value)
@@ -61,12 +63,26 @@ namespace arg3
             auto i = std::max(0U, index - 1);
 
             if (i < upperValues_.size())
+            {
                 upperValues_[i] = value;
+
+                upperPlayed_ |= (1 << (i));
+            }
+        }
+
+        bool scoresheet::lower_played(type index) const
+        {
+            return lowerPlayed_ & (1 << index);
         }
 
         scoresheet::value_type scoresheet::lower_score(type index) const
         {
             return lowerValues_[index];
+        }
+
+        bool scoresheet::upper_played(die::value_type index) const
+        {
+            return upperPlayed_ & (1 << index);
         }
 
         scoresheet::value_type scoresheet::upper_score(die::value_type index) const
@@ -77,6 +93,11 @@ namespace arg3
                 return upperValues_[i];
             else
                 return 0;
+        }
+
+        size_t scoresheet::number_of_values() const
+        {
+            return lowerValues_.size() + upperValues_.size();
         }
 
     }

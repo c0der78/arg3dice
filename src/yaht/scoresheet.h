@@ -99,13 +99,20 @@ namespace arg3
              */
             scoresheet::value_type lower_score(type type) const;
 
+            bool lower_played(type index) const;
+
             /*!
              * gets the lower score
              * @param type the type of score to get
              */
             scoresheet::value_type upper_score(die::value_type type) const;
 
+            bool upper_played(die::value_type index) const;
+
+            size_t number_of_values() const;
+
         private:
+            unsigned short upperPlayed_, lowerPlayed_;
             array<value_type, die::DEFAULT_SIDES> upperValues_;
             array<value_type, MAX_TYPE> lowerValues_;
         };

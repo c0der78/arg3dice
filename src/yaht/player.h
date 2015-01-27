@@ -65,7 +65,9 @@ namespace arg3
              */
             void keep_die(size_t index, bool value);
 
-            bool is_kept(size_t index);
+            bool is_kept(size_t index) const;
+
+            bool is_finished() const;
 
             /*!
              * calculate a value on the lower part of scoresheet

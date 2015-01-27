@@ -67,6 +67,11 @@ namespace arg3
             return rollCount_;
         }
 
+        bool player::is_finished() const
+        {
+            return rollCount_ == score_.number_of_values();
+        }
+
         void player::roll()
         {
             dice_.roll([&](size_t index, const die & d)
@@ -96,7 +101,7 @@ namespace arg3
                 kept_.erase(index);
         }
 
-        bool player::is_kept(size_t index)
+        bool player::is_kept(size_t index) const
         {
             return kept_.find(index) != kept_.end();
         }
