@@ -69,7 +69,7 @@ namespace arg3
 
         bool player::is_finished() const
         {
-            return rollCount_ == score_.number_of_values();
+            return score_.number_played() == score_.size();
         }
 
         void player::roll()

@@ -101,6 +101,8 @@ namespace arg3
 
             bool lower_played(type index) const;
 
+            scoresheet::value_type total_score() const;
+
             /*!
              * gets the lower score
              * @param type the type of score to get
@@ -109,7 +111,9 @@ namespace arg3
 
             bool upper_played(die::value_type index) const;
 
-            size_t number_of_values() const;
+            size_t size() const;
+
+            size_t number_played() const;
 
         private:
             unsigned short upperPlayed_, lowerPlayed_;
