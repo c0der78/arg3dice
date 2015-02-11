@@ -113,7 +113,7 @@ namespace arg3
         {
             scoresheet::value_type total_score = 0;
 
-            for (int i = 0; i < upperValues_.size(); i++)
+            for (size_t i = 0; i < upperValues_.size(); i++)
             {
                 total_score += upperValues_[i];
             }
@@ -121,7 +121,7 @@ namespace arg3
             if (total_score > 63)
                 total_score += 35;
 
-            for (int i = 0; i < lowerValues_.size(); i++)
+            for (size_t i = 0; i < lowerValues_.size(); i++)
             {
                 total_score += lowerValues_[i];
             }
@@ -133,11 +133,11 @@ namespace arg3
         {
             scoresheet::value_type count = 0;
 
-            for (int i = 0; i < upperValues_.size(); i++)
+            for (size_t i = 0; i < upperValues_.size(); i++)
                 if (upperPlayed_ & (1 << i))
                     count++;
 
-            for (int i = 0; i < lowerValues_.size(); i++)
+            for (size_t i = 0; i < lowerValues_.size(); i++)
                 if (lowerPlayed_ & (1 << i))
                     count++;
 
