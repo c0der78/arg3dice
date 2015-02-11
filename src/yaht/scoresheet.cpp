@@ -54,17 +54,20 @@ namespace arg3
         void scoresheet::reset()
         {
             lowerValues_.fill(0);
+            lowerPlayed_ = 0;
             upperValues_.fill(0);
+            upperPlayed_ = 0;
         }
 
-        void scoresheet::lower_score(type index, scoresheet::value_type value)
+        void scoresheet::lower_score(type index, scoresheet::value_type value, bool played)
         {
             lowerValues_[index] = value;
 
-            lowerPlayed_ |= (1 << (index));
+            if (played)
+                lowerPlayed_ |= (1 << (index));
         }
 
-        void scoresheet::upper_score(die::value_type index, scoresheet::value_type value)
+        void scoresheet::upper_score(die::value_type index, scoresheet::value_type value, bool played)
         {
             auto i = std::max(0U, index - 1);
 
@@ -72,7 +75,8 @@ namespace arg3
             {
                 upperValues_[i] = value;
 
-                upperPlayed_ |= (1 << (i));
+                if (played)
+                    upperPlayed_ |= (1 << (i));
             }
         }
 

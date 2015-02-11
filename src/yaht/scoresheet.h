@@ -79,14 +79,14 @@ namespace arg3
              * @param type the type of score
              * @param value the value to set
              */
-            void lower_score(type type, scoresheet::value_type value);
+            void lower_score(type type, scoresheet::value_type value, bool played = true);
 
             /*!
              * sets a score on the upper page
              * @param type the type of score
              * @param value the value to set
              */
-            void upper_score(die::value_type type, scoresheet::value_type value);
+            void upper_score(die::value_type type, scoresheet::value_type value, bool played = true);
 
             /*!
              * resets/clears the score
