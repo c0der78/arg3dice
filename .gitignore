@@ -30,3 +30,4 @@ arg3dice_test
 *.gcno
 coverage.info
 *~
+arg3dice.pc
