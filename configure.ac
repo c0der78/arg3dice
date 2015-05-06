@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.58])
-AC_INIT([arg3dice], [0.2.0], [c0der78@gmail.com])
+AC_INIT([arg3dice], [0.2.0], [c0der78@gmail.com], [arg3dice], [http://github.com/c0der78/arg3dice/archive/0.2.0.tar.gz])
 AC_CONFIG_SRCDIR([src/dice.cpp])
 AC_CONFIG_HEADERS([src/config.h])
 
