@@ -270,7 +270,7 @@ namespace arg3
         else
         {
             // avoid unsigned overflow
-            if (numeric_limits<die::value_type>::max() - value >= b)
+            if (numeric_limits<die::value_type>::max() - value >= static_cast<die::value_type>(b))
                 return value + b; // add the bonus
             else
                 return numeric_limits<die::value_type>::max();
