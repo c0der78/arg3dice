@@ -137,6 +137,26 @@ go_bandit([]()
             Assert::That(d.bonus(), Equals(23));
         });
 
+        it("doesn't underflow on bonus", []() {
+            dice d(2);
+
+            d.bonus(-100);
+
+            Assert::That(d.roll(), Equals(0));
+        });
+
+        it("doesn't overflow on bonus", []() {
+            dice_test_engine engine;
+
+            dice d(2, 5, &engine);
+
+            d.bonus(200);
+
+            engine.set_next_roll({ numeric_limits<die::value_type>::max() - 50 });
+
+            Assert::That(d.roll(), Equals(numeric_limits<die::value_type>::max()));
+        });
+
         it("can be converted to a string", []()
         {
             dice d(10, 20);

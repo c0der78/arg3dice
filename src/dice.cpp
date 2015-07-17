@@ -230,7 +230,10 @@ namespace arg3
         return buf.str();
     }
 
-    // return the total of rolling all dice
+    //! return the total of rolling all dice
+    /*!
+     * @param   selector    determins if a die should be rolled or use it's current value
+     */
     die::value_type dice::roll(std::function<bool(size_t index, const die &d)> selector)
     {
         die::value_type value = 0;
@@ -254,19 +257,23 @@ namespace arg3
         }
 
         /* return value has the bonus */
-        auto b = bonus();
+        int b = bonus();
 
         if (b < 0)
         {
-            // avoid unsigned overflow
-            if (static_cast<die::value_type>(abs(b)) >= value)
+            // avoid unsigned underflow
+            if (static_cast<int>(value) + b >= 0)
                 return value + b;
             else
                 return 0;
         }
         else
         {
-            return value + b; // add the bonus
+            // avoid unsigned overflow
+            if (numeric_limits<die::value_type>::max() - value >= b)
+                return value + b; // add the bonus
+            else
+                return numeric_limits<die::value_type>::max();
         }
     }
 
