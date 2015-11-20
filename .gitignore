@@ -31,3 +31,5 @@ arg3dice_test
 coverage.info
 *~
 arg3dice.pc
+build
+*.bak
