@@ -29,6 +29,8 @@ script:
   - cd build
   - cmake -DCMAKE_BUILD_TYPE=Debug -DMEMORY_CHECK=ON -DCODE_COVERAGE=ON .. 
   - make
+  - make arg3dice-coverage-clean
+  - make test
   - make arg3dice-coverage-info
 after_success:
   - coveralls-lcov $TRAVIS_BUILD_DIR/coverage.info
