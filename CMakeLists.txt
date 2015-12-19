@@ -35,8 +35,8 @@ enable_testing()
 
 if (MEMORY_CHECK)
 	include(MemCheckTest)
-	add_memcheck_test(${PROJECT_NAME}-test ${PROJECT_BINARY_DIR}/tests/${PROJECT_NAME}_test)
+	add_memcheck_test(${PROJECT_NAME}-test ${PROJECT_BINARY_DIR}/tests/${PROJECT_NAME}-test)
 else ()
-	add_test(${PROJECT_NAME}-test ${PROJECT_BINARY_DIR}/tests/${PROJECT_NAME}_test)
+	add_test(${PROJECT_NAME}-test ${PROJECT_BINARY_DIR}/tests/${PROJECT_NAME}-test)
 endif()
 

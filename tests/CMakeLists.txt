@@ -1,7 +1,7 @@
 
-add_executable(${PROJECT_NAME}_test arg3.test.cpp dice.test.cpp yaht/player.test.cpp yaht/scoresheet.test.cpp)
+add_executable(${PROJECT_NAME}-test arg3.test.cpp dice.test.cpp yaht/player.test.cpp yaht/scoresheet.test.cpp)
 
 include_directories(SYSTEM vendor/bandit ${PROJECT_SOURCE_DIR}/src)
 
-target_link_libraries (${PROJECT_NAME}_test ${PROJECT_NAME})
+target_link_libraries (${PROJECT_NAME}-test ${PROJECT_NAME})
 
