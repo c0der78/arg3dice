@@ -1,25 +1,50 @@
 libarg3dice
 ===========
 
-[![Build Status](https://travis-ci.org/c0der78/arg3dice.svg?branch=master)](https://travis-ci.org/c0der78/arg3dice)
+
+[![Build Status](http://img.shields.io/travis/deadcoda/arg3dice.svg)](https://travis-ci.org/deadcoda/arg3dice)
+[![Coverage Status](https://coveralls.io/repos/deadcoda/arg3dice/badge.svg?branch=master&service=github)](https://coveralls.io/github/deadcoda/arg3dice?branch=master)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://deadcoda.mit-license.org)
+[![Codacy Badge](https://api.codacy.com/project/badge/grade/15fb1a85cafe4f33a6f5f87d3fec31c1)](https://www.codacy.com/app/c0der78/arg3dice)
 
 A c++11 library for working with dice.  Implementations for different dice games (Yahtzee, etc.)
 
-[View Testing Code Coverage](http://htmlpreview.github.com/?https://github.com/c0der78/arg3dice/blob/master/coverage/index.html)
-
 Building
-========
+--------
 
-I use [autotools](http://en.wikipedia.org/wiki/GNU_build_system).
+After cloning run the following command to initialize submodules:
 
 ```bash
-./configure --prefix=/usr/local
 
-make
+git submodule update --init --recursive
 ```
 
+you can use [cmake](https://cmake.org) to generate for the build system of your choice.
+
+```bash
+mkdir debug; cd debug; 
+cmake -DCMAKE_BUILD_TYPE=Debug ..
+make
+make test
+```
+
+a homebrew release example:
+```bash
+mkdir release; cd release
+cmake -DCMAKE_BUILD_TYPE=Release $(brew diy --version=0.2.0)
+make
+make install
+brew link arg3dice
+```
+
+options supported are:
+
+    -DCODE_COVERAGE=ON   :   enable code coverage using lcov
+    -DMEMORY_CHECK=ON    :   enable valgrind memory checking on tests
+
+
 Coding Style
-============
+------------
 
 - class/struct/method names are all lower case with underscores separating words
 - non public members are camel case with and underscore at end of the name
@@ -27,7 +52,7 @@ Coding Style
 - braces on a new line
 
 Examples
-========
+--------
 
 *Simple Example*
 
