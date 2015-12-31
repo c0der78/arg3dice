@@ -27,28 +27,10 @@ make
 make test
 ```
 
-a homebrew release example:
-```bash
-mkdir release; cd release
-cmake -DCMAKE_BUILD_TYPE=Release $(cd ..;brew diy --version=0.2.0)
-make
-make install
-brew link arg3dice
-```
-
 options supported are:
 
     -DCODE_COVERAGE=ON   :   enable code coverage using lcov
     -DMEMORY_CHECK=ON    :   enable valgrind memory checking on tests
-
-
-Coding Style
-------------
-
-- class/struct/method names are all lower case with underscores separating words
-- non public members are camel case with and underscore at end of the name
-- macros, enums and constants are all upper case with underscores seperating words
-- braces on a new line
 
 Examples
 --------
@@ -75,7 +57,7 @@ public:
     	cout << "Generated random number: " << value << endl;
 
     	return value;
-	}
+    }
 };
 
 logger_die_engine my_engine;
