@@ -2,9 +2,9 @@ libarg3dice
 ===========
 
 
-[![Build Status](http://img.shields.io/travis/deadcoda/arg3dice.svg)](https://travis-ci.org/deadcoda/arg3dice)
-[![Coverage Status](https://coveralls.io/repos/deadcoda/arg3dice/badge.svg?branch=master&service=github)](https://coveralls.io/github/deadcoda/arg3dice?branch=master)
-[![License](http://img.shields.io/:license-mit-blue.svg)](http://deadcoda.mit-license.org)
+[![Build Status](http://img.shields.io/travis/ryjen/arg3dice.svg)](https://travis-ci.org/ryjen/arg3dice)
+[![Coverage Status](https://coveralls.io/repos/ryjen/arg3dice/badge.svg?branch=master&service=github)](https://coveralls.io/github/ryjen/arg3dice?branch=master)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://ryjen.mit-license.org)
 
 A c++11 library for working with dice.  Implementations for different dice games (Yahtzee, etc.)
 
