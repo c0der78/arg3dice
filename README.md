@@ -1,9 +1,9 @@
-libarg3dice
-===========
+rj_dice
+=======
 
 
-[![Build Status](http://img.shields.io/travis/ryjen/arg3dice.svg)](https://travis-ci.org/ryjen/arg3dice)
-[![Coverage Status](https://coveralls.io/repos/ryjen/arg3dice/badge.svg?branch=master&service=github)](https://coveralls.io/github/ryjen/arg3dice?branch=master)
+[![Build Status](http://img.shields.io/travis/ryjen/dice.svg)](https://travis-ci.org/ryjen/dice)
+[![Coverage Status](https://coveralls.io/repos/ryjen/dice/badge.svg?branch=master&service=github)](https://coveralls.io/github/ryjen/dice?branch=master)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://ryjen.mit-license.org)
 
 A c++11 library for working with dice.  Implementations for different dice games (Yahtzee, etc.)
@@ -38,7 +38,7 @@ Examples
 *Simple Example*
 
 ```c++
-arg3::dice d10(10, 10); // 10 dice with 10 sides each
+rj::dice d10(10, 10); // 10 dice with 10 sides each
 
 d10.roll(); // random value
 ```
@@ -46,7 +46,7 @@ d10.roll(); // random value
 *Complex Example*
 
 ```c++
-class logger_die_engine : public arg3::die::engine
+class logger_die_engine : public rj::die::engine
 {
 public:
     die::value_type generate(die::value_type from, die::value_type to)
@@ -62,7 +62,7 @@ public:
 
 logger_die_engine my_engine;
 
-arg3::dice d10(10, 10, &my_engine);
+rj::dice d10(10, 10, &my_engine);
 
 d10.roll(); // logs the random number
 ```

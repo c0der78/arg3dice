@@ -26,11 +26,9 @@ stamp-h1
 .dirstamp
 *.status
 config.h
-arg3dice_test
 *.gcno
 coverage.info
 *~
-arg3dice.pc
 build
 *.bak
 debug

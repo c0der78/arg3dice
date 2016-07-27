@@ -2,8 +2,8 @@
  * @header Yacht scoresheet
  * The Yacht scoresheet provides an interfaces to tracking scores in a game of Yacht
  */
-#ifndef ARG3_YACHT_SCORE_H
-#define ARG3_YACHT_SCORE_H
+#ifndef RJ_YACHT_SCORE_H
+#define RJ_YACHT_SCORE_H
 
 #include <array>
 #include "../dice.h"
@@ -11,25 +11,21 @@
 
 using namespace std;
 
-namespace arg3
+namespace rj
 {
-
     namespace yaht
     {
-
         /*!
          * Class to track scores
          */
         class scoresheet
         {
-        public:
-
+           public:
             /*! Underlying type to store scores */
             typedef unsigned short value_type;
 
             /*! Types of scoring */
-            typedef enum
-            {
+            typedef enum {
                 /*! three of a kind */
                 KIND_THREE,
                 /*! four of a kind */
@@ -72,7 +68,7 @@ namespace arg3
              */
             scoresheet &operator=(const scoresheet &rhs);
 
-            scoresheet &operator=(scoresheet && rhs);
+            scoresheet &operator=(scoresheet &&rhs);
 
             /*!
              * sets a score on the lower page
@@ -115,14 +111,12 @@ namespace arg3
 
             size_t number_played() const;
 
-        private:
+           private:
             unsigned short upperPlayed_, lowerPlayed_;
             array<value_type, die::DEFAULT_SIDES> upperValues_;
             array<value_type, MAX_TYPE> lowerValues_;
         };
-
     }
-
 }
 
 #endif

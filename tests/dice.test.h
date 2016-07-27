@@ -1,15 +1,13 @@
-#ifndef ARG3_DICE_TEST_H
-#define ARG3_DICE_TEST_H
+#ifndef RJ_DICE_TEST_H
+#define RJ_DICE_TEST_H
 
 #include "dice.h"
 
-using namespace arg3;
+using namespace rj;
 
 class dice_test_engine : public die::engine
 {
-
-public:
-
+   public:
     dice_test_engine();
 
     dice_test_engine(initializer_list<die::value_type> items);
@@ -23,10 +21,10 @@ public:
     die::value_type generate(die::value_type from, die::value_type to);
 
     void set_next_roll(initializer_list<die::value_type> items);
-private:
+
+   private:
     vector<die::value_type> values_;
     size_t currentValue_;
-
 };
 
 #endif

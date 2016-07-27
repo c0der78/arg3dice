@@ -1,10 +1,10 @@
 
-#include <random>
-#include <functional>
 #include "dice.h"
 #include <cassert>
+#include <functional>
+#include <random>
 
-namespace arg3
+namespace rj
 {
     // #######################################################################################################
     // die
@@ -19,7 +19,6 @@ namespace arg3
 
     die::value_type detail::default_engine::generate(die::value_type from, die::value_type to)
     {
-
         static std::default_random_engine random_engine(time(0));
 
         uniform_int_distribution<die::value_type> distribution(from, to);
@@ -29,8 +28,7 @@ namespace arg3
 
     die::die(const unsigned int sides, die::engine *const engine) : engine_(engine), value_(0)
     {
-        if (sides == 0)
-        {
+        if (sides == 0) {
             throw new invalid_argument("dice must have one or more sides.");
         }
 
@@ -42,9 +40,10 @@ namespace arg3
     }
 
     die::die(die &&other) : engine_(std::move(other.engine_)), sides_(other.sides_), value_(other.value_)
-    {}
+    {
+    }
 
-    die &die::operator= (const die &other)
+    die &die::operator=(const die &other)
     {
         engine_ = other.engine_;
         sides_ = other.sides_;
@@ -53,7 +52,7 @@ namespace arg3
         return *this;
     }
 
-    die &die::operator= (die && other)
+    die &die::operator=(die &&other)
     {
         engine_ = std::move(other.engine_);
         sides_ = other.sides_;
@@ -67,12 +66,12 @@ namespace arg3
         // nothing to do
     }
 
-    bool die::operator== (const die &rhs) const
+    bool die::operator==(const die &rhs) const
     {
         return value_ == rhs.value_;
     }
 
-    bool die::operator!= (const die &rhs) const
+    bool die::operator!=(const die &rhs) const
     {
         return !operator==(rhs);
     }
@@ -120,8 +119,7 @@ namespace arg3
     // creates x dice with y sides
     dice::dice(const unsigned int count, const unsigned int sides, die::engine *const engine) : bonus_(0), dice_()
     {
-        for (size_t i = 0; i < count; i++)
-            dice_.push_back(die(sides, engine));
+        for (size_t i = 0; i < count; i++) dice_.push_back(die(sides, engine));
     }
 
     // copy constructor
@@ -142,7 +140,7 @@ namespace arg3
         return *this;
     }
 
-    dice &dice::operator=(dice && other)
+    dice &dice::operator=(dice &&other)
     {
         bonus_ = other.bonus_;
         dice_ = std::move(other.dice_);
@@ -153,7 +151,6 @@ namespace arg3
     // deconstructor
     dice::~dice()
     {
-
     }
 
     // iterator methods
@@ -218,13 +215,11 @@ namespace arg3
 
         buf << size;
 
-        if (size > 0)
-        {
+        if (size > 0) {
             buf << "d" << dice_.begin()->sides();
         }
 
-        if (bonus_ > 0)
-        {
+        if (bonus_ > 0) {
             buf << "+" << bonus_;
         }
         return buf.str();
@@ -238,59 +233,51 @@ namespace arg3
     {
         die::value_type value = 0;
 
-        for (size_t i = 0; i < dice_.size(); i++)
-        {
+        for (size_t i = 0; i < dice_.size(); i++) {
             auto &d = dice_[i];
 
             die::value_type roll;
 
-            if (selector == nullptr || selector(i, d))
-            {
+            if (selector == nullptr || selector(i, d)) {
                 roll = d.roll();
-            }
-            else
-            {
+            } else {
                 roll = d.value();
             }
 
-            value += roll; // sum the total
+            value += roll;  // sum the total
         }
 
         /* return value has the bonus */
         int b = bonus();
 
-        if (b < 0)
-        {
+        if (b < 0) {
             // avoid unsigned underflow
             if (static_cast<int>(value) + b >= 0)
                 return value + b;
             else
                 return 0;
-        }
-        else
-        {
+        } else {
             // avoid unsigned overflow
             if (numeric_limits<die::value_type>::max() - value >= static_cast<die::value_type>(b))
-                return value + b; // add the bonus
+                return value + b;  // add the bonus
             else
                 return numeric_limits<die::value_type>::max();
         }
     }
 
-    die &dice::operator[] ( size_t n )
+    die &dice::operator[](size_t n)
     {
         return dice_[n];
     }
 
-    const die &dice::operator[] ( size_t n ) const
+    const die &dice::operator[](size_t n) const
     {
         return dice_[n];
     }
 
-    ostream &operator<< (ostream &out, const dice &dice)
+    ostream &operator<<(ostream &out, const dice &dice)
     {
         out << dice.to_string();
         return out;
     }
-
 }

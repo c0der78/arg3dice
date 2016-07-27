@@ -2,19 +2,18 @@
      @header Yacht player
      The Yacht player provides a functional interface to a player in a game of Yacht.
      Use the functions declared here to handle gameplay.
-     @copyright ryan jennings (arg3.com) 2012 LGPL
+     @copyright ryan jennings (ryan-jennings.net) 2012 LGPL
      @updated 2012-09-09
  */
-#ifndef ARG3_YACHT_PLAYER_H
-#define ARG3_YACHT_PLAYER_H
+#ifndef RJ_YACHT_PLAYER_H
+#define RJ_YACHT_PLAYER_H
 
+#include <map>
 #include "../dice.h"
 #include "scoresheet.h"
-#include <map>
 
-namespace arg3
+namespace rj
 {
-
     namespace yaht
     {
         /*!
@@ -25,7 +24,7 @@ namespace arg3
         {
             friend std::ostream &operator<<(std::ostream &stm, const player &);
 
-        public:
+           public:
             /*!
              * number of sides in a die
              */
@@ -53,7 +52,7 @@ namespace arg3
              */
             player &operator=(const player &);
 
-            player &operator=(player && );
+            player &operator=(player &&);
 
             /*!
              * destructor
@@ -106,7 +105,7 @@ namespace arg3
 
             void roll();
 
-        private:
+           private:
             dice dice_;
 
             scoresheet::value_type calculate_number_of_a_kind(int) const;
@@ -115,12 +114,11 @@ namespace arg3
             scoresheet::value_type calculate_chance() const;
             scoresheet::value_type calculate_yaht() const;
 
-            scoresheet score_;  // the score sheet
-            unsigned short rollCount_; // number of die rolls
-            map<size_t, int> kept_;  // kept die values
+            scoresheet score_;          // the score sheet
+            unsigned short rollCount_;  // number of die rolls
+            map<size_t, int> kept_;     // kept die values
         };
     }
-
 }
 
 #endif

@@ -1,41 +1,30 @@
 #include <bandit/bandit.h>
-#include "../../src/yaht/scoresheet.h"
-#include "../../src/yaht/constants.h"
 #include "../../src/dice.h"
+#include "../../src/yaht/constants.h"
+#include "../../src/yaht/scoresheet.h"
 
 using namespace bandit;
-using namespace arg3;
-using namespace arg3::yaht;
+using namespace rj;
+using namespace rj::yaht;
 
-go_bandit([]()
-{
+go_bandit([]() {
 
-    describe("a yaht(zee) scoresheet", []()
-    {
+    describe("a yaht(zee) scoresheet", []() {
         scoresheet *score;
 
-        before_each([&]()
-        {
-            score = new scoresheet();
-        });
+        before_each([&]() { score = new scoresheet(); });
 
-        after_each([&]()
-        {
-            delete score;
-        });
+        after_each([&]() { delete score; });
 
-        it("can score ones", [&]()
-        {
+        it("can score ones", [&]() {
             score->upper_score(1, Constants::NUM_DICE);
 
             Assert::That(score->upper_score(1), Equals(5));
         });
 
-        it("has an upper score", [&]()
-        {
+        it("has an upper score", [&]() {
 
-            for (unsigned int i = 1; i <= die::DEFAULT_SIDES; i++)
-            {
+            for (unsigned int i = 1; i <= die::DEFAULT_SIDES; i++) {
                 auto value = 2 * i;
 
                 score->upper_score(2, value);
@@ -44,8 +33,7 @@ go_bandit([]()
             }
         });
 
-        it("gracefully handles range errors", [&]()
-        {
+        it("gracefully handles range errors", [&]() {
             score->upper_score(1, 11111);
 
             score->upper_score(1234, 1234);
@@ -53,20 +41,17 @@ go_bandit([]()
             Assert::That(score->upper_score(1234), Equals(0));
         });
 
-        it("has a lower score", [&]()
-        {
-            for (int i = scoresheet::FIRST_TYPE; i < scoresheet::MAX_TYPE; i++)
-            {
+        it("has a lower score", [&]() {
+            for (int i = scoresheet::FIRST_TYPE; i < scoresheet::MAX_TYPE; i++) {
                 auto value = 2 * i;
 
-                score->lower_score(scoresheet::CHANCE, (scoresheet::value_type) value);
+                score->lower_score(scoresheet::CHANCE, (scoresheet::value_type)value);
 
                 Assert::That(score->lower_score(scoresheet::CHANCE), Equals(value));
             }
         });
 
-        it("can reset", [&]()
-        {
+        it("can reset", [&]() {
             score->upper_score(2, 10);
 
             Assert::That(score->upper_score(2), Equals(10));
@@ -79,4 +64,3 @@ go_bandit([]()
 
 
 });
-

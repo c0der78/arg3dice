@@ -2,26 +2,25 @@
  * @header dice
  * A representation of dice or a single die for use in games.
  */
-#ifndef ARG3_DICE_H
-#define ARG3_DICE_H
+#ifndef RJ_DICE_H
+#define RJ_DICE_H
 
-#include <vector>
-#include <string>
+#include <functional>
 #include <iostream>
 #include <sstream>
-#include <functional>
+#include <string>
+#include <vector>
 
 using namespace std;
 
-namespace arg3
+namespace rj
 {
-
     /*!
      * A die with a given number of sides
      */
     class die
     {
-    public:
+       public:
         /*!
          * type of the value of die sides
          */
@@ -37,7 +36,7 @@ namespace arg3
          */
         class engine
         {
-        public:
+           public:
             /*!
              * the random generator method
              * @param from the start range
@@ -73,7 +72,7 @@ namespace arg3
          */
         die &operator=(const die &rhs);
 
-        die &operator=(die && rhs);
+        die &operator=(die &&rhs);
 
         /*!
          * deconstructor
@@ -97,7 +96,7 @@ namespace arg3
         bool operator!=(const die &rhs) const;
 
         // cast operator
-        operator value_type () const;
+        operator value_type() const;
 
         /*!
          * sets the number of sides on the die
@@ -113,22 +112,21 @@ namespace arg3
         // returns one of the sides on the die (random)
         value_type roll();
 
-    private:
-        engine *engine_;     // engine to use for dice rolling
-        unsigned sides_; // number of sides on die
-        value_type value_;   // the current roll value
+       private:
+        engine *engine_;    // engine to use for dice rolling
+        unsigned sides_;    // number of sides on die
+        value_type value_;  // the current roll value
     };
 
 
     namespace detail
     {
-
         /*!
          * Default implementation of the underlying random engine
          */
         class default_engine : public die::engine
         {
-        public:
+           public:
             /*!
              * the random generator method
              * @param from the starting range
@@ -136,7 +134,6 @@ namespace arg3
              */
             die::value_type generate(die::value_type from, die::value_type to);
         };
-
     }
     /*!
      * simple class to encapsulate a collection of dice which can be rolled
@@ -144,10 +141,11 @@ namespace arg3
      */
     class dice
     {
-    private:
+       private:
         short bonus_;
         vector<die> dice_;
-    public:
+
+       public:
         /*! iterator type for each die */
         typedef typename vector<die>::iterator iterator;
         /*! const iterator type for each die */
@@ -174,9 +172,9 @@ namespace arg3
          * assignment operator
          * @param rhs the right hand side of the assignment
          */
-        dice &operator= (const dice &rhs);
+        dice &operator=(const dice &rhs);
 
-        dice &operator= (dice && rhs);
+        dice &operator=(dice &&rhs);
 
         /*!
          * deconstructor
@@ -200,13 +198,13 @@ namespace arg3
          * index operator
          * @param index the index
          */
-        die &operator[] ( size_t index);
+        die &operator[](size_t index);
 
         /*!
          * const index operator
          * @param index the index
          */
-        const die &operator[] ( size_t index) const;
+        const die &operator[](size_t index) const;
 
         /*!
          * returns the bonus value
@@ -226,8 +224,7 @@ namespace arg3
         die::value_type roll(std::function<bool(size_t index, const die &d)> selector = nullptr);
     };
 
-    ostream &operator<< (ostream &, const dice &);
-
+    ostream &operator<<(ostream &, const dice &);
 }
 
 #endif

@@ -2,19 +2,14 @@
  * @header Yacht Constants
  * Constant values
  */
-#ifndef ARG3_YACHT_CONSTANTS_H
-#define ARG3_YACHT_CONSTANTS_H
+#ifndef RJ_YACHT_CONSTANTS_H
+#define RJ_YACHT_CONSTANTS_H
 
-namespace arg3
+namespace rj
 {
-
     namespace yaht
     {
-
-
-        typedef struct consts
-        {
-
+        typedef struct consts {
             /*! @var ROLL_COUNT the number of times to roll the dice per turn */
             static const unsigned short ROLL_COUNT = 3;
 
@@ -29,9 +24,7 @@ namespace arg3
             static const unsigned short UPPER_BONUS = 35;
 
         } Constants;
-
     }
-
 }
 
 #endif

@@ -1,34 +1,31 @@
 #include "scoresheet.h"
 #include <algorithm>
 
-namespace arg3
+namespace rj
 {
-
     namespace yaht
     {
-
-
         scoresheet::scoresheet() : upperPlayed_(0), lowerPlayed_(0)
         {
             lowerValues_.fill(0);
             upperValues_.fill(0);
         }
 
-        scoresheet::scoresheet(const scoresheet &other) : upperPlayed_(other.upperPlayed_), lowerPlayed_(other.lowerPlayed_),
-            upperValues_(other.upperValues_), lowerValues_(other.lowerValues_)
+        scoresheet::scoresheet(const scoresheet &other)
+            : upperPlayed_(other.upperPlayed_), lowerPlayed_(other.lowerPlayed_), upperValues_(other.upperValues_), lowerValues_(other.lowerValues_)
         {
-
         }
 
-        scoresheet::scoresheet(scoresheet &&other) : upperPlayed_(std::move(other.upperPlayed_)), lowerPlayed_(std::move(other.lowerPlayed_)),
-            upperValues_(std::move(other.upperValues_)), lowerValues_(std::move(other.lowerValues_))
+        scoresheet::scoresheet(scoresheet &&other)
+            : upperPlayed_(std::move(other.upperPlayed_)),
+              lowerPlayed_(std::move(other.lowerPlayed_)),
+              upperValues_(std::move(other.upperValues_)),
+              lowerValues_(std::move(other.lowerValues_))
         {
-
         }
 
         scoresheet::~scoresheet()
         {
-
         }
 
         scoresheet &scoresheet::operator=(const scoresheet &other)
@@ -41,7 +38,7 @@ namespace arg3
             return *this;
         }
 
-        scoresheet &scoresheet::operator=(scoresheet && other)
+        scoresheet &scoresheet::operator=(scoresheet &&other)
         {
             upperValues_ = std::move(other.upperValues_);
             lowerValues_ = std::move(other.lowerValues_);
@@ -63,20 +60,17 @@ namespace arg3
         {
             lowerValues_[index] = value;
 
-            if (played)
-                lowerPlayed_ |= (1 << (index));
+            if (played) lowerPlayed_ |= (1 << (index));
         }
 
         void scoresheet::upper_score(die::value_type index, scoresheet::value_type value, bool played)
         {
             auto i = std::max(0U, index - 1);
 
-            if (i < upperValues_.size())
-            {
+            if (i < upperValues_.size()) {
                 upperValues_[i] = value;
 
-                if (played)
-                    upperPlayed_ |= (1 << (i));
+                if (played) upperPlayed_ |= (1 << (i));
             }
         }
 
@@ -117,16 +111,13 @@ namespace arg3
         {
             scoresheet::value_type total_score = 0;
 
-            for (size_t i = 0; i < upperValues_.size(); i++)
-            {
+            for (size_t i = 0; i < upperValues_.size(); i++) {
                 total_score += upperValues_[i];
             }
 
-            if (total_score > 63)
-                total_score += 35;
+            if (total_score > 63) total_score += 35;
 
-            for (size_t i = 0; i < lowerValues_.size(); i++)
-            {
+            for (size_t i = 0; i < lowerValues_.size(); i++) {
                 total_score += lowerValues_[i];
             }
 
@@ -138,15 +129,12 @@ namespace arg3
             scoresheet::value_type count = 0;
 
             for (size_t i = 0; i < upperValues_.size(); i++)
-                if (upperPlayed_ & (1 << i))
-                    count++;
+                if (upperPlayed_ & (1 << i)) count++;
 
             for (size_t i = 0; i < lowerValues_.size(); i++)
-                if (lowerPlayed_ & (1 << i))
-                    count++;
+                if (lowerPlayed_ & (1 << i)) count++;
 
             return count;
         }
     }
-
 }
