@@ -16,7 +16,7 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 # create the package config install
 include(CreatePackage)
-create_package("A dice rolling utility library")
+create_package(DESCRIPTION "A dice rolling utility library")
 
 # add target for code coverage
 if(ENABLE_COVERAGE)
