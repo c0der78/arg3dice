@@ -2,6 +2,7 @@ rj_dice
 =======
 
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/15fb1a85cafe4f33a6f5f87d3fec31c1)](https://www.codacy.com/app/ryjen/arg3dice?utm_source=github.com&utm_medium=referral&utm_content=ryjen/dice&utm_campaign=badger)
 [![Build Status](http://img.shields.io/travis/ryjen/dice.svg)](https://travis-ci.org/ryjen/dice)
 [![Coverage Status](https://coveralls.io/repos/ryjen/dice/badge.svg?branch=master&service=github)](https://coveralls.io/github/ryjen/dice?branch=master)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://ryjen.mit-license.org)
