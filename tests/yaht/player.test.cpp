@@ -1,3 +1,5 @@
+#include <string>
+
 #include <bandit/bandit.h>
 #include "../../src/yaht/player.h"
 #include "../dice.test.h"
@@ -6,6 +8,8 @@
 using namespace bandit;
 
 using namespace rj::yaht;
+
+using namespace snowhouse;
 
 int ::player::next_id = 0;
 

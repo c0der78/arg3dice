@@ -1,11 +1,16 @@
 
 #include "dice.test.h"
+
+#include <string>
+
 #include <bandit/bandit.h>
 #include "dice.h"
 
 using namespace bandit;
 
 using namespace rj;
+
+using namespace snowhouse;
 
 dice_test_engine::dice_test_engine() : values_(), currentValue_(0)
 {
@@ -15,7 +20,8 @@ dice_test_engine::dice_test_engine(initializer_list<die::value_type> value) : va
 {
 }
 
-dice_test_engine::dice_test_engine(const dice_test_engine &copy) : values_(copy.values_.size()), currentValue_(copy.currentValue_)
+dice_test_engine::dice_test_engine(const dice_test_engine &copy)
+    : values_(copy.values_.size()), currentValue_(copy.currentValue_)
 {
     for (auto &d : copy.values_) values_.push_back(d);
 }

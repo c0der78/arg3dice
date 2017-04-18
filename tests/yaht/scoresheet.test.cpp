@@ -1,3 +1,5 @@
+#include <string>
+
 #include <bandit/bandit.h>
 #include "../../src/dice.h"
 #include "../../src/yaht/constants.h"
@@ -6,6 +8,7 @@
 using namespace bandit;
 using namespace rj;
 using namespace rj::yaht;
+using namespace snowhouse;
 
 go_bandit([]() {
 
