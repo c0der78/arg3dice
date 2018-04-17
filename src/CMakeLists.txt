@@ -1,5 +1,3 @@
-add_library(${PROJECT_NAME} dice.cpp yaht/player.cpp yaht/scoresheet.cpp)
-
 
 set(${PROJECT_NAME}_HEADERS
 	dice.h
@@ -10,6 +8,9 @@ set(${PROJECT_NAME}_YAHT_HEADERS
   yaht/player.h
   yaht/scoresheet.h
 )
+
+add_library(${PROJECT_NAME} ${${PROJECT_NAME}_HEADERS} ${${PROJECT_NAME}_YAHT_HEADERS} dice.cpp yaht/player.cpp yaht/scoresheet.cpp)
+
 
 string(REPLACE "_" "/" INSTALL_DIRECTORY ${PROJECT_NAME})
 

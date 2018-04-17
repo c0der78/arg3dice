@@ -2,10 +2,10 @@
  * @header Yacht Constants
  * Constant values
  */
-#ifndef RJ_YACHT_CONSTANTS_H
-#define RJ_YACHT_CONSTANTS_H
+#ifndef CODA_YACHT_CONSTANTS_H
+#define CODA_YACHT_CONSTANTS_H
 
-namespace rj
+namespace coda
 {
     namespace yaht
     {

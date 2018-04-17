@@ -1,4 +1,4 @@
-rj_dice
+coda_dice
 =======
 
 
@@ -14,7 +14,6 @@ Building
 After cloning run the following command to initialize submodules:
 
 ```bash
-
 git submodule update --init --recursive
 ```
 
@@ -30,7 +29,7 @@ make test
 options supported are:
 
     -DENABLE_COVERAGE=ON   :   enable code coverage using lcov
-    -DENABLE_MEMCHECK=ON    :   enable valgrind memory checking on tests
+    -DENABLE_MEMCHECK=ON   :   enable valgrind memory checking on tests
 
 Examples
 --------
@@ -38,15 +37,15 @@ Examples
 *Simple Example*
 
 ```c++
-rj::dice d10(10, 10); // 10 dice with 10 sides each
+coda::dice d10(10, 10); // 10 dice with 10 sides each
 
-d10.roll(); // random value
+auto val = d10.roll(); // random value
 ```
 
 *Complex Example*
 
 ```c++
-class logger_die_engine : public rj::die::engine
+class logger_die_engine : public coda::die::engine
 {
 public:
     die::value_type generate(die::value_type from, die::value_type to)
@@ -62,8 +61,8 @@ public:
 
 logger_die_engine my_engine;
 
-rj::dice d10(10, 10, &my_engine);
+coda::dice d10(10, 10, &my_engine);
 
-d10.roll(); // logs the random number
+auto val = d10.roll(); // logs the random number
 ```
 

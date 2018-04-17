@@ -1,7 +1,7 @@
 #include "scoresheet.h"
 #include <algorithm>
 
-namespace rj
+namespace coda
 {
     namespace yaht
     {

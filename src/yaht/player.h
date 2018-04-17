@@ -2,17 +2,16 @@
      @header Yacht player
      The Yacht player provides a functional interface to a player in a game of Yacht.
      Use the functions declared here to handle gameplay.
-     @copyright ryan jennings (ryan-jennings.net) 2012 LGPL
      @updated 2012-09-09
  */
-#ifndef RJ_YACHT_PLAYER_H
-#define RJ_YACHT_PLAYER_H
+#ifndef CODA_YACHT_PLAYER_H
+#define CODA_YACHT_PLAYER_H
 
 #include <map>
 #include "../dice.h"
 #include "scoresheet.h"
 
-namespace rj
+namespace coda
 {
     namespace yaht
     {

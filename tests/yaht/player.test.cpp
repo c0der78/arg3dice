@@ -7,7 +7,7 @@
 
 using namespace bandit;
 
-using namespace rj::yaht;
+using namespace coda::yaht;
 
 using namespace snowhouse;
 

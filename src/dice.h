@@ -2,8 +2,8 @@
  * @header dice
  * A representation of dice or a single die for use in games.
  */
-#ifndef RJ_DICE_H
-#define RJ_DICE_H
+#ifndef CODA_DICE_H
+#define CODA_DICE_H
 
 #include <functional>
 #include <iostream>
@@ -13,7 +13,7 @@
 
 using namespace std;
 
-namespace rj
+namespace coda
 {
     /*!
      * A die with a given number of sides

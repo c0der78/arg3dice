@@ -1,9 +1,9 @@
-#ifndef RJ_DICE_TEST_H
-#define RJ_DICE_TEST_H
+#ifndef CODA_DICE_TEST_H
+#define CODA_DICE_TEST_H
 
 #include "dice.h"
 
-using namespace rj;
+using namespace coda;
 
 class dice_test_engine : public die::engine
 {

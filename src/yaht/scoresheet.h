@@ -2,8 +2,8 @@
  * @header Yacht scoresheet
  * The Yacht scoresheet provides an interfaces to tracking scores in a game of Yacht
  */
-#ifndef RJ_YACHT_SCORE_H
-#define RJ_YACHT_SCORE_H
+#ifndef CODA_YACHT_SCORE_H
+#define CODA_YACHT_SCORE_H
 
 #include <array>
 #include "../dice.h"
@@ -11,7 +11,7 @@
 
 using namespace std;
 
-namespace rj
+namespace coda
 {
     namespace yaht
     {

@@ -4,7 +4,7 @@
 #include <functional>
 #include <random>
 
-namespace rj
+namespace coda
 {
     // #######################################################################################################
     // die

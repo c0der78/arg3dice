@@ -6,8 +6,8 @@
 #include "../../src/yaht/scoresheet.h"
 
 using namespace bandit;
-using namespace rj;
-using namespace rj::yaht;
+using namespace coda;
+using namespace coda::yaht;
 using namespace snowhouse;
 
 go_bandit([]() {
