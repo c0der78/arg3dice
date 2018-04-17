@@ -7,7 +7,7 @@ option(ENABLE_MEMCHECK "Enable testing for memory leaks." OFF)
 option(ENABLE_PROFILING "Enable profiling code." OFF)
 
 # define project name
-project (coda_dice VERSION 0.1.0)
+project (coda_dice VERSION 0.1.1)
 
 set(TEST_PROJECT_NAME ${PROJECT_NAME}_test)
 
