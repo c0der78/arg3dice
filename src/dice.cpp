@@ -66,17 +66,17 @@ namespace coda
         // nothing to do
     }
 
-    bool die::operator==(const die &rhs) const
+    bool die::operator==(const die &rhs) const noexcept
     {
         return value_ == rhs.value_;
     }
 
-    bool die::operator!=(const die &rhs) const
+    bool die::operator!=(const die &rhs) const noexcept
     {
         return !operator==(rhs);
     }
 
-    die::operator value_type() const
+    die::operator value_type() const noexcept
     {
         return value_;
     }
@@ -84,7 +84,7 @@ namespace coda
     /*
      * returns the number of sides on the die
      */
-    unsigned int die::sides() const
+    unsigned int die::sides() const noexcept
     {
         return sides_;
     }
@@ -92,12 +92,12 @@ namespace coda
     /*
      * sets the number of sides on the die
      */
-    void die::sides(const unsigned int value)
+    void die::sides(const unsigned int value) noexcept
     {
         sides_ = value;
     }
 
-    die::value_type die::value() const
+    die::value_type die::value() const noexcept
     {
         return value_;
     }
@@ -123,16 +123,16 @@ namespace coda
     }
 
     // copy constructor
-    dice::dice(const dice &other) : bonus_(other.bonus_), dice_(other.dice_)
+    dice::dice(const dice &other) noexcept : bonus_(other.bonus_), dice_(other.dice_)
     {
     }
 
     // move constructor
-    dice::dice(dice &&other) : bonus_(other.bonus_), dice_(std::move(other.dice_))
+    dice::dice(dice &&other) noexcept : bonus_(other.bonus_), dice_(std::move(other.dice_))
     {
     }
 
-    dice &dice::operator=(const dice &other)
+    dice &dice::operator=(const dice &other) noexcept
     {
         bonus_ = other.bonus_;
         dice_ = other.dice_;
@@ -140,7 +140,7 @@ namespace coda
         return *this;
     }
 
-    dice &dice::operator=(dice &&other)
+    dice &dice::operator=(dice &&other) noexcept
     {
         bonus_ = other.bonus_;
         dice_ = std::move(other.dice_);
@@ -149,43 +149,43 @@ namespace coda
     }
 
     // deconstructor
-    dice::~dice()
+    dice::~dice() noexcept
     {
     }
 
     // iterator methods
-    dice::iterator dice::begin()
+    dice::iterator dice::begin() noexcept
     {
         return dice_.begin();
     }
 
-    dice::const_iterator dice::begin() const
+    dice::const_iterator dice::begin() const noexcept
     {
         return dice_.begin();
     }
 
     // const iterator methods
-    const dice::const_iterator dice::cbegin() const
+    const dice::const_iterator dice::cbegin() const noexcept
     {
         return dice_.cbegin();
     }
 
-    dice::iterator dice::end()
+    dice::iterator dice::end() noexcept
     {
         return dice_.end();
     }
 
-    dice::const_iterator dice::end() const
+    dice::const_iterator dice::end() const noexcept
     {
         return dice_.end();
     }
 
-    const dice::const_iterator dice::cend() const
+    const dice::const_iterator dice::cend() const noexcept
     {
         return dice_.cend();
     }
 
-    unsigned int dice::size() const
+    unsigned int dice::size() const noexcept
     {
         return dice_.size();
     }
@@ -193,7 +193,7 @@ namespace coda
     /*
      * returns the bonus value
      */
-    int dice::bonus() const
+    int dice::bonus() const noexcept
     {
         return bonus_;
     }
@@ -201,7 +201,7 @@ namespace coda
     /*
      * sets the bonus value
      */
-    void dice::bonus(const int value)
+    void dice::bonus(const int value) noexcept
     {
         bonus_ = value;
     }

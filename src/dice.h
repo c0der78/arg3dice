@@ -82,32 +82,32 @@ namespace coda
         /*!
          * returns the number of sides on the die
          */
-        unsigned int sides() const;
+        unsigned int sides() const noexcept;
 
         /*!
          * equality operator
          * @param rhs the right hand side of the operator
          */
-        bool operator==(const die &rhs) const;
+        bool operator==(const die &rhs) const noexcept;
         /*!
          * inequality operator
          * @param rhs the right hand side of the operator
          */
-        bool operator!=(const die &rhs) const;
+        bool operator!=(const die &rhs) const noexcept;
 
         // cast operator
-        operator value_type() const;
+        operator value_type() const noexcept;
 
         /*!
          * sets the number of sides on the die
          * @param value the valude to set
          */
-        void sides(const unsigned int value);
+        void sides(const unsigned int value) noexcept;
 
         /*!
          * current value of the die, or the side facing up
          */
-        value_type value() const;
+        value_type value() const noexcept;
 
         // returns one of the sides on the die (random)
         value_type roll();
@@ -164,35 +164,35 @@ namespace coda
          * copy constructor
          * @param other the other dice to copy
          */
-        dice(const dice &other);
+        dice(const dice &other) noexcept;
 
-        dice(dice &&other);
+        dice(dice &&other) noexcept;
 
         /*!
          * assignment operator
          * @param rhs the right hand side of the assignment
          */
-        dice &operator=(const dice &rhs);
+        dice &operator=(const dice &rhs) noexcept;
 
-        dice &operator=(dice &&rhs);
+        dice &operator=(dice &&rhs) noexcept;
 
         /*!
          * deconstructor
          */
-        virtual ~dice();
+        ~dice() noexcept;
 
         // iterator methods
-        iterator begin();
-        const_iterator begin() const;
-        iterator end();
-        const_iterator end() const;
+        iterator begin() noexcept;
+        const_iterator begin() const noexcept;
+        iterator end() noexcept;
+        const_iterator end() const noexcept;
 
         // const iterator methods
-        const const_iterator cbegin() const;
-        const const_iterator cend() const;
+        const const_iterator cbegin() const noexcept;
+        const const_iterator cend() const noexcept;
 
         // returns how many die in this collection
-        unsigned int size() const;
+        unsigned int size() const noexcept;
 
         /*!
          * index operator
@@ -209,13 +209,13 @@ namespace coda
         /*!
          * returns the bonus value
          */
-        int bonus() const;
+        int bonus() const noexcept;
 
         /*!
          * sets the bonus value
          * @param value the bonus value to set
          */
-        void bonus(const int value);
+        void bonus(const int value) noexcept;
 
         // a string representation of the dice ex. 5d20
         const string to_string() const;
