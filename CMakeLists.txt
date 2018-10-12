@@ -9,7 +9,6 @@ option(ENABLE_PROFILING "Enable profiling code." OFF)
 # define project name
 project (coda_dice VERSION 0.1.1)
 
-set(TEST_PROJECT_NAME ${PROJECT_NAME}_test)
 
 # set path to custom modules
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -17,13 +16,6 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 # create the package config install
 include(CreatePackage)
 create_package(DESCRIPTION "A dice rolling utility library")
-
-# add target for code coverage
-if(ENABLE_COVERAGE)
-	include(CodeCoverage)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_COVERAGE}")
-	setup_target_for_coverage(TARGET ${PROJECT_NAME}_coverage OUTPUT ${PROJECT_BINARY_DIR}/coverage)
-endif()
 
 # Setup testing
 enable_testing()
