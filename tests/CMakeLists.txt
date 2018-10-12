@@ -23,7 +23,10 @@ target_include_directories(${TEST_PROJECT_NAME} SYSTEM PUBLIC ${BANDIT_DIR} PUBL
 
 target_link_libraries (${TEST_PROJECT_NAME} ${PROJECT_NAME})
 
-
 if (DEFINED BANDIT_TARGET)
     add_dependencies(${TEST_PROJECT_NAME} ${BANDIT_TARGET})
 endif()
+
+include(ValgrindTest)
+
+add_valgrind_profile_test(MEMCHECK ${ENABLE_MEMCHECK} PROFILING ${ENABLE_PROFILING} TARGET ${TEST_PROJECT_NAME})

@@ -25,15 +25,37 @@ if(ENABLE_COVERAGE)
 	setup_target_for_coverage(TARGET ${PROJECT_NAME}_coverage OUTPUT ${PROJECT_BINARY_DIR}/coverage)
 endif()
 
+# Setup testing
+enable_testing()
+
 # add directories
 add_subdirectory(src)
 add_subdirectory(tests)
 
-# Setup testing
-enable_testing()
+############################################################
+# Create DEB
+############################################################
 
-include(ValgrindTest)
+# Tell CPack to generate a .deb package
+set(CPACK_GENERATOR "DEB")
 
-add_valgrind_profile_test(MEMCHECK ${ENABLE_MEMCHECK} PROFILING ${ENABLE_PROFILING} TARGET ${TEST_PROJECT_NAME})
+# Set a Package Maintainer.
+# This is required
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Ryan Jennings <ryan@micrantha.com>")
 
+set(CPACK_PACKAGE_VENDOR "Micrantha Software Solutions")
+
+# Set a Package Version
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
+
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A c++ toolkit")
+
+set(CPACK_PACKAGING_INSTALL_PREFIX "/usr/local")
+
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE")
+
+set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/README.md")
+
+# Include CPack
+include(CPack)
 
