@@ -3,19 +3,16 @@
 
 #include "yaht/player.h"
 
-class player : public coda::yaht::player
-{
-   public:
-    string name;
-    int id;
+class player : public coda::yaht::player {
+  public:
+  string name;
+  int id;
 
-    player(const string &name, die::engine *engine = die::default_engine) : coda::yaht::player(engine), name(name), id(++next_id)
-    {
-    }
+  player(const string &name, die::engine *engine = die::default_engine)
+      : coda::yaht::player(engine), name(name), id(++next_id) {}
 
-   private:
-    static int next_id;
+  private:
+  static int next_id;
 };
-
 
 #endif
